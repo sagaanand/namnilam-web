@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="goldRing" x1="15%" y1="10%" x2="85%" y2="90%">
+      <stop offset="0%" stop-color="#F3DC9B"/>
+      <stop offset="25%" stop-color="#DFBA73"/>
+      <stop offset="50%" stop-color="#C5A059"/>
+      <stop offset="75%" stop-color="#A57D32"/>
+      <stop offset="100%" stop-color="#C5A059"/>
+    </linearGradient>
+    <linearGradient id="goldSymbol" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#DFBA73"/>
+      <stop offset="50%" stop-color="#C5A059"/>
+      <stop offset="100%" stop-color="#B08939"/>
+    </linearGradient>
+    <path id="textArcFav" d="M 125,230 A 165,165 0 0,1 375,230" fill="none"/>
+  </defs>
+  <circle cx="250" cy="250" r="236" fill="#FFFFFF"/>
+  <circle cx="250" cy="250" r="222" fill="none" stroke="url(#goldRing)" stroke-width="28"/>
+  <text fill="#0F172A" font-family="'Noto Sans Tamil', 'Plus Jakarta Sans', sans-serif" font-size="52" font-weight="900" letter-spacing="3">
+    <textPath href="#textArcFav" startOffset="50%" text-anchor="middle">
+      நம் நிலம்
+    </textPath>
+  </text>
+  <path d="M 250,152 L 355,238 L 355,370 L 330,350 L 330,256 L 250,192 L 170,256 L 170,350 L 145,370 L 145,238 Z" fill="url(#goldSymbol)" />
+  <path d="M 250,224 L 330,288 L 330,328 L 250,264 L 170,328 L 170,288 Z" fill="url(#goldSymbol)" />
+</svg>

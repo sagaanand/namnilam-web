@@ -1,0 +1,26 @@
+# Nam Nilam Hostinger Apache Configuration
+# Enables React Router SPA navigation and direct API execution
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Allow direct access to existing files, directories, or the api folder
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d [OR]
+  RewriteCond %{REQUEST_URI} ^/api/
+  RewriteRule ^ - [L]
+
+  # Route all other frontend requests to index.html
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+# Security & Caching Headers
+<IfModule mod_headers.c>
+  # Prevent MIME type sniffing
+  Header set X-Content-Type-Options "nosniff"
+  # Prevent Clickjacking
+  Header set X-Frame-Options "SAMEORIGIN"
+  # Enable XSS protection
+  Header set X-XSS-Protection "1; mode=block"
+</IfModule>
