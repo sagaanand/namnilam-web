@@ -140,7 +140,7 @@ export const IntelligencePage = ({ onOpenEnquiry }) => {
                     Key Strategic Takeaways:
                   </strong>
                   <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                    {art.highlights.map((h, idx) => (
+                    {(art.highlights || []).map((h, idx) => (
                       <li key={idx} style={{ fontSize: '0.82rem', color: 'var(--color-ink)', display: 'flex', alignItems: 'flex-start', gap: '6px' }}>
                         <CheckCircle2 size={13} color="var(--color-gold-dark)" style={{ marginTop: '2px', flexShrink: 0 }} />
                         <span>{h}</span>

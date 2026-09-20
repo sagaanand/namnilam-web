@@ -31,14 +31,50 @@ export const ProjectsPage = ({ onOpenEnquiry }) => {
   }, []);
 
   // If specific project slug is provided
-  const project = slug ? (projectList.find(p => p.slug === slug) || TRICHY_PROJECTS.find(p => p.slug === slug)) : null;
+  const seedProject = TRICHY_PROJECTS.find(p => p.slug === slug);
+  const matchedProject = slug ? (projectList.find(p => p.slug === slug) || seedProject) : null;
+  const project = matchedProject ? { ...seedProject, ...matchedProject } : null;
 
   if (slug && project) {
+    const pTitle = project.title || project.name || 'Project Details';
+    const pLocation = project.location || 'Trichy';
+    const pRate = project.rateSqft || (project.price_per_sqft ? `₹${project.price_per_sqft}` : '₹1,500');
+    const pImage = project.image || project.image_url || 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80';
+    const pOverview = project.overview || project.description || 'Master-planned approved residential layout in high-growth corridor of Tiruchirappalli.';
+    const pWater = project.waterTable || '20 ft (Sweet Ground Water)';
+    const pGuideline = project.guidelineValue || 'Fair Market Indexed';
+    const pCagr = project.cagr || '+16.5%';
+    const pAvailable = project.availablePlots || project.available_units || 12;
+    const pTotal = project.totalPlots || project.total_units || 45;
+    const pApproval = project.approvalNo || project.approval || 'DTCP Approved';
+    const pRera = project.reraNumber || 'TN-RERA Sanctioned';
+    const pPlotSizes = project.plotSizes || '1,200 – 2,400 sq.ft';
+
+    const pHighlights = Array.isArray(project.highlights) && project.highlights.length > 0
+      ? project.highlights
+      : (project.amenities
+          ? (typeof project.amenities === 'string' ? project.amenities.split(',').map(s => s.trim()) : project.amenities)
+          : [
+              '100% Clear Parent Documents and Encumbrance-Free Title',
+              'Immediate Individual Sub-Division Patta Transfer',
+              'Wide Blacktop Roads with Avenue Plantation',
+              'Bank Loan Approved by Nationalized Banks'
+            ]);
+
+    const pConnectivity = Array.isArray(project.connectivity) && project.connectivity.length > 0
+      ? project.connectivity
+      : [
+          { name: 'Trichy International Airport', distance: '8 km', time: '12 mins' },
+          { name: 'Trichy Central Bus Stand', distance: '12 km', time: '18 mins' },
+          { name: 'Railway Junction', distance: '14 km', time: '20 mins' },
+          { name: 'Nearest National Highway', distance: '1.5 km', time: '3 mins' }
+        ];
+
     return (
       <div>
         <Breadcrumbs items={[
           { label: 'Projects (Trichy)', path: '/projects' },
-          { label: project.title }
+          { label: pTitle }
         ]} />
 
         {/* Project Detail Hero */}
@@ -47,23 +83,23 @@ export const ProjectsPage = ({ onOpenEnquiry }) => {
             <div style={{ display: 'flex', gap: '8px', marginBottom: '12px', flexWrap: 'wrap' }}>
               <span className="badge badge-gold">
                 <MapPin size={12} />
-                {project.location}
+                {pLocation}
               </span>
               <span className="badge badge-green">
                 <ShieldCheck size={12} />
-                {project.approvalNo}
+                {pApproval}
               </span>
               <span className="badge badge-dark">
-                RERA: {project.reraNumber}
+                RERA: {pRera}
               </span>
             </div>
 
             <h1 style={{ fontSize: '2.8rem', color: 'var(--color-brand-deep)', marginBottom: '12px' }}>
-              {project.title}
+              {pTitle}
             </h1>
 
             <p style={{ fontSize: '1.1rem', color: 'var(--color-ink-muted)', maxWidth: '780px', lineHeight: 1.65 }}>
-              {project.overview}
+              {pOverview}
             </p>
 
             {/* Price & Action Row */}
@@ -71,12 +107,12 @@ export const ProjectsPage = ({ onOpenEnquiry }) => {
               <div style={{ padding: '10px 20px', backgroundColor: 'var(--color-surface-soft)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)' }}>
                 <span style={{ fontSize: '0.75rem', color: '#64748B', display: 'block' }}>Base Rate</span>
                 <strong style={{ fontSize: '1.4rem', color: 'var(--color-brand-deep)', fontFamily: 'var(--font-mono)' }}>
-                  {project.rateSqft} <span style={{ fontSize: '0.85rem', fontWeight: 500 }}>/ sq.ft</span>
+                  {pRate} <span style={{ fontSize: '0.85rem', fontWeight: 500 }}>/ sq.ft</span>
                 </strong>
               </div>
 
               <button 
-                onClick={() => onOpenEnquiry(`Book Free Site Visit: ${project.title}`)}
+                onClick={() => onOpenEnquiry(`Book Free Site Visit: ${pTitle}`)}
                 className="btn btn-primary btn-lg"
               >
                 <Car size={18} />
@@ -84,7 +120,7 @@ export const ProjectsPage = ({ onOpenEnquiry }) => {
               </button>
 
               <a 
-                href={`https://wa.me/${BRAND_INFO.whatsappNumber}?text=${encodeURIComponent(`Hello Nam Nilam, I would like to schedule a site visit and enquire about ${project.title} in Trichy.`)}`}
+                href={`https://wa.me/${BRAND_INFO.whatsappNumber}?text=${encodeURIComponent(`Hello Nam Nilam, I would like to schedule a site visit and enquire about ${pTitle} in Trichy.`)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-whatsapp btn-lg"
@@ -104,8 +140,8 @@ export const ProjectsPage = ({ onOpenEnquiry }) => {
               <div>
                 <div style={{ borderRadius: 'var(--radius-xl)', overflow: 'hidden', marginBottom: '36px', boxShadow: 'var(--shadow-lg)' }}>
                   <img 
-                    src={project.image} 
-                    alt={project.title} 
+                    src={pImage} 
+                    alt={pTitle} 
                     style={{ width: '100%', height: '420px', objectFit: 'cover' }} 
                   />
                 </div>
@@ -114,7 +150,7 @@ export const ProjectsPage = ({ onOpenEnquiry }) => {
                 <div style={{ marginBottom: '40px' }}>
                   <h2 style={{ fontSize: '1.6rem', marginBottom: '16px' }}>Project Highlights</h2>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                    {project.highlights.map((hl, i) => (
+                    {pHighlights.map((hl, i) => (
                       <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: '0.95rem' }}>
                         <CheckCircle2 size={18} color="var(--color-gold-dark)" style={{ marginTop: '2px', flexShrink: 0 }} />
                         <span>{hl}</span>
@@ -127,7 +163,7 @@ export const ProjectsPage = ({ onOpenEnquiry }) => {
                 <div style={{ marginBottom: '40px' }}>
                   <h2 style={{ fontSize: '1.6rem', marginBottom: '16px' }}>Location Connectivity & Proximity</h2>
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '14px' }}>
-                    {project.connectivity.map((conn, i) => (
+                    {pConnectivity.map((conn, i) => (
                       <div key={i} style={{
                         padding: '16px',
                         backgroundColor: 'var(--color-canvas)',
@@ -151,32 +187,32 @@ export const ProjectsPage = ({ onOpenEnquiry }) => {
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', fontSize: '0.9rem' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '8px', borderBottom: '1px solid var(--color-border)' }}>
                       <span style={{ color: 'var(--color-ink-muted)' }}>Location:</span>
-                      <strong>{project.location}</strong>
+                      <strong>{pLocation}</strong>
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '8px', borderBottom: '1px solid var(--color-border)' }}>
                       <span style={{ color: 'var(--color-ink-muted)' }}>Plot Dimensions:</span>
-                      <strong>{project.plotSizes}</strong>
+                      <strong>{pPlotSizes}</strong>
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '8px', borderBottom: '1px solid var(--color-border)' }}>
                       <span style={{ color: 'var(--color-ink-muted)' }}>Groundwater Level:</span>
-                      <strong style={{ color: '#059669' }}>{project.waterTable}</strong>
+                      <strong style={{ color: '#059669' }}>{pWater}</strong>
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '8px', borderBottom: '1px solid var(--color-border)' }}>
                       <span style={{ color: 'var(--color-ink-muted)' }}>Govt Guideline:</span>
-                      <strong>{project.guidelineValue}</strong>
+                      <strong>{pGuideline}</strong>
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '8px', borderBottom: '1px solid var(--color-border)' }}>
                       <span style={{ color: 'var(--color-ink-muted)' }}>Projected 3-Yr CAGR:</span>
-                      <strong style={{ color: 'var(--color-gold-dark)' }}>{project.cagr}</strong>
+                      <strong style={{ color: 'var(--color-gold-dark)' }}>{pCagr}</strong>
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '8px' }}>
                       <span style={{ color: 'var(--color-ink-muted)' }}>Availability:</span>
-                      <strong>{project.availablePlots} of {project.totalPlots} Plots Left</strong>
+                      <strong>{pAvailable} of {pTotal} Plots Left</strong>
                     </div>
                   </div>
 
                   <button 
-                    onClick={() => onOpenEnquiry(`Site Visit: ${project.title}`)}
+                    onClick={() => onOpenEnquiry(`Site Visit: ${pTitle}`)}
                     className="btn btn-primary btn-md"
                     style={{ width: '100%', marginTop: '24px' }}
                   >
@@ -209,6 +245,26 @@ export const ProjectsPage = ({ onOpenEnquiry }) => {
               </div>
             </div>
           </div>
+        </section>
+      </div>
+    );
+  }
+
+  if (slug && !project) {
+    return (
+      <div>
+        <Breadcrumbs items={[
+          { label: 'Projects (Trichy)', path: '/projects' },
+          { label: 'Project Not Found' }
+        ]} />
+        <section className="section" style={{ textAlign: 'center', padding: '80px 20px' }}>
+          <h2 style={{ fontSize: '2rem', marginBottom: '16px', color: 'var(--color-brand-deep)' }}>Project Not Found</h2>
+          <p style={{ color: 'var(--color-ink-muted)', margin: '0 auto 24px', maxWidth: '500px' }}>
+            The requested project layout could not be found or has been updated. Explore all available Trichy projects below.
+          </p>
+          <Link to="/projects" className="btn btn-primary">
+            Explore All Trichy Projects
+          </Link>
         </section>
       </div>
     );
