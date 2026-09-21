@@ -5,6 +5,11 @@
   RewriteEngine On
   RewriteBase /
 
+  # Redirect HTTP to HTTPS for namnilam.com
+  RewriteCond %{HTTPS} off
+  RewriteCond %{HTTP_HOST} ^(www\.)?namnilam\.com$ [NC]
+  RewriteRule ^(.*)$ https://namnilam.com/$1 [L,R=301]
+
   # Allow direct access to existing files, directories, or the api folder
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d [OR]

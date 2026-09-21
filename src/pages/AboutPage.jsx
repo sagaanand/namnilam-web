@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { BRAND_INFO } from '../data/ecosystemData';
+import { SeoHead } from '../components/common/SeoHead';
 
 export const AboutPage = ({ onOpenEnquiry }) => {
   const location = useLocation();
@@ -21,12 +22,28 @@ export const AboutPage = ({ onOpenEnquiry }) => {
   const isStory = location.pathname.includes('our-story');
   const isApproach = location.pathname.includes('approach');
 
+  const pageTitle = isApproach 
+    ? 'Our 4-Step Advisory Methodology (Understand, Analyse, Advise, Execute)'
+    : isStory 
+      ? 'Our Story & Purpose | About Nam Nilam'
+      : 'About Nam Nilam | Real Estate Intelligence & Advisory';
+
   return (
     <div>
+      <SeoHead 
+        title={pageTitle}
+        description="Learn about Nam Nilam — an independent real estate intelligence, advisory, education and digital transformation company rooted in Tiruchirappalli with services across Tamil Nadu."
+        canonical={location.pathname}
+        breadcrumbs={[
+          { label: 'About', path: '/about' },
+          ...(isStory ? [{ label: 'Our Story' }] : isApproach ? [{ label: 'Our Approach' }] : [])
+        ]}
+      />
       <Breadcrumbs items={[
         { label: 'About', path: '/about' },
         ...(isStory ? [{ label: 'Our Story' }] : isApproach ? [{ label: 'Our Approach' }] : [])
       ]} />
+
 
       {/* Hero */}
       <section className="page-hero">
@@ -41,6 +58,15 @@ export const AboutPage = ({ onOpenEnquiry }) => {
           <p style={{ fontSize: '1.15rem', color: 'var(--color-ink-muted)', maxWidth: '780px' }}>
             {BRAND_INFO.subTagline} Rooted in Tiruchirappalli with advisory services extending across Tamil Nadu.
           </p>
+
+          {/* About hero image */}
+          <div style={{ marginTop: '32px', borderRadius: 'var(--radius-xl)', overflow: 'hidden', boxShadow: 'var(--shadow-lg)', maxHeight: '320px' }}>
+            <img
+              src="/advisory-meeting.jpg"
+              alt="Nam Nilam — Independent Real Estate Advisory Consultation"
+              style={{ width: '100%', height: '320px', objectFit: 'cover', objectPosition: 'center 15%', display: 'block' }}
+            />
+          </div>
 
           {/* Subpage Tabs */}
           <div style={{ display: 'flex', gap: '10px', marginTop: '28px' }}>

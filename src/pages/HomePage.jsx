@@ -15,13 +15,24 @@ import {
   Sparkles,
   CheckCircle2,
   Phone,
-  Bot
+  Bot,
+  Layers,
+  Banknote,
+  FileCheck2,
+  Hammer
 } from 'lucide-react';
-import { BRAND_INFO, TRICHY_PROJECTS, SERVICES_CATALOG, INTELLIGENCE_ARTICLES } from '../data/ecosystemData';
+import { BRAND_INFO, TRICHY_PROJECTS } from '../data/ecosystemData';
+import { SeoHead } from '../components/common/SeoHead';
 
 export const HomePage = ({ onOpenEnquiry }) => {
   return (
     <div>
+      <SeoHead 
+        title="Real Estate Intelligence & Advisory | Tamil Nadu"
+        description="Real Estate Decisions, Backed by Intelligence. Advisory, intelligence, education and digital transformation for the real estate ecosystem across Tamil Nadu."
+        canonical="/"
+      />
+
       {/* 1. HERO SECTION */}
       <section className="hero-section">
         <div className="container">
@@ -61,46 +72,39 @@ export const HomePage = ({ onOpenEnquiry }) => {
               </div>
             </div>
 
-            {/* Right Visual Emblem Card */}
+            {/* Right Visual — Trichy Land Aerial Photo */}
             <div className="hero-right">
               <div style={{
-                backgroundColor: '#FFFFFF',
-                border: '1px solid var(--color-border)',
                 borderRadius: 'var(--radius-xl)',
-                padding: '40px',
+                overflow: 'hidden',
                 boxShadow: 'var(--shadow-xl)',
-                textAlign: 'center',
-                position: 'relative'
+                position: 'relative',
+                border: '1px solid var(--color-border)'
               }}>
-                <img 
-                  src="/nam-nilam-logo.png" 
-                  alt="Nam Nilam Emblem" 
-                  style={{ width: '160px', height: '160px', margin: '0 auto 24px auto', display: 'block', objectFit: 'contain' }}
+                <img
+                  src="/hero-trichy-land.jpg"
+                  alt="DTCP Approved Gated Layout in Trichy, Tamil Nadu"
+                  style={{ width: '100%', height: '360px', objectFit: 'cover', display: 'block' }}
                 />
-
-                <h3 style={{ fontSize: '1.4rem', color: 'var(--color-brand-deep)', marginBottom: '8px' }}>
-                  The Nam Nilam Standard
-                </h3>
-                <p style={{ fontSize: '0.9rem', color: 'var(--color-ink-muted)', marginBottom: '24px' }}>
-                  A multi-disciplinary real estate firm providing independent advisory, market research, professional education, and business transformation.
-                </p>
-
+                {/* Overlay badge */}
                 <div style={{
-                  display: 'grid',
-                  gridTemplateColumns: '1fr 1fr',
-                  gap: '12px',
-                  borderTop: '1px solid var(--color-border)',
-                  paddingTop: '20px',
-                  textAlign: 'left'
+                  position: 'absolute',
+                  bottom: '20px',
+                  left: '20px',
+                  right: '20px',
+                  backgroundColor: 'rgba(11, 17, 24, 0.85)',
+                  backdropFilter: 'blur(10px)',
+                  borderRadius: 'var(--radius-md)',
+                  padding: '14px 18px',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center'
                 }}>
                   <div>
-                    <span style={{ fontSize: '0.72rem', color: '#64748B', display: 'block' }}>Primary Hub</span>
-                    <strong style={{ fontSize: '0.9rem', color: 'var(--color-brand-deep)' }}>Trichy, Tamil Nadu</strong>
+                    <div style={{ fontSize: '0.72rem', color: '#DFBA73', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '2px' }}>Featured Corridor</div>
+                    <div style={{ fontSize: '0.95rem', color: '#FFFFFF', fontWeight: 700 }}>Trichy Highway Developments</div>
                   </div>
-                  <div>
-                    <span style={{ fontSize: '0.72rem', color: '#64748B', display: 'block' }}>Services Reach</span>
-                    <strong style={{ fontSize: '0.9rem', color: 'var(--color-brand-deep)' }}>Across Tamil Nadu</strong>
-                  </div>
+                  <span style={{ backgroundColor: '#059669', color: '#fff', borderRadius: 'var(--radius-pill)', padding: '4px 12px', fontSize: '0.75rem', fontWeight: 700 }}>DTCP Verified</span>
                 </div>
               </div>
             </div>
@@ -128,33 +132,33 @@ export const HomePage = ({ onOpenEnquiry }) => {
                 <h3>I want to Buy / Invest</h3>
                 <p>Explore verified layout developments and plot investment corridors in Trichy.</p>
                 <span className="journey-link">
-                  <span>View Trichy Projects</span>
+                  <span>View Projects</span>
                   <ArrowRight size={14} />
                 </span>
               </Link>
 
               {/* Option 2 */}
-              <Link to="/services/real-estate-advisory" className="journey-box">
+              <Link to="/services" className="journey-box">
                 <div className="journey-icon">
                   <ShieldCheck size={24} />
                 </div>
-                <h3>I need Property Advice</h3>
-                <p>Objective guidance on land valuation, legal due diligence, and buying decisions.</p>
+                <h3>I need Property Services</h3>
+                <p>Bank loans, legal opinion vetting, and turnkey 9% construction consulting.</p>
                 <span className="journey-link">
-                  <span>Explore Advisory</span>
+                  <span>Explore Services</span>
                   <ArrowRight size={14} />
                 </span>
               </Link>
 
               {/* Option 3 */}
-              <Link to="/ai" className="journey-box">
+              <Link to="/intelligence" className="journey-box">
                 <div className="journey-icon">
-                  <Bot size={24} />
+                  <TrendingUp size={24} />
                 </div>
-                <h3>Nam Nilam AI Workforce</h3>
-                <p>Deploy AI agents for lead qualification, 24/7 WhatsApp, telecalling, and revenue leakage detection.</p>
+                <h3>I need Market Intelligence</h3>
+                <p>Independent property valuation, ₹199 market reports, and on-site infrastructure audits.</p>
                 <span className="journey-link">
-                  <span>Explore AI Workforce</span>
+                  <span>Explore Intelligence</span>
                   <ArrowRight size={14} />
                 </span>
               </Link>
@@ -165,7 +169,7 @@ export const HomePage = ({ onOpenEnquiry }) => {
                   <GraduationCap size={24} />
                 </div>
                 <h3>I want to Learn Real Estate</h3>
-                <p>Structured courses, masterclasses, and practical guides on land buying and due diligence.</p>
+                <p>2-Month Certified practitioner course and practical short-term verification masterclasses.</p>
                 <span className="journey-link">
                   <span>Explore Academy</span>
                   <ArrowRight size={14} />
@@ -176,67 +180,184 @@ export const HomePage = ({ onOpenEnquiry }) => {
         </div>
       </section>
 
-      {/* 3. WHAT NAM NILAM DOES (4 HIGH-LEVEL PILLARS) */}
+      {/* 3. CORE ECOSYSTEM: 4 PILLARS */}
       <section className="section">
         <div className="container">
           <div className="section-header">
             <div className="section-eyebrow">
               <Compass size={14} />
-              <span>Core Ecosystem</span>
+              <span>Core Business Architecture</span>
             </div>
             <h2 className="section-title">
-              Four Specialized Pillars. One Uncompromising Standard.
+              Everything You Need to Make a Better Real Estate Decision
             </h2>
             <p className="section-subtitle">
-              We bridge the gap between on-ground real estate realities and institutional-grade intelligence.
+              Four specialized divisions delivering institutional-grade clarity, verification, education, and digital solutions for Tamil Nadu real estate.
             </p>
           </div>
 
           <div className="pillars-grid">
-            <div className="pillar-card">
-              <div className="journey-icon">
-                <ShieldCheck size={24} />
+            {/* SERVICES */}
+            <div className="pillar-card" style={{ display: 'flex', flexDirection: 'column' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
+                <span style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--color-gold)', fontFamily: 'var(--font-mono)' }}>01</span>
+                <span className="badge badge-gold">Services</span>
               </div>
-              <h3>Real Estate Advisory</h3>
-              <p>Make better property and investment decisions with independent evaluation and valuation support.</p>
-              <Link to="/services" className="journey-link" style={{ marginTop: 'auto' }}>
-                <span>Learn More</span>
+
+              <h3 style={{ fontSize: '1.3rem', color: 'var(--color-brand-deep)', marginBottom: '4px' }}>
+                Real Estate Services
+              </h3>
+              <div style={{ fontSize: '0.85rem', color: 'var(--color-gold-dark)', fontWeight: 700, marginBottom: '16px' }}>
+                “From Planning to Execution”
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '24px', flex: 1 }}>
+                <div style={{ padding: '10px 12px', backgroundColor: 'var(--color-canvas)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ fontSize: '0.88rem', fontWeight: 600 }}>Loan Arrangement</span>
+                  <strong style={{ color: 'var(--color-brand-deep)', fontSize: '0.9rem' }}>₹4,999</strong>
+                </div>
+
+                <div style={{ padding: '10px 12px', backgroundColor: 'var(--color-canvas)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ fontSize: '0.88rem', fontWeight: 600 }}>Online Legal Opinion</span>
+                  <strong style={{ color: 'var(--color-brand-deep)', fontSize: '0.9rem' }}>₹3,999</strong>
+                </div>
+
+                <div style={{ padding: '10px 12px', backgroundColor: 'var(--color-canvas)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div>
+                    <span style={{ fontSize: '0.88rem', fontWeight: 600, display: 'block' }}>Construction Consulting & PM</span>
+                    <span style={{ fontSize: '0.72rem', color: 'var(--color-ink-muted)' }}>From Planning to Handover</span>
+                  </div>
+                  <strong style={{ color: '#059669', fontSize: '0.9rem' }}>9% Fee</strong>
+                </div>
+              </div>
+
+              <Link to="/services" className="btn btn-outline btn-sm" style={{ width: '100%', justifyContent: 'center' }}>
+                <span>Explore Services</span>
                 <ArrowRight size={14} />
               </Link>
             </div>
 
-            <div className="pillar-card">
-              <div className="journey-icon">
-                <TrendingUp size={24} />
+            {/* INTELLIGENCE */}
+            <div className="pillar-card" style={{ display: 'flex', flexDirection: 'column' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
+                <span style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--color-gold)', fontFamily: 'var(--font-mono)' }}>02</span>
+                <span className="badge badge-gold">Intelligence</span>
               </div>
-              <h3>Real Estate Intelligence</h3>
-              <p>Understand micro-markets, infrastructure corridors, and historical land price trajectories.</p>
-              <Link to="/intelligence" className="journey-link" style={{ marginTop: 'auto' }}>
-                <span>Explore Data</span>
+
+              <h3 style={{ fontSize: '1.3rem', color: 'var(--color-brand-deep)', marginBottom: '4px' }}>
+                Property Intelligence
+              </h3>
+              <div style={{ fontSize: '0.85rem', color: 'var(--color-gold-dark)', fontWeight: 700, marginBottom: '16px' }}>
+                “Know the Market Before You Decide.”
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '24px', flex: 1 }}>
+                <div style={{ padding: '10px 12px', backgroundColor: 'var(--color-canvas)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ fontSize: '0.88rem', fontWeight: 600 }}>Property Valuation</span>
+                  <span style={{ color: 'var(--color-gold-dark)', fontSize: '0.82rem', fontWeight: 700 }}>Request Valuation</span>
+                </div>
+
+                <div style={{ padding: '10px 12px', backgroundColor: 'var(--color-canvas)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ fontSize: '0.88rem', fontWeight: 600 }}>Market Data Report</span>
+                  <strong style={{ color: 'var(--color-brand-deep)', fontSize: '0.9rem' }}>₹199</strong>
+                </div>
+
+                <div style={{ padding: '10px 12px', backgroundColor: 'var(--color-canvas)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div>
+                    <span style={{ fontSize: '0.88rem', fontWeight: 600, display: 'block' }}>On-site Infra Valuation</span>
+                    <span style={{ fontSize: '0.72rem', color: 'var(--color-ink-muted)' }}>Water, Soil, Grid Audit</span>
+                  </div>
+                  <strong style={{ color: 'var(--color-brand-deep)', fontSize: '0.9rem' }}>₹3,999</strong>
+                </div>
+              </div>
+
+              <Link to="/intelligence" className="btn btn-outline btn-sm" style={{ width: '100%', justifyContent: 'center' }}>
+                <span>Explore Intelligence</span>
                 <ArrowRight size={14} />
               </Link>
             </div>
 
-            <div className="pillar-card">
-              <div className="journey-icon">
-                <GraduationCap size={24} />
+            {/* ACADEMY */}
+            <div className="pillar-card" style={{ display: 'flex', flexDirection: 'column' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
+                <span style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--color-gold)', fontFamily: 'var(--font-mono)' }}>03</span>
+                <span className="badge badge-gold">Academy</span>
               </div>
-              <h3>Real Estate Education</h3>
-              <p>Empower yourself through structured courses, document verification tutorials, and workshops.</p>
-              <Link to="/academy" className="journey-link" style={{ marginTop: 'auto' }}>
-                <span>View Courses</span>
+
+              <h3 style={{ fontSize: '1.3rem', color: 'var(--color-brand-deep)', marginBottom: '4px' }}>
+                Nam Nilam Academy
+              </h3>
+              <div style={{ fontSize: '0.85rem', color: 'var(--color-gold-dark)', fontWeight: 700, marginBottom: '16px' }}>
+                “Learn Real Estate. Learn by Doing.”
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '24px', flex: 1 }}>
+                <div style={{ padding: '10px 12px', backgroundColor: 'var(--color-canvas)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
+                    <span style={{ fontSize: '0.86rem', fontWeight: 700 }}>Certified 2-Month Course</span>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: 'var(--color-ink-muted)' }}>
+                    <span>Offline: <strong style={{ color: 'var(--color-brand-deep)' }}>₹9,999</strong></span>
+                    <span>Online: <strong style={{ color: 'var(--color-brand-deep)' }}>₹6,999</strong></span>
+                  </div>
+                </div>
+
+                <div style={{ padding: '10px 12px', backgroundColor: 'var(--color-canvas)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
+                    <span style={{ fontSize: '0.86rem', fontWeight: 700 }}>Practical Short Courses</span>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: 'var(--color-ink-muted)' }}>
+                    <span>Online: <strong style={{ color: 'var(--color-brand-deep)' }}>₹399</strong></span>
+                    <span>Offline: <strong style={{ color: 'var(--color-brand-deep)' }}>₹999</strong></span>
+                  </div>
+                </div>
+              </div>
+
+              <Link to="/academy" className="btn btn-outline btn-sm" style={{ width: '100%', justifyContent: 'center' }}>
+                <span>Explore Academy</span>
                 <ArrowRight size={14} />
               </Link>
             </div>
 
-            <div className="pillar-card">
-              <div className="journey-icon">
-                <Bot size={24} />
+            {/* BUSINESS SOLUTIONS */}
+            <div className="pillar-card" style={{ display: 'flex', flexDirection: 'column' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
+                <span style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--color-gold)', fontFamily: 'var(--font-mono)' }}>04</span>
+                <span className="badge badge-gold">Solutions</span>
               </div>
-              <h3>AI Workforce for Real Estate</h3>
-              <p>Turn repetitive sales, telecalling, WhatsApp, and CRM tasks into an intelligent autonomous workforce.</p>
-              <Link to="/ai" className="journey-link" style={{ marginTop: 'auto' }}>
-                <span>Deploy AI Workforce</span>
+
+              <h3 style={{ fontSize: '1.3rem', color: 'var(--color-brand-deep)', marginBottom: '4px' }}>
+                Business Solutions
+              </h3>
+              <div style={{ fontSize: '0.85rem', color: 'var(--color-gold-dark)', fontWeight: 700, marginBottom: '16px' }}>
+                “Scale Your Real Estate Enterprise”
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '24px', flex: 1 }}>
+                <div style={{ padding: '10px 12px', backgroundColor: 'var(--color-canvas)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ fontSize: '0.86rem', fontWeight: 700 }}>Diamond Pack</span>
+                    <span style={{ fontSize: '0.72rem', color: 'var(--color-gold-dark)', fontWeight: 700 }}>All-in-One</span>
+                  </div>
+                  <span style={{ fontSize: '0.78rem', color: 'var(--color-ink-muted)' }}>Custom Quote • AI + CRM + Ads</span>
+                </div>
+
+                <div style={{ padding: '10px 12px', backgroundColor: 'var(--color-canvas)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ fontSize: '0.86rem', fontWeight: 700 }}>Gold Pack</span>
+                    <span style={{ fontSize: '0.72rem', color: 'var(--color-gold-dark)', fontWeight: 700 }}>Focused Pack</span>
+                  </div>
+                  <span style={{ fontSize: '0.78rem', color: 'var(--color-ink-muted)' }}>Custom Quote • CRM or Automation</span>
+                </div>
+
+                <div style={{ padding: '8px 12px', backgroundColor: 'rgba(223, 186, 115, 0.08)', borderRadius: 'var(--radius-md)', border: '1px solid rgba(223, 186, 115, 0.3)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <span style={{ fontSize: '0.82rem', fontWeight: 600 }}>One-Time &amp; Subscriptions</span>
+                  <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-brand-deep)' }}>Talk to Us</span>
+                </div>
+              </div>
+
+              <Link to="/business" className="btn btn-outline btn-sm" style={{ width: '100%', justifyContent: 'center' }}>
+                <span>Explore Business Solutions</span>
                 <ArrowRight size={14} />
               </Link>
             </div>
@@ -244,76 +365,119 @@ export const HomePage = ({ onOpenEnquiry }) => {
         </div>
       </section>
 
-      {/* 4. REAL ESTATE INTELLIGENCE HIGHLIGHT */}
+      {/* 4. FEATURED PROJECTS (SEPARATE COMMERCIAL SECTION) */}
       <section className="section section-alt">
         <div className="container">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '48px', flexWrap: 'wrap', gap: '20px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '40px', flexWrap: 'wrap', gap: '20px' }}>
             <div>
               <div className="section-eyebrow">
-                <TrendingUp size={14} />
-                <span>Market Intelligence</span>
+                <MapPin size={14} />
+                <span>Verified Commercial Developments</span>
               </div>
               <h2 style={{ fontSize: '2.2rem', color: 'var(--color-brand-deep)' }}>
-                Understand the Market Before You Make the Move.
+                Featured Projects
               </h2>
+              <p style={{ color: 'var(--color-ink-muted)', fontSize: '0.95rem', marginTop: '6px', maxWidth: '640px' }}>
+                Authentic, data-driven residential layouts and agricultural land opportunities situated along Tiruchirappalli’s prime growth corridors.
+              </p>
             </div>
-            <Link to="/intelligence" className="btn btn-outline">
-              <span>View All Market Intelligence</span>
+            <Link to="/projects" className="btn btn-outline">
+              <span>View All Projects</span>
               <ArrowRight size={16} />
             </Link>
           </div>
 
-          <div className="cards-grid-4">
-            <div style={{ padding: '24px', backgroundColor: 'var(--color-canvas)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--color-border)' }}>
-              <span className="badge badge-gold" style={{ marginBottom: '12px' }}>Market Insight</span>
-              <h4 style={{ fontSize: '1.1rem', marginBottom: '8px' }}>Tamil Nadu Growth Corridors</h4>
-              <p style={{ fontSize: '0.85rem', color: 'var(--color-ink-muted)' }}>
-                Macro economic factors driving suburban land appreciation in Central and Southern TN.
-              </p>
-            </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '24px' }}>
+            {TRICHY_PROJECTS.map((proj) => (
+              <div key={proj.slug} className="project-card">
+                <div className="project-img-wrapper" style={{ position: 'relative' }}>
+                  <img src={proj.image} alt={proj.title} className="project-img" style={{ height: '210px', width: '100%', objectFit: 'cover' }} />
+                  <span className="project-tag">{proj.status}</span>
+                  <span className="project-rate-pill">{proj.rateSqft} / sq.ft</span>
+                  {proj.emiAvailable && (
+                    <span style={{ position: 'absolute', bottom: '12px', left: '12px', backgroundColor: '#059669', color: '#FFFFFF', padding: '3px 10px', borderRadius: 'var(--radius-pill)', fontSize: '0.72rem', fontWeight: 700 }}>
+                      EMI Available
+                    </span>
+                  )}
+                </div>
 
-            <div style={{ padding: '24px', backgroundColor: 'var(--color-canvas)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--color-border)' }}>
-              <span className="badge badge-gold" style={{ marginBottom: '12px' }}>Location Insight</span>
-              <h4 style={{ fontSize: '1.1rem', marginBottom: '8px' }}>Trichy Expansion Zones</h4>
-              <p style={{ fontSize: '0.85rem', color: 'var(--color-ink-muted)' }}>
-                Detailed zoning, transit links, and groundwater suitability across Trichy's arterial roads.
-              </p>
-            </div>
+                <div className="project-body" style={{ padding: '20px', display: 'flex', flexDirection: 'column', flex: 1 }}>
+                  <div style={{ fontSize: '0.8rem', color: 'var(--color-gold-dark)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px', marginBottom: '6px' }}>
+                    <MapPin size={13} />
+                    <span>{proj.location}</span>
+                  </div>
 
-            <div style={{ padding: '24px', backgroundColor: 'var(--color-canvas)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--color-border)' }}>
-              <span className="badge badge-gold" style={{ marginBottom: '12px' }}>Price Insight</span>
-              <h4 style={{ fontSize: '1.1rem', marginBottom: '8px' }}>Guideline vs Market Value</h4>
-              <p style={{ fontSize: '0.85rem', color: 'var(--color-ink-muted)' }}>
-                Realistic price spreads and stamp duty calculations to avoid costly registration surprises.
-              </p>
-            </div>
+                  <h3 style={{ fontSize: '1.25rem', marginBottom: '8px', color: 'var(--color-brand-deep)' }}>
+                    {proj.title}
+                  </h3>
 
-            <div style={{ padding: '24px', backgroundColor: 'var(--color-canvas)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--color-border)' }}>
-              <span className="badge badge-gold" style={{ marginBottom: '12px' }}>Infrastructure</span>
-              <h4 style={{ fontSize: '1.1rem', marginBottom: '8px' }}>Semi-Ring Road Impact</h4>
-              <p style={{ fontSize: '0.85rem', color: 'var(--color-ink-muted)' }}>
-                Analysis of road and transit connectivity unlocking logistics and residential parcels.
-              </p>
-            </div>
+                  <p style={{ fontSize: '0.85rem', color: 'var(--color-ink-muted)', marginBottom: '16px', lineHeight: 1.55 }}>
+                    {proj.overview.slice(0, 115)}...
+                  </p>
+
+                  <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: '1fr 1fr',
+                    gap: '8px',
+                    padding: '10px',
+                    backgroundColor: 'var(--color-canvas)',
+                    borderRadius: 'var(--radius-sm)',
+                    fontSize: '0.78rem',
+                    marginBottom: '18px'
+                  }}>
+                    <div>
+                      <span style={{ color: '#64748B', display: 'block' }}>Approval</span>
+                      <strong>{proj.approvalNo ? proj.approvalNo.split('|')[0].trim() : 'Approved Layout'}</strong>
+                    </div>
+                    <div>
+                      <span style={{ color: '#64748B', display: 'block' }}>Water Table</span>
+                      <strong style={{ color: '#059669' }}>{proj.waterTable ? proj.waterTable.split(' ')[0] : 'Potable'}</strong>
+                    </div>
+                  </div>
+
+                  {proj.guidelineValue && (
+                    <div style={{ fontSize: '0.76rem', color: 'var(--color-ink-muted)', marginBottom: '14px', background: 'rgba(0,0,0,0.02)', padding: '6px 10px', borderRadius: '4px' }}>
+                      Govt Guideline Base: <strong>{proj.guidelineValue}</strong>
+                    </div>
+                  )}
+
+                  <div style={{ marginTop: 'auto', display: 'flex', gap: '10px' }}>
+                    <Link to={`/projects/${proj.slug}`} className="btn btn-dark btn-sm" style={{ flex: 1, justifyContent: 'center' }}>
+                      <span>View Project</span>
+                      <ArrowRight size={14} />
+                    </Link>
+                    <a 
+                      href={`https://wa.me/${BRAND_INFO.whatsappNumber}?text=${encodeURIComponent(`Hello, I am interested in ${proj.title} in Trichy.`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-whatsapp btn-sm"
+                      title="Enquire on WhatsApp"
+                    >
+                      <MessageSquare size={14} />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* 5. NAM NILAM AI WORKFORCE HIGHLIGHT */}
+      {/* 5. NAM NILAM AI WORKFORCE HIGHLIGHT (SITTING INSIDE BUSINESS SOLUTIONS CAPABILITY) */}
       <section className="section section-dark">
         <div className="container">
           <div className="business-highlight-grid">
             <div>
               <div className="section-eyebrow">
                 <Bot size={14} />
-                <span>Nam Nilam AI • Enterprise Real Estate Workforce</span>
+                <span>Flagship Capability • Enterprise AI Workforce</span>
               </div>
               <h2 className="section-title">
                 Your Next Employee Doesn't Need a Desk. <br />
                 <span className="text-gold">It Needs a Workflow.</span>
               </h2>
               <p className="section-subtitle">
-                Turn repetitive sales, marketing, customer communication, and business intelligence tasks into intelligent workflows that work alongside your team.
+                As part of our Business Solutions architecture, Nam Nilam deploys autonomous AI agents across 5 functional departments — handling lead qualification, 24/7 WhatsApp customer conversations, telecalling, and revenue leakage detection.
               </p>
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', margin: '32px 0' }}>
@@ -337,43 +501,37 @@ export const HomePage = ({ onOpenEnquiry }) => {
 
               <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap' }}>
                 <Link to="/ai" className="btn btn-primary btn-lg">
-                  <span>Explore 10 AI Agents</span>
+                  <span>Explore AI Workforce (/ai)</span>
                   <ArrowRight size={16} />
                 </Link>
-                <Link to="/ai" className="btn btn-outline-white btn-lg">
-                  Find Your AI Employee
+                <Link to="/business" className="btn btn-outline-white btn-lg">
+                  View Business Packages
                 </Link>
               </div>
             </div>
 
             <div style={{
-              backgroundColor: 'rgba(255, 255, 255, 0.05)',
+              borderRadius: 'var(--radius-xl)',
+              overflow: 'hidden',
               border: '1px solid rgba(223, 186, 115, 0.25)',
-              padding: '36px',
-              borderRadius: 'var(--radius-xl)'
+              position: 'relative'
             }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-                <h3 style={{ fontSize: '1.25rem', color: '#FFFFFF' }}>
-                  5 Functional Departments
-                </h3>
-                <span className="badge badge-gold" style={{ fontSize: '0.72rem' }}>Ready to Deploy</span>
-              </div>
-              
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', fontSize: '0.9rem', color: '#CBD5E1' }}>
-                <div style={{ padding: '12px 14px', backgroundColor: 'rgba(255, 255, 255, 0.04)', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(255,255,255,0.06)' }}>
-                  <strong style={{ color: '#DFBA73' }}>01. Sales Workforce:</strong> Instant qualification under 10s, Day 0–30 follow-up, and automated outbound calling.
-                </div>
-                <div style={{ padding: '12px 14px', backgroundColor: 'rgba(255, 255, 255, 0.04)', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(255,255,255,0.06)' }}>
-                  <strong style={{ color: '#DFBA73' }}>02. Customer Communication:</strong> 24/7 WhatsApp API booking, brochures, and layout document support.
-                </div>
-                <div style={{ padding: '12px 14px', backgroundColor: 'rgba(255, 255, 255, 0.04)', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(255,255,255,0.06)' }}>
-                  <strong style={{ color: '#DFBA73' }}>03. Operations:</strong> Conversational CRM copilot by voice and 8:00 AM daily executive morning brief.
-                </div>
-                <div style={{ padding: '12px 14px', backgroundColor: 'rgba(255, 255, 255, 0.04)', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(255,255,255,0.06)' }}>
-                  <strong style={{ color: '#DFBA73' }}>04. Decision Intelligence:</strong> Spot uncalled leads, pipeline bottlenecks, and leaking sales revenue.
-                </div>
-                <div style={{ padding: '12px 14px', backgroundColor: 'rgba(255, 255, 255, 0.04)', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(255,255,255,0.06)' }}>
-                  <strong style={{ color: '#DFBA73' }}>05. Marketing Workforce:</strong> High-converting property ad angles and real estate campaign architecture.
+              <img
+                src="/ai-workforce.jpg"
+                alt="Nam Nilam AI Workforce for Real Estate"
+                style={{ width: '100%', height: '100%', minHeight: '380px', objectFit: 'cover', display: 'block' }}
+              />
+              <div style={{
+                position: 'absolute',
+                bottom: 0, left: 0, right: 0,
+                background: 'linear-gradient(to top, rgba(11,17,24,0.95) 0%, transparent 100%)',
+                padding: '32px 28px 28px'
+              }}>
+                <h3 style={{ fontSize: '1.25rem', color: '#FFFFFF', marginBottom: '8px' }}>5 Functional Departments</h3>
+                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                  {['Sales Workforce','Customer Comms','Operations','Decision Intel','Marketing'].map(d => (
+                    <span key={d} style={{ backgroundColor: 'rgba(223,186,115,0.18)', border: '1px solid rgba(223,186,115,0.3)', color: '#DFBA73', borderRadius: 'var(--radius-pill)', padding: '3px 10px', fontSize: '0.73rem', fontWeight: 700 }}>{d}</span>
+                  ))}
                 </div>
               </div>
             </div>
@@ -381,95 +539,8 @@ export const HomePage = ({ onOpenEnquiry }) => {
         </div>
       </section>
 
-      {/* 6. OUR PROJECTS IN TRICHY (STRICTLY TRICHY) */}
+      {/* 6. OPERATING METHODOLOGY */}
       <section className="section">
-        <div className="container">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '48px', flexWrap: 'wrap', gap: '20px' }}>
-            <div>
-              <div className="section-eyebrow">
-                <MapPin size={14} />
-                <span>Featured Developments</span>
-              </div>
-              <h2 style={{ fontSize: '2.2rem', color: 'var(--color-brand-deep)' }}>
-                Our Projects in Trichy
-              </h2>
-              <p style={{ color: 'var(--color-ink-muted)', fontSize: '0.95rem', marginTop: '6px' }}>
-                Curated DTCP-approved gated layouts in high-growth arterial corridors of Tiruchirappalli.
-              </p>
-            </div>
-            <Link to="/projects" className="btn btn-outline">
-              <span>View All Trichy Projects</span>
-              <ArrowRight size={16} />
-            </Link>
-          </div>
-
-          <div className="trichy-projects-grid">
-            {TRICHY_PROJECTS.map((proj) => (
-              <div key={proj.slug} className="project-card">
-                <div className="project-img-wrapper">
-                  <img src={proj.image} alt={proj.title} className="project-img" />
-                  <span className="project-tag">{proj.status}</span>
-                  <span className="project-rate-pill">{proj.rateSqft} / sq.ft</span>
-                </div>
-
-                <div className="project-body">
-                  <div style={{ fontSize: '0.82rem', color: 'var(--color-gold-dark)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px', marginBottom: '4px' }}>
-                    <MapPin size={13} />
-                    <span>{proj.location}</span>
-                  </div>
-
-                  <h3 style={{ fontSize: '1.25rem', marginBottom: '8px' }}>
-                    {proj.title}
-                  </h3>
-
-                  <p style={{ fontSize: '0.88rem', color: 'var(--color-ink-muted)', marginBottom: '16px', lineHeight: 1.55 }}>
-                    {proj.overview.slice(0, 110)}...
-                  </p>
-
-                  <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: '1fr 1fr',
-                    gap: '8px',
-                    padding: '10px',
-                    backgroundColor: 'var(--color-canvas)',
-                    borderRadius: 'var(--radius-sm)',
-                    fontSize: '0.78rem',
-                    marginBottom: '18px'
-                  }}>
-                    <div>
-                      <span style={{ color: '#64748B', display: 'block' }}>Approval</span>
-                      <strong>DTCP Approved</strong>
-                    </div>
-                    <div>
-                      <span style={{ color: '#64748B', display: 'block' }}>Water Table</span>
-                      <strong style={{ color: '#059669' }}>{proj.waterTable.split(' ')[0]}</strong>
-                    </div>
-                  </div>
-
-                  <div style={{ marginTop: 'auto', display: 'flex', gap: '10px' }}>
-                    <Link to={`/projects/${proj.slug}`} className="btn btn-dark btn-sm" style={{ flex: 1 }}>
-                      <span>View Project</span>
-                      <ArrowRight size={14} />
-                    </Link>
-                    <a 
-                      href={`https://wa.me/${BRAND_INFO.whatsappNumber}?text=${encodeURIComponent(`Hello, I am interested in ${proj.title} in Trichy.`)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn btn-whatsapp btn-sm"
-                      title="Enquire on WhatsApp"
-                    >
-                      <MessageSquare size={14} />
-                    </a>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 7. WHY NAM NILAM (THE METHODOLOGY) */}
-      <section className="section section-alt">
         <div className="container">
           <div className="section-header">
             <div className="section-eyebrow">
@@ -520,7 +591,7 @@ export const HomePage = ({ onOpenEnquiry }) => {
         </div>
       </section>
 
-      {/* 8. FINAL CONVERSION CTA */}
+      {/* 7. FINAL CONVERSION CTA */}
       <section className="section" style={{ background: 'var(--color-surface)' }}>
         <div className="container">
           <div style={{
@@ -574,3 +645,5 @@ export const HomePage = ({ onOpenEnquiry }) => {
     </div>
   );
 };
+
+export default HomePage;

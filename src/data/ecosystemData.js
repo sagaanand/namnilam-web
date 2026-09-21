@@ -16,203 +16,485 @@ export const TRICHY_PROJECTS = [
   {
     slug: "jai-nagar",
     title: "Jai Nagar",
-    location: "Airport Corridor, Trichy",
+    location: "Siruganur, Trichy — Chennai NH (NH-45)",
+    corridor: "Chennai NH-45 Growth Corridor",
     status: "Ready to Register",
     type: "DTCP Approved Residential Layout",
-    priceRange: "₹18 Lakhs – ₹36 Lakhs",
-    rateSqft: "₹1,450",
-    rateSqftRaw: 1450,
+    priceRange: "₹10.2 Lakhs – ₹20.4 Lakhs",
+    rateSqft: "₹850",
+    rateSqftRaw: 850,
+    guidelineValue: "₹450 / sq.ft",
+    guidelineNote: "Government guideline base is ₹450/sq.ft for stamp duty. Quoted price of ₹850/sq.ft reflects immediate infrastructure, 40ft blacktop roads, DTCP sanction, and high-speed highway connectivity.",
     plotSizes: "1,200 – 2,400 sq.ft",
     totalPlots: 52,
     availablePlots: 16,
     approvalNo: "DTCP Approved | RERA Registered",
     reraNumber: "TN/16/Layout/0512/2024",
-    guidelineValue: "₹850 / sq.ft",
-    cagr: "+16.5%",
     waterTable: "25 ft (Sweet Drinking Water)",
     image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=80",
-    overview: "Jai Nagar is a prime DTCP-approved residential layout situated on the thriving Trichy Airport growth corridor. Featuring 40ft wide blacktop roads, sweet groundwater at 25 feet, and rapid appreciation potential with 100% clear parent documents.",
+    overview: "Jai Nagar is a prime DTCP-approved layout strategically situated on the Chennai-Trichy National Highway (NH-45) near Siruganur. Offering rapid capital growth, immediate registration readiness, and sweet Kaveri-basin drinking water at 25 feet.",
     highlights: [
-      "5 mins to Trichy International Airport & Semi-Ring Road",
-      "Abundant sweet groundwater source at 25 feet",
-      "40 ft and 30 ft wide blacktop roads with LED street lights",
-      "Immediate individual patta transfer and registry readiness",
-      "Bank loan approved by SBI, HDFC, and Indian Bank"
+      "Located directly on the Chennai-Trichy NH-45 corridor near Siruganur",
+      "DTCP layout sanction with individual sub-division patta transfer",
+      "Wide 40 ft and 30 ft blacktop roads with solar/LED street lights",
+      "Sweet potable groundwater at 25 feet depth",
+      "Clear parent title deeds vetted for safe long-term investment"
     ],
     connectivity: [
-      { name: "Trichy International Airport", distance: "4.5 km", time: "6 mins" },
-      { name: "Semi-Ring Road Junction", distance: "2.0 km", time: "3 mins" },
-      { name: "Trichy Central Junction", distance: "12 km", time: "18 mins" },
-      { name: "Central Bus Stand", distance: "13 km", time: "20 mins" }
+      { name: "Chennai-Trichy NH-45 Highway", distance: "0.2 km", time: "1 min" },
+      { name: "Siruganur Bus Stand", distance: "2.0 km", time: "3 mins" },
+      { name: "Samayapuram Toll & Temple", distance: "9.0 km", time: "10 mins" },
+      { name: "Trichy Chathiram Bus Stand", distance: "20 km", time: "25 mins" }
     ],
     amenities: [
-      "Grand Gated Arch Entrance",
-      "24/7 Security & Perimeter Compound",
-      "Underground Drainage Channels",
-      "Dedicated Children Park & OSR Garden"
+      "Gated Entrance Arch with Security Post",
+      "Blacktop Roads & Street Lighting",
+      "Underground Stormwater Channels",
+      "Avenue Trees & Children Park Reservation"
     ]
   },
   {
     slug: "abirami-nagar",
     title: "Abirami Nagar",
-    location: "Thiruvanaikoil Corridor, Trichy",
+    location: "Thirupattur, Trichy",
+    corridor: "Thirupattur Heritage & Residential Corridor",
     status: "Ready to Register",
-    type: "Premium Residential Villa Plots",
-    priceRange: "₹22 Lakhs – ₹45 Lakhs",
-    rateSqft: "₹1,750",
-    rateSqftRaw: 1750,
-    plotSizes: "1,200 – 2,500 sq.ft",
+    type: "Approved Residential Villa Plots",
+    priceRange: "₹4.5 Lakhs – ₹9.0 Lakhs",
+    rateSqft: "₹375",
+    rateSqftRaw: 375,
+    emiAvailable: true,
+    emiNote: "Flexible monthly EMI schemes available for salaried & self-employed buyers.",
+    plotSizes: "1,200 – 2,400 sq.ft",
     totalPlots: 45,
-    availablePlots: 12,
-    approvalNo: "DTCP & Local Planning Authority Approved",
+    availablePlots: 14,
+    approvalNo: "Approved Layout with Clear Title",
     reraNumber: "TN/16/Layout/0788/2024",
-    guidelineValue: "₹1,100 / sq.ft",
-    cagr: "+15.8%",
-    waterTable: "20 ft (Cauvery Aquifer)",
+    guidelineValue: "₹220 / sq.ft",
+    waterTable: "20 ft (Perennial Aquifer)",
     image: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=1000&q=80",
-    overview: "Abirami Nagar is an exclusive residential community located in the historic temple and heritage corridor of Thiruvanaikoil. Perfectly suited for immediate independent house construction with Kaveri river basin water table and complete legal vetting.",
+    overview: "Abirami Nagar provides highly affordable, vetted residential plots in Thirupattur, Trichy. With an attractive rate of ₹375/sq.ft and easy EMI options, this layout is ideal for early plot investment and independent home construction.",
     highlights: [
-      "Located in the serene Thiruvanaikoil-Srirangam residential belt",
-      "Cauvery river basin aquifer — sweet water within 20 feet",
-      "Cement concrete roads with proper stormwater drainage",
-      "Direct highway accessibility and peaceful residential atmosphere",
-      "Clear 30-year parent document chain and encumbrance-free title"
+      "Highly accessible Thirupattur location with strong residential demand",
+      "Starting at only ₹375 / sq.ft with easy EMI financing options",
+      "Perennial sweet groundwater within 20 feet",
+      "Clean 30-year title lineage with immediate registration readiness",
+      "Fast-developing neighborhood with schools and transport nearby"
     ],
     connectivity: [
-      { name: "Thiruvanaikoil Temple", distance: "2.0 km", time: "4 mins" },
-      { name: "Srirangam Ranganathaswamy Temple", distance: "4.5 km", time: "8 mins" },
-      { name: "No.1 Tollgate Trichy", distance: "5.0 km", time: "7 mins" },
-      { name: "Chathiram Bus Stand", distance: "6.5 km", time: "10 mins" }
+      { name: "Thirupattur Town Center", distance: "1.5 km", time: "3 mins" },
+      { name: "Sri Brahmapureeswarar Temple", distance: "2.5 km", time: "5 mins" },
+      { name: "Chennai NH-45 Feeder Road", distance: "6.0 km", time: "8 mins" },
+      { name: "Samayapuram", distance: "14 km", time: "18 mins" }
     ],
     amenities: [
-      "24-Hour Gated Security",
-      "Solar Street Lighting",
-      "Landscaped Avenue Trees",
-      "Individual EB and Water Connections"
+      "Perimeter Fencing & Security Gates",
+      "Concrete Internal Roads with Curbs",
+      "Dedicated EB Lines & Street Lamps",
+      "Green Open Space Reservation"
     ]
   },
   {
     slug: "farm-land",
     title: "Farm Land",
-    location: "Trichy Suburbs (Near Manapparai/Kulithalai)",
+    location: "Kariyamanickam / Chennai NH (NH-45)",
+    corridor: "NH-45 Agro Corridor",
     status: "Available",
-    type: "Agro & Organic Farm Plots",
-    priceRange: "₹15 Lakhs – ₹35 Lakhs",
-    rateSqft: "₹650",
-    rateSqftRaw: 650,
-    plotSizes: "quarter Acre to 1 Acre (5,000 – 10,000+ sq.ft)",
+    type: "Agro & Managed Farm Plots",
+    priceRange: "Starting ₹6.0 Lakhs (5,000 sq.ft+)",
+    rateSqft: "Starting ₹120",
+    rateSqftRaw: 120,
+    plotSizes: "5,000 sq.ft – 1 Acre parcels",
     totalPlots: 28,
-    availablePlots: 9,
-    approvalNo: "Verified Agricultural Title",
+    availablePlots: 11,
+    approvalNo: "Verified Agricultural Title Deeds",
     reraNumber: "Agro Heritage Verified",
-    guidelineValue: "₹320 / sq.ft",
-    cagr: "+18.2%",
-    waterTable: "30 ft (Borewell & Canal Water)",
+    guidelineValue: "₹65 / sq.ft",
+    waterTable: "30 ft (Borewell & Natural Aquifer)",
     image: "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=1000&q=80",
-    overview: "Farm Land by Nam Nilam offers fertile agricultural and managed agro plots designed for organic farming, weekend retreat farmhouses, and long-term capital wealth creation in scenic Trichy suburbs.",
+    overview: "Farm Land at Kariyamanickam off the Chennai National Highway (NH-45) offers fertile agricultural plots designed for organic farming, weekend retreat farmhouses, and strategic land-banking at an unbeatable starting rate of ₹120/sq.ft.",
     highlights: [
-      "Rich red soil ideal for coconut, teak, fruit trees, and organic farming",
-      "Perennial groundwater table with dedicated drip irrigation setup",
-      "Secured perimeter fencing around the entire farm estate",
-      "High capital growth driven by suburban expansion and Agro tourism",
-      "Clear revenue records (Patta, Chitta, FMB match guarantee)"
+      "Unbeatable starting price of ₹120 / sq.ft near Chennai NH corridor",
+      "Fertile red soil ideal for coconut groves, fruit orchards & organic agro",
+      "Perennial groundwater table with borewell accessibility",
+      "Gated farm perimeter fencing and internal farm roads",
+      "100% verified agricultural title with clear Revenue Patta & FMB match"
     ],
     connectivity: [
-      { name: "Trichy Ring Road", distance: "8.0 km", time: "12 mins" },
-      { name: "Manapparai Junction", distance: "14 km", time: "18 mins" },
-      { name: "Trichy Central City", distance: "22 km", time: "30 mins" }
+      { name: "Chennai-Trichy NH-45 Highway", distance: "2.0 km", time: "4 mins" },
+      { name: "Kariyamanickam Junction", distance: "1.0 km", time: "2 mins" },
+      { name: "Samayapuram", distance: "8.5 km", time: "11 mins" },
+      { name: "Trichy Junction", distance: "24 km", time: "30 mins" }
     ],
     amenities: [
-      "Perimeter Barbed Wire & Solar Fencing",
-      "Common Borewell & Drip Irrigation",
-      "Caretaker & 24/7 Security On-Site",
-      "Farmhouse Foundation Readiness"
+      "Perimeter Solar/Barbed Wire Fencing",
+      "Internal 30ft All-Weather Farm Tracks",
+      "Common Borewell Water Infrastructure",
+      "On-Site Caretaker & Monitoring Assistance"
     ]
   },
   {
-    slug: "sentha-city",
-    title: "Sentha City",
-    location: "Samayapuram - NH 45 Corridor, Trichy",
+    slug: "santha-city",
+    title: "Santha City",
+    location: "Samayapuram / Kariyamanickam",
+    corridor: "Samayapuram-Kariyamanickam Arterial Link",
     status: "Ready to Register",
     type: "Integrated Gated Community Plots",
-    priceRange: "₹24 Lakhs – ₹48 Lakhs",
-    rateSqft: "₹1,850",
-    rateSqftRaw: 1850,
+    priceRange: "₹4.8 Lakhs – ₹9.6 Lakhs",
+    rateSqft: "₹400",
+    rateSqftRaw: 400,
     plotSizes: "1,200 – 2,400 sq.ft",
     totalPlots: 60,
     availablePlots: 18,
-    approvalNo: "DTCP & RERA Approved",
+    approvalNo: "DTCP Sanctioned Layout",
     reraNumber: "TN/16/Layout/1042/2024",
-    guidelineValue: "₹1,200 / sq.ft",
-    cagr: "+17.4%",
-    waterTable: "28 ft (Deep Aquifer)",
+    guidelineValue: "₹240 / sq.ft",
+    waterTable: "26 ft (Deep Aquifer)",
     image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1000&q=80",
-    overview: "Sentha City is a modern integrated township layout located directly off the Chennai-Trichy National Highway (NH-45). Boasting wide 40-foot arterial roads, grand entry arch, and immediate proximity to educational institutions and healthcare.",
+    overview: "Santha City is a well-planned gated community layout connecting Samayapuram and Kariyamanickam. Offered at ₹400/sq.ft, this community features wide internal roads, grand entrance gateway, and quick access to educational institutions and religious centers.",
     highlights: [
-      "Direct access to Chennai-Trichy National Highway (NH 45)",
-      "3 mins to Samayapuram Tollgate and Bus Terminus",
-      "Surrounded by top engineering colleges, schools, and hospitals",
-      "100% DTCP layout sanction with OSR park handed over to local body",
-      "Pre-approved home loans up to 80% from leading nationalized banks"
+      "Priced at ₹400 / sq.ft in high-demand Samayapuram growth zone",
+      "Direct link road connecting Samayapuram shrine & Kariyamanickam",
+      "DTCP layout sanction with clear demarcation marker stones",
+      "Sweet potable groundwater at 26 feet",
+      "Bank loan assistance arranged through leading financial institutions"
     ],
     connectivity: [
-      { name: "Samayapuram Toll Plaza", distance: "2.5 km", time: "3 mins" },
-      { name: "No.1 Tollgate Trichy", distance: "6.5 km", time: "8 mins" },
-      { name: "Srirangam Temple", distance: "11 km", time: "15 mins" },
-      { name: "Trichy Central Junction", distance: "17 km", time: "24 mins" }
+      { name: "Samayapuram Temple & Bus Stand", distance: "4.0 km", time: "6 mins" },
+      { name: "Chennai NH-45 Highway", distance: "3.5 km", time: "5 mins" },
+      { name: "Trichy No. 1 Tollgate", distance: "11 km", time: "14 mins" },
+      { name: "Chathiram Bus Stand", distance: "15 km", time: "20 mins" }
     ],
     amenities: [
-      "Imposing Entrance Gateway with Security Booth",
-      "40 ft and 33 ft Tar Roads",
-      "Jogging Track & Children Play Area",
-      "Avenue Trees with Individual Tree Guards"
+      "Grand Gated Entrance Gateway",
+      "33 ft & 30 ft Tar Roads",
+      "Avenue Plantation & Street Lights",
+      "Designated Children Play & Park Area"
     ]
   },
   {
-    slug: "kasinath-nagar",
-    title: "Kasinath Nagar",
-    location: "Kallanai Road / Grand Anicut, Trichy",
+    slug: "kasi-nath-nagar",
+    title: "Kasi Nath Nagar",
+    location: "Thirupattur, Trichy",
+    corridor: "Historic Sri Brahmapureeswarar Temple Corridor, Thirupattur",
     status: "Ready to Register",
     type: "Approved Residential Layout",
-    priceRange: "₹19.5 Lakhs – ₹40 Lakhs",
-    rateSqft: "₹1,550",
-    rateSqftRaw: 1550,
+    priceRange: "₹5.7 Lakhs – ₹11.4 Lakhs",
+    rateSqft: "₹475",
+    rateSqftRaw: 475,
     plotSizes: "1,200 – 2,400 sq.ft",
     totalPlots: 40,
-    availablePlots: 11,
-    approvalNo: "DTCP Approved Layout",
+    availablePlots: 13,
+    approvalNo: "Approved Layout with Valid Sub-Division",
     reraNumber: "TN/16/Layout/0631/2024",
-    guidelineValue: "₹950 / sq.ft",
-    cagr: "+14.6%",
-    waterTable: "18 ft (Cauvery-Kollidam Aquifer)",
+    guidelineValue: "₹280 / sq.ft",
+    waterTable: "22 ft (Sweet Aquifer)",
     image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=80",
-    overview: "Kasinath Nagar is situated along the picturesque Kallanai Road connecting Trichy and the historic Grand Anicut. Renowned for its pristine water table at 18 feet, lush green surroundings, and peaceful living environment.",
+    overview: "Kasi Nath Nagar is situated in the revered Sri Brahmapureeswarar (Brahma) Temple corridor in Thirupattur, Trichy. At ₹475/sq.ft, this layout offers tranquil living, exceptional water table, and rapid appreciation driven by pilgrimage tourism and local development.",
     highlights: [
-      "Lush, tranquil river corridor just 12 minutes from Chathiram Bus Stand",
-      "Exceptional groundwater level at 18 feet throughout the year",
-      "Approved layout with clear title deeds and revenue sub-division",
-      "Rapidly developing residential pocket with active construction",
-      "Bank financing readily available with fast approvals"
+      "Located in the serene Thirupattur Brahma Temple corridor",
+      "Attractive pricing at ₹475 / sq.ft with ready-to-build residential plots",
+      "Pure potable groundwater source at 22 feet",
+      "Legally certified parent documents with immediate registry readiness",
+      "Close proximity to bus routes, markets, and healthcare facilities"
     ],
     connectivity: [
-      { name: "Kallanai (Grand Anicut)", distance: "5.0 km", time: "7 mins" },
-      { name: "Srirangam Railway Station", distance: "7.5 km", time: "11 mins" },
-      { name: "Chathiram Bus Stand", distance: "9.0 km", time: "14 mins" },
-      { name: "Trichy Central Bus Stand", distance: "15 km", time: "22 mins" }
+      { name: "Sri Brahmapureeswarar Temple", distance: "1.2 km", time: "3 mins" },
+      { name: "Thirupattur Bus Terminus", distance: "1.8 km", time: "4 mins" },
+      { name: "Siruganur / NH-45 Junction", distance: "8.0 km", time: "10 mins" },
+      { name: "Trichy Central City", distance: "26 km", time: "35 mins" }
     ],
     amenities: [
-      "Compound Wall with Secure Gates",
-      "Street Lighting & Underground Stormwater Drains",
-      "Wide Concrete Internal Roads",
-      "Community Park Area"
+      "Secured Compound Wall with Gate",
+      "Internal Tar Roads with Street Lighting",
+      "Proper Drainage Channels",
+      "Individual EB Line Provisions"
     ]
   }
 ];
 
 export const SERVICES_CATALOG = [
   {
+    slug: "loan-arrangement",
+    image: "/svc-valuation.jpg",
+    title: "Loan Arrangement",
+    price: "₹4,999",
+    priceTag: "₹4,999 Fixed Fee",
+    headline: "Hassle-Free Bank Loan Arrangement for Plots & Construction.",
+    desc: "Complete end-to-end loan arrangement with leading nationalized and private banks (SBI, HDFC, Indian Bank, Canara Bank). We handle documentation structuring, eligibility optimization, and bank liaison.",
+    targetAudience: [
+      "Salaried and self-employed buyers purchasing approved residential plots",
+      "Home builders seeking composite plot + construction composite loans",
+      "NRIs looking for streamlined bank sanction without travel hassles"
+    ],
+    commonProblems: [
+      "Frequent loan rejection due to unorganized documentation or tax gaps",
+      "Hidden processing fees and slow turnaround times from bank branches",
+      "Confusion between plot purchase loans and construction composite loans",
+      "Delays during legal vetting by bank-appointed panel advocates"
+    ],
+    whatWeHelpWith: [
+      "Document Eligibility & CIBIL Profile Structuring",
+      "Direct coordination with nationalized bank loan processing centers",
+      "Legal docket preparation matching bank panel advocate requirements",
+      "Tracking through sanction letter issuance to registry day disbursement"
+    ],
+    deliverables: "Guaranteed Banker Liaison, Eligibility Audit & Sanction Letter Tracking Dossier"
+  },
+  {
+    slug: "online-legal-opinion",
+    image: "/svc-due-diligence.jpg",
+    title: "Online Legal Opinion",
+    price: "₹3,999",
+    priceTag: "₹3,999 Fixed Fee",
+    headline: "High Court Counsel Legal Vetting & 30-Year Title Search.",
+    desc: "Get an independent, impartial legal opinion on any property in Tamil Nadu before paying an advance token. Scrutinized by certified legal counsel to protect your life savings.",
+    targetAudience: [
+      "Buyers preparing to sign a sale agreement or token advance",
+      "NRIs and out-of-town buyers needing independent legal verification",
+      "Families verifying complex ancestral, partition, or power-of-attorney deeds"
+    ],
+    commonProblems: [
+      "Undisclosed mortgages, court attachments, or family partition disputes",
+      "Mismatched survey numbers between Sale Deed, Patta, and FMB sketch",
+      "Fake or unapproved layout sub-divisions with invalid building permits",
+      "Missing link deeds in the 30-year parent document chain"
+    ],
+    whatWeHelpWith: [
+      "30-Year Encumbrance Certificate (EC) scrutiny for active liens",
+      "Revenue portal verification: Patta, Chitta, and 'A' Register alignment",
+      "FMB sketch and field measurement boundary check",
+      "Written legal opinion highlighting red flags, risks, and missing documents"
+    ],
+    deliverables: "Comprehensive Written Legal Opinion Report signed by Legal Counsel with Risk Scorecard"
+  },
+  {
+    slug: "construction-services",
+    image: "/svc-advisory.jpg",
+    title: "Construction Consulting & Project Management",
+    shortTitle: "Construction Consulting & PM",
+    subtitle: "Professional oversight from planning to handover",
+    slogan: "PLAN RIGHT. BUILD RIGHT. MONITOR EVERYTHING.",
+    company: "NAM NILAM INFRA PVT LTD",
+    companyTagline: "Real Estate • Construction • Engineering • Project Management • Property Services",
+    price: "9% Professional Fee",
+    priceTag: "9% of Approved Construction Cost",
+    headline: "One Professional Team for Your Entire Construction Journey.",
+    desc: "Nam Nilam Infra Pvt Ltd provides end-to-end construction consulting and project-management services for residential and selected commercial projects. Our role is to coordinate technical, financial, execution, and quality aspects of construction so you have one accountable professional team managing the project from beginning to completion.",
+    targetAudience: [
+      "Individual plot owners building their independent home or villa",
+      "NRIs and out-of-station investors needing trusted, verified on-site engineering oversight",
+      "Commercial and mixed-use property developers requiring turnkey project management",
+      "Property owners seeking total cost transparency, quality assurance, and zero corner-cutting"
+    ],
+    commonProblems: [
+      "Contractors cutting corners on reinforcement, sub-standard concrete, or poor waterproofing",
+      "Uncontrolled budget escalations and hidden contractor markup without BOQ transparency",
+      "Frustrating construction delays with zero project schedule tracking or accountability",
+      "Stress of coordinating multiple independent architects, structural engineers, electricians, and plumbers"
+    ],
+    whatWeHelpWith: [
+      "Project Planning & Initial Feasibility: Requirement analysis, site assessment, budget planning, roadmap",
+      "Architectural & Structural Design: Floor-plan review, 3D elevations, structural and MEP drawings",
+      "Estimation & BOQ Management: Bill of Quantities, vendor quote comparisons, budget variation tracking",
+      "Stage-Gate Execution Oversight: Foundation, structural frame, brickwork, plastering, and curing supervision",
+      "MEP, Material & Quality Control: Rigorous checks on reinforcement, concrete cubes, plumbing, and electrical",
+      "Snagging, Rectification & Formal Handover: Comprehensive final inspection, snag list clearing, and documentation"
+    ],
+    deliverables: "End-to-End Construction Consulting, Weekly Photo/Video Progress Reports, Quality Inspection Logs & Formal Snag-Free Handover",
+    pricingNote: "9% of approved construction cost billed across four milestone-based payments. Material, labor, and specialist expenses remain 100% transparent and pass-through.",
+    stages: [
+      {
+        number: 1,
+        title: "Project Planning & Initial Consultation",
+        items: [
+          "Client requirement analysis",
+          "Site assessment and preliminary feasibility review",
+          "Construction budget planning and initial estimation",
+          "Project timeline and execution roadmap",
+          "Scope definition and consultant coordination"
+        ]
+      },
+      {
+        number: 2,
+        title: "Architectural & Design Coordination",
+        items: [
+          "Architectural design coordination and floor-plan review",
+          "Elevation / 3D visualization coordination",
+          "Structural design coordination",
+          "Electrical and plumbing layout coordination",
+          "Drawing revisions and drawing-to-site coordination"
+        ]
+      },
+      {
+        number: 3,
+        title: "Estimation & Cost Management",
+        items: [
+          "Construction estimation and BOQ coordination",
+          "Material and labour quantity assessment",
+          "Vendor quotation comparison",
+          "Budget monitoring and variation tracking",
+          "Periodic project cost reporting"
+        ]
+      },
+      {
+        number: 4,
+        title: "Construction Execution Management",
+        subsections: [
+          {
+            name: "Foundation",
+            details: "Setting-out coordination, excavation, PCC, footing reinforcement, concrete work, foundation inspection and waterproofing coordination."
+          },
+          {
+            name: "Structural Work",
+            details: "Columns, beams, slabs, reinforcement, shuttering/formwork, concrete quality checks and curing monitoring."
+          },
+          {
+            name: "Building Work",
+            details: "Brick/block work, staircase, doors/windows coordination, plastering, waterproofing and flooring coordination."
+          }
+        ]
+      },
+      {
+        number: 5,
+        title: "Electrical, Plumbing & MEP Coordination",
+        items: [
+          "Electrical point and installation coordination",
+          "Plumbing, water-line and drainage coordination",
+          "Sanitary and fixture installation coordination",
+          "MEP work-stage inspection, testing and rectification coordination"
+        ]
+      },
+      {
+        number: 6,
+        title: "Material & Vendor Management",
+        items: [
+          "Material requirement planning and specification verification",
+          "Vendor identification and quotation comparison",
+          "Delivery coordination and material quality checks",
+          "Contractor coordination and material-wastage monitoring"
+        ]
+      },
+      {
+        number: 7,
+        title: "Quality Control",
+        items: [
+          "Reinforcement, concrete and masonry checks",
+          "Waterproofing, plastering and flooring quality monitoring",
+          "Electrical, plumbing, painting and finishing inspection",
+          "Workmanship review and rectification tracking"
+        ]
+      },
+      {
+        number: 8,
+        title: "Progress & Site Management",
+        items: [
+          "Site progress and milestone monitoring",
+          "Work scheduling, labour and contractor coordination",
+          "Delay identification and corrective-action coordination",
+          "Client progress updates, including site photos/videos where agreed"
+        ]
+      },
+      {
+        number: 9,
+        title: "Finishing, Snagging & Handover",
+        items: [
+          "Flooring, painting, doors/windows and fixture coordination",
+          "Kitchen, sanitary and external-work coordination",
+          "Final inspection and snag identification",
+          "Rectification monitoring and completion verification",
+          "Documentation coordination and formal handover"
+        ]
+      }
+    ],
+    milestones: [
+      {
+        stage: 1,
+        title: "Planning, Design, Estimation & Foundation",
+        allocation: "25%",
+        effectiveFee: "2.25%",
+        exampleAmount: "₹67,500"
+      },
+      {
+        stage: 2,
+        title: "Plinth & Structural Frame up to Roof Slab",
+        allocation: "30%",
+        effectiveFee: "2.70%",
+        exampleAmount: "₹81,000"
+      },
+      {
+        stage: 3,
+        title: "Masonry, MEP, Plastering & Major Finishing",
+        allocation: "30%",
+        effectiveFee: "2.70%",
+        exampleAmount: "₹81,000"
+      },
+      {
+        stage: 4,
+        title: "Final Finishing, Inspection, Snagging & Handover",
+        allocation: "15%",
+        effectiveFee: "1.35%",
+        exampleAmount: "₹40,500"
+      }
+    ],
+    exampleProject: {
+      budget: "₹30,00,000",
+      budgetValue: 3000000,
+      feePercentage: "9%",
+      totalFee: "₹2,70,000",
+      totalFeeValue: 270000
+    },
+    commercialClarifications: [
+      {
+        title: "Construction Cost",
+        desc: "Materials, labour, contractor bills, equipment and other direct project expenses are governed by the project agreement."
+      },
+      {
+        title: "Statutory / Authority Charges",
+        desc: "Plan approval, permissions, EB/water connections, testing, registration and other statutory charges are payable separately at actuals unless expressly included."
+      },
+      {
+        title: "Specialist Consultants",
+        desc: "Architect, structural engineer, soil testing, surveyor and other specialist charges are separate where independently appointed, unless included in the written scope."
+      },
+      {
+        title: "Client Approvals",
+        desc: "Material selections, major design changes, vendor appointments and budget variations remain subject to client approval."
+      }
+    ]
+  },
+  {
+    slug: "property-valuation",
+    image: "/svc-valuation.jpg",
+    title: "Property Valuation Support",
+    price: "Request Valuation",
+    priceTag: "CTA → Request Valuation",
+    headline: "Understand Fair Market Worth Before You Make an Offer.",
+    desc: "Data-led valuation reports analyzing sub-registrar sales comps, guideline values, replacement costs, and localized supply-demand metrics across Tamil Nadu micro-markets.",
+    targetAudience: [
+      "Buyers evaluating property quotes from private developers",
+      "Sellers looking for an unbiased market baseline to list fairly",
+      "Families planning property division or portfolio audits"
+    ],
+    commonProblems: [
+      "Overpaying due to inflated broker promises",
+      "Misunderstanding how government guideline value differs from market price",
+      "Relying on outdated locality word-of-mouth rather than registered transactions"
+    ],
+    whatWeHelpWith: [
+      "Analysis of recently registered sub-registrar deeds in the exact survey ward",
+      "Physical location factors: road width, frontage ratio, groundwater yield",
+      "Calculation of effective on-road cost including 9% stamp duty and registry",
+      "Comparative market matrix against adjacent layouts"
+    ],
+    deliverables: "Institutional Property Valuation Benchmark Report with 3-Year Appreciation Projection"
+  },
+  {
     slug: "real-estate-advisory",
+    image: "/svc-advisory.jpg",
     title: "Real Estate Advisory",
+    price: "Consultation",
+    priceTag: "Advisory Consultation",
     headline: "Make Property & Investment Decisions With Clarity, Not Doubt.",
     desc: "Bespoke property consultation for home buyers and long-term land investors. We evaluate property suitability, fair market valuation, future livability, and risk profiles.",
     targetAudience: [
@@ -235,55 +517,11 @@ export const SERVICES_CATALOG = [
     deliverables: "Comprehensive 6-Page Advisory Dossier with Fair Value Range & Risk Matrix"
   },
   {
-    slug: "property-valuation",
-    title: "Property Valuation Support",
-    headline: "Understand Fair Market Worth Before You Make an Offer.",
-    desc: "Data-led valuation reports analyzing sub-registrar sales comps, guideline values, replacement costs, and localized supply-demand metrics across Tamil Nadu micro-markets.",
-    targetAudience: [
-      "Buyers evaluating property quotes from private developers",
-      "Sellers looking for an unbiased market baseline to list fairly",
-      "Families planning property division or portfolio audits"
-    ],
-    commonProblems: [
-      "Overpaying due to inflated broker promises",
-      "Misunderstanding how government guideline value differs from market price",
-      "Relying on outdated locality word-of-mouth rather than registered transactions"
-    ],
-    whatWeHelpWith: [
-      "Analysis of recently registered sub-registrar deeds in the exact survey ward",
-      "Physical location factors: road width, frontage ratio, groundwater yield",
-      "Calculation of effective on-road cost including 9% stamp duty and registry",
-      "Comparative market matrix against adjacent layouts"
-    ],
-    deliverables: "Institutional Property Valuation Benchmark Report with 3-Year Appreciation Projection"
-  },
-  {
-    slug: "due-diligence",
-    title: "Due Diligence Support",
-    headline: "Identify Hidden Legal Risks Before You Part With Your Hard-Earned Money.",
-    desc: "Rigorous 45-point revenue and title verification support. We help you review parent deed chains, 30-year encumbrance certificates (EC), patta status, and layout sanction validity.",
-    targetAudience: [
-      "Anyone preparing to pay an advance token for land or property",
-      "Buyers reviewing complex ancestral or joint-family holdings",
-      "NRIs unable to verify physical revenue records on the ground"
-    ],
-    commonProblems: [
-      "Unregistered unapproved panchayat layouts with invalid building permits",
-      "Undisclosed mortgages, bank liens, or active civil litigations",
-      "Gaps in parent document tracing spanning 30 years",
-      "Mismatched survey numbers between Sale Deed, Patta, and FMB sketch"
-    ],
-    whatWeHelpWith: [
-      "30-Year Encumbrance Certificate (EC) scrutiny for uncancelled liens",
-      "Revenue portal verification: Patta, Chitta, and 'A' Register alignment",
-      "FMB sketch boundary match with ground survey stones",
-      "DTCP/CMDA order authenticity and OSR park handover compliance"
-    ],
-    deliverables: "Red-Flag Legal Audit Summary & Document Completeness Checklist"
-  },
-  {
     slug: "investment-advisory",
+    image: "/svc-investment.jpg",
     title: "Investment Advisory",
+    price: "Custom",
+    priceTag: "Portfolio Strategy",
     headline: "Structured Land Investment Portfolios Grounded in Real Economics.",
     desc: "Strategic land allocation for HNIs, syndicates, and wealth builders. We focus on high-conviction growth corridors driven by industrial SEZs, airports, and expressway corridors.",
     targetAudience: [
@@ -303,36 +541,90 @@ export const SERVICES_CATALOG = [
       "Guideline value trajectory modeling"
     ],
     deliverables: "Bespoke Land Portfolio Strategy Blueprint with Scenario Modeling"
+  }
+];
+
+export const BUSINESS_SOLUTIONS_PACKAGES = [
+  {
+    id: "diamond",
+    name: "DIAMOND",
+    badge: "Smart All-in-One Pack",
+    price: "Custom Quote",
+    priceSub: "Talk to us for pricing based on project inventory",
+    tagline: "For real estate businesses that want multiple solutions together.",
+    description: "The complete enterprise growth engine: AI autonomous workforce, high-intent lead generation, cloud CRM, WhatsApp business API, and executive intelligence dashboards.",
+    features: [
+      "Full Autonomous AI Workforce (5 Functional Departments)",
+      "Omnichannel Lead Funnel (Meta, Google Ads & Search)",
+      "Dedicated Real Estate Cloud CRM & Deal Pipeline",
+      "Verified Green-Tick WhatsApp Business API with 5-Second Bot",
+      "AI Telecalling & Outbound Follow-up Engine",
+      "Executive ROI, Revenue Leakage & Conversion Dashboards",
+      "Dedicated Solutions Architect & Weekly Strategy Reviews"
+    ],
+    popular: true,
+    cta: "Request Diamond Package Quote"
   },
   {
-    slug: "real-estate-consulting",
-    title: "Real Estate Business Consulting",
-    headline: "Transform Your Real Estate Business From Local Operations to Institutional Scale.",
-    desc: "Tailored consulting for layout developers, promoters, and agencies. We connect business operations with modern digital marketing, sales pipelines, and lead intelligence.",
-    targetAudience: [
-      "Layout promoters with 5 to 50 acre plotting projects",
-      "Real estate marketing agencies seeking high-converting sales pipelines",
-      "Construction firms expanding into plot development"
+    id: "gold",
+    name: "GOLD",
+    badge: "Simple Solution Pack",
+    price: "Custom Quote",
+    priceSub: "Talk to us for pricing based on your team size",
+    tagline: "For real estate businesses that want a focused solution.",
+    description: "Targeted digital transformation addressing your primary operational bottleneck: whether capturing and qualifying buyer leads or automating sales team follow-ups.",
+    features: [
+      "Selected AI Agent Deployment (Lead Qualification or WhatsApp)",
+      "Targeted Meta / Google Lead Generation Funnel",
+      "Streamlined Real Estate CRM Pipeline Setup",
+      "Automated WhatsApp Brochure & Site Visit Reminders",
+      "Sales Rep Activity Tracking & Daily Digest",
+      "Standard Onboarding & Team Training"
     ],
-    commonProblems: [
-      "High cost-per-lead with unverified broker leads",
-      "Zero pipeline visibility and manual WhatsApp follow-ups that leak sales",
-      "Outdated brochure-only marketing that fails to build trust"
-    ],
-    whatWeHelpWith: [
-      "Digital Transformation blueprint for layout marketing",
-      "Sales automation, round-robin CRM pipelines, and WhatsApp bots",
-      "Brand positioning, master plan 3D interactive collateral, and transparent pricing engines",
-      "Team training on customer lifecycle management"
-    ],
-    deliverables: "Custom Real Estate Operational Transformation Roadmap"
+    popular: false,
+    cta: "Request Gold Package Quote"
   }
 ];
 
 export const BUSINESS_SOLUTIONS = [
   {
+    slug: "one-time-solutions",
+    image: "/biz-digital-marketing.jpg",
+    title: "One-Time Business Solutions",
+    priceTag: "Talk to us for pricing / Custom Quote",
+    headline: "System Implementation, CRM Architecture & Digital Assets.",
+    problem: "Outdated processes, unorganized contact databases, and no standard operational blueprint holding back developer growth.",
+    solution: "Turnkey one-time implementations including CRM setup, WhatsApp API onboarding, landing page funnels, and sales collateral digitization.",
+    process: ["Requirement Audit", "System Configuration", "Asset Creation", "Staff Handover & Training"],
+    deliverables: "Turnkey ready-to-run system, custom SOP documentation, and verified technology stack ownership."
+  },
+  {
+    slug: "subscription-solutions",
+    image: "/ai-workforce.jpg",
+    title: "Subscription Solutions",
+    priceTag: "Talk to us for pricing / Custom Quote",
+    headline: "Continuous Growth, Managed AI Workforce & Pipeline Optimization.",
+    problem: "Inconsistent sales velocity, high churn in sales executives, and marketing campaigns burning budgets without continuous optimization.",
+    solution: "Retainer-based managed services providing ongoing AI workforce monitoring, weekly lead optimization, sales coaching, and pipeline auditing.",
+    process: ["Continuous Optimization", "Weekly Performance Audits", "Lead Flow Management", "Executive Reviews"],
+    deliverables: "Dedicated solutions architect, weekly WhatsApp digests, ongoing ad optimization, and guaranteed SLA support."
+  },
+  {
+    slug: "ai-workforce",
+    image: "/ai-workforce.jpg",
+    title: "Nam Nilam AI Workforce",
+    priceTag: "Enterprise Capability",
+    headline: "Deploy 10 Specialized AI Agents Across 5 Departments.",
+    problem: "Real estate developers lose up to 60% of potential buyers due to 4+ hour lead response times and abandoned follow-ups.",
+    solution: "Autonomous AI agents that qualify leads instantly 24/7 on WhatsApp, handle telecalling, book site visits, and detect revenue leakage.",
+    process: ["Agent Training", "CRM Integration", "Dialogue Customization", "Live Deployment"],
+    deliverables: "10 AI Agents across Sales, Customer Comms, Operations, Decision Intel, and Marketing with 99.9% uptime SLA."
+  },
+  {
     slug: "digital-marketing",
+    image: "/biz-digital-marketing.jpg",
     title: "Real Estate Digital Marketing",
+    priceTag: "Custom Quote",
     headline: "Generate High-Intent Property Buyers, Not Casual Scroll Leads.",
     problem: "Real estate ads that burn marketing budget on invalid phone numbers, tyre-kickers, and low-intent enquiries.",
     solution: "Data-engineered Meta, Google Search, and YouTube campaigns targeting genuine property buyers looking for plots in specific corridors.",
@@ -340,17 +632,9 @@ export const BUSINESS_SOLUTIONS = [
     deliverables: "Full-funnel campaign management, conversion landing pages, and lead qualification scripts."
   },
   {
-    slug: "lead-generation",
-    title: "High-Intent Lead Generation",
-    headline: "Predictable, Qualified Inbound Leads for Your Layout Projects.",
-    problem: "Sales teams wasting 80% of their workday calling uninterested or fake numbers from generic portal packages.",
-    solution: "Multi-stage qualification funnels with OTP verification, budget screening, and instant WhatsApp handoffs.",
-    process: ["Funnel Architecture", "Intent Screening", "Instant Notification", "CRM Sync"],
-    deliverables: "Exclusive verified lead flow with customer budget, timeline, and location preference pre-captured."
-  },
-  {
     slug: "crm",
     title: "Real Estate CRM Systems",
+    priceTag: "Custom Quote",
     headline: "Never Lose a Property Lead to Slow Follow-Ups Again.",
     problem: "Leads scattered across paper diaries, sales reps' personal phones, and lost WhatsApp chats.",
     solution: "Unified cloud CRM tailored for real estate: visual layout pipeline, auto-assignment, call logs, and deal tracking.",
@@ -360,38 +644,12 @@ export const BUSINESS_SOLUTIONS = [
   {
     slug: "whatsapp-automation",
     title: "WhatsApp Sales Automation",
+    priceTag: "Custom Quote",
     headline: "Instant 5-Second Response Times With Verified WhatsApp Business APIs.",
     problem: "Enquiries go cold because developers take 4 to 12 hours to send brochures and price details.",
     solution: "Instant automated WhatsApp responses delivering layout brochures, Google Maps pins, and booking site visit slots 24/7.",
     process: ["Official Green Tick API", "Conversational Bot Design", "Catalog Integration", "CRM Webhooks"],
     deliverables: "Interactive WhatsApp bot, broadcast campaign engine, and automated visit reminder workflows."
-  },
-  {
-    slug: "sales-automation",
-    title: "Sales Pipeline Automation",
-    headline: "Systemize Your Sales Team From First Call to Registry Day.",
-    problem: "No systematic follow-up cadence, forgotten site visits, and zero accountability for sales executives.",
-    solution: "Automated task assignments, SMS/WhatsApp visit reminders, automated price quotation generators, and token follow-ups.",
-    process: ["Cadence Mapping", "Notification Rules", "Performance Dashboards", "Follow-up Triggers"],
-    deliverables: "End-to-end sales operating system reducing sales cycle time by 40%."
-  },
-  {
-    slug: "business-intelligence",
-    title: "Real Estate Business Intelligence",
-    headline: "Make Leadership Decisions With Real Numbers, Not Gut Feeling.",
-    problem: "Promoters have no clear visibility on marketing ROI, cost per site visit, or sales rep conversion rates.",
-    solution: "Executive dashboards tracking cost-per-lead, visit-to-booking ratio, inventory velocity, and cash collection forecasts.",
-    process: ["Data Aggregation", "KPI Definition", "Interactive Dashboards", "Weekly Digests"],
-    deliverables: "Live Executive BI Dashboards with automated weekly WhatsApp summary reports."
-  },
-  {
-    slug: "digital-transformation",
-    title: "Complete Digital Transformation",
-    headline: "The Complete Architecture: Marketing → Leads → CRM → Sales → Growth.",
-    problem: "Fragmented systems, disconnected vendors, and manual operational chaos limiting developer expansion.",
-    solution: "Turnkey enterprise transformation combining all 6 pillars into a synchronized growth engine.",
-    process: ["Audit & Gap Analysis", "System Design", "Implementation", "Continuous Optimization"],
-    deliverables: "Comprehensive operating transformation for premier real estate developers."
   }
 ];
 
@@ -481,239 +739,32 @@ export const ACADEMY_COURSES = [
   }
 ];
 
-export const AI_CATEGORIES = [
-  { id: 'all', name: 'All AI Workforce', count: 10, desc: 'Complete enterprise AI workforce for real estate' },
-  { id: 'sales', name: 'Sales', count: 3, desc: 'Lead qualification, automated follow-up cadences, and outbound AI telecalling' },
-  { id: 'customer', name: 'Customer', count: 2, desc: '24/7 official WhatsApp conversations, project information, and document support' },
-  { id: 'operations', name: 'Operations', count: 2, desc: 'Conversational CRM copilot and daily executive morning business briefs' },
-  { id: 'intelligence', name: 'Intelligence', count: 2, desc: 'Proactive revenue leakage detection and end-to-end funnel diagnostics' },
-  { id: 'marketing', name: 'Marketing', count: 1, desc: 'High-converting ad angle generation, audience targeting, and creative briefs' }
-];
 
-export const AI_WORKFORCE_DATA = [
-  // 1. SALES
-  {
-    id: 'ai-sales-agent',
-    slug: 'ai-sales-agent',
-    category: 'Sales',
-    title: 'AI Sales Agent',
-    badge: 'High Intent Qualification',
-    headline: 'Instant Lead Qualification & Requirement Discovery',
-    tagline: 'Never keep a hot buyer waiting. Understand intent, budget, and readiness in seconds.',
-    problem: 'Real estate leads go cold within 15 minutes of enquiry. Sales reps waste hours calling invalid numbers or unqualified leads while high-intent buyers move to competitors.',
-    aiAction: 'Instantly engages new leads from web forms, Meta ads, or landing pages. Conducts a natural discovery conversation to identify requirements (plot size, budget, timeline, micro-location), scores buyer readiness, and updates the CRM in real time.',
-    teamCollaboration: 'The AI handles the heavy front-line screening. Your human sales team spends 100% of their time speaking exclusively with pre-qualified, warm prospects ready to schedule site visits.',
-    workflow: ['New Lead Enquires', 'AI Instant Response (<10s)', 'Interactive Requirement Discovery', 'CRM Sync & Scoring', 'Warm Call Handover to Sales Rep'],
-    metrics: ['First Response Time: Under 10 seconds', 'Lead Contact Rate: 92%+', 'Sales Team Efficiency: 3.5x higher conversion per rep', 'Zero uncontacted inbound leads'],
-    simulation: {
-      type: 'chat',
-      customer: 'Hi, saw your ad for plots near Trichy Airport. What is the price?',
-      aiReply: 'Hello! Our Trichy Airport corridor project (Airport Tech Vista) starts from ₹24 Lakhs (₹1,850/sq.ft) for DTCP & RERA approved villa plots. To send the exact available plot layout and pricing sheet, could I know if you are looking for immediate villa construction or long-term investment?',
-      outcome: 'Lead tagged: "High Intent / Airport Corridor / ₹25-30L Budget" → Assigned to Senior Sales Executive.'
-    }
-  },
-  {
-    id: 'ai-follow-up-agent',
-    slug: 'ai-follow-up-agent',
-    category: 'Sales',
-    title: 'AI Follow-Up Agent',
-    badge: 'Zero Lead Drop-Off',
-    headline: 'Persistent, Context-Aware Follow-Up That Never Forgets a Lead',
-    tagline: 'Leads are not lost because of lack of interest. They are lost because humans stop following up after 2 attempts.',
-    problem: 'Over 70% of real estate deals close after 5 to 12 touchpoints. Human sales agents rarely follow up more than twice before discarding the lead as "cold".',
-    aiAction: 'Monitors lead inactivity in the CRM. Automatically executes personalized, context-aware touchpoints at Day 0, Day 1, Day 3, Day 7, Day 14, and Day 30 across WhatsApp with legal checklists, video walkthroughs, and site visit invitations.',
-    teamCollaboration: 'Maintains warm relationship touchpoints automatically. When a lead replies or re-engages, the AI immediately alerts the assigned human salesperson with full context.',
-    workflow: ['Inactive Lead Detected', 'Contextual Follow-up Trigger', 'Value Offer / Project Update', 'Buyer Re-engages', 'Hot Alert to Sales Executive'],
-    metrics: ['Follow-up Consistency: 100%', 'Lead Re-engagement Rate: 28% increase', 'Average Deal Conversion Cycle: Reduced by 35%', 'Dormant Database Recovery: 15-22%'],
-    simulation: {
-      type: 'cadence',
-      cadence: [
-        { day: 'Day 0', action: 'Instant Welcome & Digital Brochure Delivered' },
-        { day: 'Day 2', action: 'Video Walkthrough of Layout Avenue Roads & Groundwater Report' },
-        { day: 'Day 5', action: 'Comparison: Guideline Value vs Market Appreciation in this Corridor' },
-        { day: 'Day 10', action: 'VIP Weekend Site Visit Cab Invitation' },
-        { day: 'Day 21', action: 'Price Revision Alert / Limited Corner Plots Remaining' }
-      ]
-    }
-  },
-  {
-    id: 'ai-calling-agent',
-    slug: 'ai-calling-agent',
-    category: 'Sales',
-    title: 'AI Outbound Calling Agent',
-    badge: 'AI Telecaller Workforce',
-    headline: 'Autonomous Voice Calling for Qualification, Reminders & Revival',
-    tagline: 'Call 500 leads in 30 minutes. Understand buyer intent through natural human-sounding voice.',
-    problem: 'Hiring, training, and managing human telecalling teams is expensive with high attrition. Manual callers make only 40-60 calls a day with inconsistent pitch quality.',
-    aiAction: 'Autonomously dials new inquiries, past site visitors, and cold databases. Speaks naturally in professional language, asks qualifying questions, notes site visit availability, records call outcomes, and tags transcripts in the CRM.',
-    teamCollaboration: 'Acts as your front-line outbound telecalling force. Filters out invalid numbers and cold inquiries, scheduling qualified site visits directly on your sales executives’ calendars.',
-    workflow: ['Target Lead Batch Uploaded', 'Autonomous AI Dialing', 'Natural Voice Discovery', 'Call Recording & Sentiment Analysis', 'Confirmed Meetings Scheduled'],
-    metrics: ['Calling Capacity: 1,000+ calls per hour', 'Site Visit Booking Rate: +40%', 'Telecalling Cost: 80% lower than human call center', 'CRM Entry Accuracy: 100%'],
-    simulation: {
-      type: 'voice_log',
-      scenario: 'Old Lead Revival (500 dormant leads from past 6 months)',
-      transcript: [
-        { speaker: 'AI Agent', text: 'Hello Mr. Karthik, this is Nam Nilam advisory desk calling regarding your enquiry for residential plots in Trichy. Are you still exploring properties this quarter?' },
-        { speaker: 'Lead', text: 'Yes, but I was looking strictly near Samayapuram with good water.' },
-        { speaker: 'AI Agent', text: 'Understood. We just opened Cauvery Green City near Samayapuram with sweet water at 22 feet and DTCP approval. Can our project specialist share the layout plan on your WhatsApp?' },
-        { speaker: 'Lead', text: 'Sure, send it to this number.' }
-      ],
-      result: 'Lead status updated: "Revived / Warm" → Layout PDF delivered on WhatsApp.'
-    }
-  },
+// Re-export modular specialized datasets for AI Workforce, Use Cases, Resources, Academy & Intelligence
+export { 
+  AI_CATEGORIES, 
+  AI_WORKFORCE_DATA, 
+  AI_USE_CASES, 
+  AI_WORKFLOW_STEPS 
+} from './aiData';
 
-  // 2. CUSTOMER
-  {
-    id: 'ai-whatsapp-agent',
-    slug: 'ai-whatsapp-agent',
-    category: 'Customer',
-    title: 'AI WhatsApp Agent',
-    badge: '24/7 Official WhatsApp API',
-    headline: 'Instant, Context-Rich Conversations on Official WhatsApp',
-    tagline: 'Your customers live on WhatsApp. Provide instant answers, plot maps, and pricing 24/7.',
-    problem: 'Enquiries arriving late at night or over weekends sit unanswered for 24-48 hours. By the time a rep responds, the prospect has already contacted competing developers.',
-    aiAction: 'Runs on Meta’s official WhatsApp Cloud API. Understands natural language, local location terms, and budget parameters. Delivers layout PDFs, YouTube walkthroughs, Google Maps links, and schedules site visit cabs automatically.',
-    teamCollaboration: 'Handles 85% of repetitive introductory questions without human delay. When a prospect is ready to negotiate or book a plot, hands off cleanly to the sales director.',
-    workflow: ['Customer WhatsApp Inbound', 'Natural Language Understanding', 'Brochure / Price Delivery', 'Qualification & Visit Scheduling', 'Human Executive Takeover on Demand'],
-    metrics: ['Average Response Time: 4 seconds', '24/7 Coverage: 100% weekend/night responses', 'Customer Satisfaction: 94%', 'Site Visit Conversion: +32%'],
-    simulation: {
-      type: 'chat',
-      customer: '2 cent plot iruka? 30 lakhs budget la Samayapuram pakkam?',
-      aiReply: 'Yes, we have! In our Cauvery Green City project near Samayapuram Tollway, we have 1,200 sq.ft (approx 2.75 cents) DTCP-approved villa plots starting at ₹17.4 Lakhs, well within your ₹30 Lakhs budget. Would you like to see the master layout plan and road map?',
-      outcome: 'Lead captured with exact requirement: 1,200 sq.ft, Budget: ₹30L, Location: Samayapuram corridor.'
-    }
-  },
-  {
-    id: 'ai-customer-support-agent',
-    slug: 'ai-customer-support-agent',
-    category: 'Customer',
-    title: 'AI Customer Support Agent',
-    badge: 'Project & Document Desk',
-    headline: 'Instant Answers for Project Approvals, Amenities, and Due Diligence',
-    tagline: 'Free your staff from answering the same 20 repetitive questions about approvals every single day.',
-    problem: 'Front-desk and sales staff spend hours answering repetitive basic questions: "Is it DTCP approved?", "What is the road width?", "Which banks offer loans?", leading to delayed responses.',
-    aiAction: 'Trained on project technical dossiers, approval numbers, RERA registrations, bank sanction letters, amenities lists, and sub-registrar guideline values to answer buyer queries with 100% factual accuracy.',
-    teamCollaboration: 'Handles all informational queries instantly. Complex legal disputes or customized commercial queries are escalated to your legal or technical directors.',
-    workflow: ['Buyer Asks Technical Question', 'AI Semantic Search on Project Dossier', 'Accurate Factual Response with Document Links', 'Escalation for Complex Inquiries'],
-    metrics: ['Inquiry Resolution Rate: 82% instant resolution', 'Team Time Saved: 15+ hours weekly per project', 'Customer Trust: Zero incorrect or conflicting information'],
-    simulation: {
-      type: 'faq',
-      question: 'Which banks have approved Cauvery Green City for plot loans?',
-      answer: 'Cauvery Green City is pre-approved for immediate plot purchase and home construction loans by State Bank of India (SBI), Indian Bank, and HDFC Bank with up to 80% financing subject to applicant eligibility. We can arrange a call with our bank loan coordinator if you would like to initiate pre-sanction.'
-    }
-  },
+export { 
+  EDUCATIONAL_RESOURCES 
+} from './resourcesData';
 
-  // 3. OPERATIONS
-  {
-    id: 'ai-crm-copilot',
-    slug: 'ai-crm-copilot',
-    category: 'Operations',
-    title: 'AI CRM Copilot',
-    badge: 'Voice & Chat CRM Operations',
-    headline: 'Operate Your Real Estate CRM Entirely by Voice and Plain Text',
-    tagline: 'Sales reps hate filling CRM forms. Copilot lets them update lead statuses in 5 seconds by voice.',
-    problem: 'Sales executives spend 45 minutes every evening typing call notes into clunky CRM software. They skip entries, leaving management blind to actual pipeline health.',
-    aiAction: 'Allows sales reps to update leads via WhatsApp voice notes or quick text commands: "Met Anandha Kumar, he liked plot 14, wants to check loan eligibility with SBI, follow up Thursday." The AI updates the CRM record, sets the task, and schedules the reminder.',
-    teamCollaboration: 'Acts as a personal executive assistant for every sales rep, eliminating manual data entry and ensuring 100% accurate CRM reporting for management.',
-    workflow: ['Sales Rep Sends Voice Note / Chat', 'AI Extracts Structured Fields (Status, Plot, Budget, Date)', 'CRM Record Updated Instantly', 'Follow-up Task Scheduled', 'Confirmation Sent to Rep'],
-    metrics: ['CRM Data Freshness: 98% on-time updates', 'Sales Rep Daily Admin Time Saved: 40 mins/day', 'Data Quality: Zero missing phone numbers or stages'],
-    simulation: {
-      type: 'crm_action',
-      repInput: 'Just finished site visit with Dr. Saravanan. He loved the corner plot in Airport Tech Vista. Agreed on price, will pay booking advance of 1 Lakh on Monday after consulting his brother.',
-      crmOutput: 'Lead: Dr. Saravanan | Stage: Negotiation / Advance Stage | Selected Plot: Corner Plot 19 | Expected Close: Monday | Task: Advance Collection Follow-up'
-    }
-  },
-  {
-    id: 'ai-morning-brief',
-    slug: 'ai-morning-brief',
-    category: 'Operations',
-    title: 'AI Morning Business Brief',
-    badge: 'Executive Daily Intelligence',
-    headline: 'Your 8:00 AM Operational Snapshot Before the Office Opens',
-    tagline: 'Wake up to an actionable summary of yesterday’s sales, pipeline health, and high-priority tasks.',
-    problem: 'Promoters and directors start their day blind, having to call 4 team leaders just to understand how many leads came in, how many site visits happened, and what needs immediate attention.',
-    aiAction: 'Aggregates data from Meta ads, WhatsApp bots, outbound calls, and CRM activity overnight. Delivers a clean, concise bulleted summary directly to the promoter’s WhatsApp at 8:00 AM every morning.',
-    teamCollaboration: 'Gives the leadership complete operational visibility without needing to micromanage staff or log into multiple dashboards.',
-    workflow: ['Overnight Data Aggregation', 'AI Pipeline Analysis & Anomaly Detection', 'Key Priorities Identification', '8:00 AM WhatsApp Delivery to Leadership'],
-    metrics: ['Management Decision Speed: 3x faster', 'Response to Pipeline Blockers: Under 24 hours', 'Daily Accountability: 100% alignment across team leads'],
-    simulation: {
-      type: 'brief',
-      date: 'Today, 8:00 AM',
-      report: [
-        '📈 Yesterday New Leads: 42 (Meta: 28, Google: 9, Website: 5)',
-        '🎯 Qualified High-Intent: 17 leads (Avg Budget: ₹32 Lakhs)',
-        '🚗 Site Visits Completed: 6 | Planned for Today: 8 visits',
-        '⚠️ At-Risk / Needs Attention: 4 high-value leads uncontacted for >24 hrs',
-        '💰 Projected Revenue This Week: ₹84 Lakhs across 3 advance token stages'
-      ]
-    }
-  },
+export { 
+  ACADEMY_SUBPAGES, 
+  ACADEMY_PROGRAMS,
+  ACADEMY_FLAGSHIP_OFFERINGS 
+} from './academyData';
 
-  // 4. INTELLIGENCE
-  {
-    id: 'ai-revenue-leakage-agent',
-    slug: 'ai-revenue-leakage-agent',
-    category: 'Intelligence',
-    title: 'AI Revenue Leakage Agent',
-    badge: 'Proactive Profit Protection',
-    headline: 'Detect Broken Funnels, Ignored Leads, and Leaking Revenue in Real Time',
-    tagline: 'You don’t need more marketing spend. You need to stop losing the hot leads you already paid for.',
-    problem: 'Real estate companies spend ₹5 to ₹10 Lakhs monthly on ads, yet lose 30-40% of generated revenue because sales reps miss callbacks, delay quotes, or ignore old leads.',
-    aiAction: 'Continuously monitors pipeline velocity. Detects when high-value leads are not contacted within 30 minutes, when follow-up promises are broken, or when site visit attendees go cold without an offer.',
-    teamCollaboration: 'Acts as an impartial operational auditor for the promoter. Alerts management immediately when a revenue-threatening breakdown occurs.',
-    workflow: ['Continuous Pipeline Audit', 'Leakage Pattern Recognition', 'Revenue Risk Calculation', 'Immediate Escalation to Sales Head / Director'],
-    metrics: ['Revenue Recovery: 18-25% retained sales', 'Lead Response SLA Breaches: Reduced by 85%', 'Sales Cycle Velocity: 24% faster turnaround'],
-    simulation: {
-      type: 'leakage_alert',
-      alert: '🚨 Revenue Leakage Warning (Risk: ₹48 Lakhs)',
-      details: '3 leads who attended site visits at Cauvery Green City over the weekend have not received a follow-up call or price breakdown for 48 hours. Historical win probability drops by 60% after Day 3.',
-      recommendation: 'Trigger immediate automated VIP incentive on WhatsApp and assign priority call to Senior Manager.'
-    }
-  },
-  {
-    id: 'ai-business-intelligence-agent',
-    slug: 'ai-business-intelligence-agent',
-    category: 'Intelligence',
-    title: 'AI Business Intelligence Agent',
-    badge: 'Strategic Decision Engine',
-    headline: 'Ask Plain-English Questions. Get Deep Strategic Insights Instantly.',
-    tagline: '“Why are enquiries increasing but sales aren’t?” — Get the root cause in 5 seconds.',
-    problem: 'Traditional business intelligence tools require complex Excel exports, SQL queries, and data scientists that most real estate firms cannot afford.',
-    aiAction: 'Connects your marketing campaigns, lead funnels, telecalling logs, and revenue registers into a conversational knowledge graph. Business owners can ask questions in plain English and receive instant data-backed answers with root causes and corrective recommendations.',
-    teamCollaboration: 'Empowers promoters, CFOs, and marketing heads with institutional-grade analytical capabilities without needing a data analytics team.',
-    workflow: ['Executive Query Asked in Plain English', 'Cross-System Data Synthesis (Ads + CRM + Accounts)', 'Root Cause Diagnosis', 'Actionable Recommendation Formulated'],
-    metrics: ['Ad Spend Optimization: 20-30% reduction in CAC', 'Inventory Sales Velocity: 1.8x faster sell-out', 'Reporting Overhead: Reduced from 3 days to 3 seconds'],
-    simulation: {
-      type: 'bi_query',
-      query: 'Why did Airport Tech Vista site visits drop last week despite 20% higher ad spend?',
-      aiAnalysis: 'Analysis shows ad clicks increased, but 64% of traffic came from an untargeted demographic outside the 30-45 age bracket. Furthermore, average sales team response time increased from 18 mins to 4.2 hours due to team leave.',
-      actionPlan: 'Re-align Meta audience exclusions and re-assign uncontacted leads to the AI Outbound Calling Agent.'
-    }
-  },
+export { 
+  INTELLIGENCE_SUBPAGES, 
+  TN_REGIONAL_HIERARCHY, 
+  DETAILED_INTELLIGENCE_RECORDS,
+  INTELLIGENCE_PRODUCTS 
+} from './intelligenceData';
 
-  // 5. MARKETING
-  {
-    id: 'ai-marketing-agent',
-    slug: 'ai-marketing-agent',
-    category: 'Marketing',
-    title: 'AI Marketing Workforce',
-    badge: 'Campaign & Creative Velocity',
-    headline: 'End-to-End Real Estate Marketing Campaign Architecture',
-    tagline: 'Not just copy generation. Intelligent workflow automation for real estate ads and funnels.',
-    problem: 'Real estate marketing agencies take 2 weeks to create ad variants, test messaging, and analyze why a campaign underperformed, burning precious launch momentum.',
-    aiAction: 'Generates high-converting ad angles tailored to specific micro-markets (e.g., NRI investors, doctor communities, local business owners), generates creative copy variations, specifies audience targeting parameters, and writes daily campaign health reports.',
-    teamCollaboration: 'Works alongside your marketing agency or internal media buyer, giving them instant access to high-converting property copy, buyer objection handling angles, and demographic intelligence.',
-    workflow: ['Project Specs & Corridor Input', 'Target Audience Segmentation', 'Multi-Angle Ad Copy Generation', 'Ad Performance Diagnostics', 'Iterative Creative Refresh'],
-    metrics: ['Creative Production Speed: 10x faster', 'Cost Per Qualified Lead (CPL): 25-40% reduction', 'Creative Fatigue Prevention: Continuous ad angle rotation'],
-    simulation: {
-      type: 'marketing_brief',
-      campaign: 'Cauvery Green City — NRI Investment Angle',
-      angles: [
-        { angle: 'Asset Security', headline: '100% Clear Parent Documents & Immediate Sub-Division Patta in Trichy' },
-        { angle: 'Groundwater Assurance', headline: 'Cauvery Aquifer Sweet Water at 22 Feet — Build Without Water Scarcity' },
-        { angle: 'Rental Yield', headline: '4 Mins to NH-45 Corridor — Projected 15.2% Annual Appreciation' }
-      ]
-    }
-  }
-];
+
+
 

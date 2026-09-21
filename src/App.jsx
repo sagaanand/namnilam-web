@@ -15,9 +15,11 @@ import { IntelligencePage } from './pages/IntelligencePage';
 import { AcademyPage } from './pages/AcademyPage';
 import { BusinessSolutionsPage } from './pages/BusinessSolutionsPage';
 import { AiWorkforcePage } from './pages/AiWorkforcePage';
+import { AiUseCasesPage } from './pages/AiUseCasesPage';
 import { ProjectsPage } from './pages/ProjectsPage';
 import { ResourcesPage } from './pages/ResourcesPage';
 import { ContactPage } from './pages/ContactPage';
+import { CareersPage } from './pages/CareersPage';
 import { AdminPage } from './pages/AdminPage';
 
 // Scroll to top on route change
@@ -74,8 +76,10 @@ export function AppContent() {
           <Route path="/business" element={<BusinessSolutionsPage onOpenEnquiry={handleOpenEnquiry} />} />
           <Route path="/business/:slug" element={<BusinessSolutionsPage onOpenEnquiry={handleOpenEnquiry} />} />
 
-          {/* AI Workforce */}
+          {/* AI Workforce & Use Cases */}
           <Route path="/ai" element={<AiWorkforcePage onOpenEnquiry={handleOpenEnquiry} />} />
+          <Route path="/ai/use-cases" element={<AiUseCasesPage onOpenEnquiry={handleOpenEnquiry} />} />
+          <Route path="/ai/use-cases/:slug" element={<AiUseCasesPage onOpenEnquiry={handleOpenEnquiry} />} />
           <Route path="/ai/:slug" element={<AiWorkforcePage onOpenEnquiry={handleOpenEnquiry} />} />
 
           {/* Projects (Trichy) */}
@@ -85,6 +89,9 @@ export function AppContent() {
           {/* Resources */}
           <Route path="/resources" element={<ResourcesPage onOpenEnquiry={handleOpenEnquiry} />} />
           <Route path="/resources/:slug" element={<ResourcesPage onOpenEnquiry={handleOpenEnquiry} />} />
+
+          {/* Careers */}
+          <Route path="/careers" element={<CareersPage onOpenEnquiry={handleOpenEnquiry} />} />
 
           {/* Contact */}
           <Route path="/contact" element={<ContactPage />} />

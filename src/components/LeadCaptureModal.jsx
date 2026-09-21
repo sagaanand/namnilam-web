@@ -94,7 +94,7 @@ export const LeadCaptureModal = ({
 
     // Build pre-composed WhatsApp message
     let msg = `Hello Nam Nilam Advisory Team,%0A%0A`;
-    msg += `I am submitting an enquiry via namnilam.in:%0A`;
+    msg += `I am submitting an enquiry via namnilam.com:%0A`;
     msg += `*Name:* ${encodeURIComponent(fullName)}%0A`;
     msg += `*Phone:* ${encodeURIComponent(phone)}%0A`;
     msg += `*Request:* ${encodeURIComponent(modalTitle)}%0A`;

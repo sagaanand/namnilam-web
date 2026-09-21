@@ -10,9 +10,13 @@ import {
   Calendar, 
   Droplets,
   Building,
-  Phone
+  Phone,
+  CreditCard,
+  Compass,
+  Info
 } from 'lucide-react';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
+import { SeoHead } from '../components/common/SeoHead';
 import { TRICHY_PROJECTS, BRAND_INFO } from '../data/ecosystemData';
 import { getProjects } from '../services/api';
 
@@ -38,11 +42,17 @@ export const ProjectsPage = ({ onOpenEnquiry }) => {
   if (slug && project) {
     const pTitle = project.title || project.name || 'Project Details';
     const pLocation = project.location || 'Trichy';
-    const pRate = project.rateSqft || (project.price_per_sqft ? `₹${project.price_per_sqft}` : '₹1,500');
+    const rawRate = project.rateSqft || project.price_per_sqft || 850;
+    const pRate = typeof rawRate === 'string' && rawRate.startsWith('₹') ? rawRate : `₹${rawRate}`;
+    const pPrefix = project.ratePrefix || '';
     const pImage = project.image || project.image_url || 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80';
     const pOverview = project.overview || project.description || 'Master-planned approved residential layout in high-growth corridor of Tiruchirappalli.';
     const pWater = project.waterTable || '20 ft (Sweet Ground Water)';
     const pGuideline = project.guidelineValue || 'Fair Market Indexed';
+    const pGuidelineNote = project.guidelineNote;
+    const pEmiAvailable = project.emiAvailable;
+    const pEmiNote = project.emiNote;
+    const pCorridor = project.corridor;
     const pCagr = project.cagr || '+16.5%';
     const pAvailable = project.availablePlots || project.available_units || 12;
     const pTotal = project.totalPlots || project.total_units || 45;
@@ -72,6 +82,18 @@ export const ProjectsPage = ({ onOpenEnquiry }) => {
 
     return (
       <div>
+        <SeoHead 
+          title={`${pTitle} - Plots in ${pLocation} Trichy | Nam Nilam`}
+          description={`${pTitle} in ${pLocation}, Trichy. ${pApproval}, ${pRera}. ${pPrefix}${pRate} per sq.ft. Clear documents and immediate patta transfer.`}
+          canonical={`/projects/${project.slug || slug}`}
+          schemaType="LocalBusiness"
+          schemaData={{
+            name: pTitle,
+            description: pOverview,
+            address: `${pLocation}, Tiruchirappalli, Tamil Nadu, India`,
+            priceRange: `${pPrefix}${pRate} / sq.ft`
+          }}
+        />
         <Breadcrumbs items={[
           { label: 'Projects (Trichy)', path: '/projects' },
           { label: pTitle }
@@ -80,11 +102,17 @@ export const ProjectsPage = ({ onOpenEnquiry }) => {
         {/* Project Detail Hero */}
         <section className="page-hero">
           <div className="container">
-            <div style={{ display: 'flex', gap: '8px', marginBottom: '12px', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', gap: '8px', marginBottom: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
               <span className="badge badge-gold">
                 <MapPin size={12} />
                 {pLocation}
               </span>
+              {pCorridor && (
+                <span className="badge badge-dark">
+                  <Compass size={12} />
+                  {pCorridor}
+                </span>
+              )}
               <span className="badge badge-green">
                 <ShieldCheck size={12} />
                 {pApproval}
@@ -92,6 +120,22 @@ export const ProjectsPage = ({ onOpenEnquiry }) => {
               <span className="badge badge-dark">
                 RERA: {pRera}
               </span>
+              {pEmiAvailable && (
+                <span style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '4px',
+                  padding: '4px 10px',
+                  backgroundColor: '#059669',
+                  color: '#FFFFFF',
+                  fontSize: '0.75rem',
+                  fontWeight: 800,
+                  borderRadius: 'var(--radius-pill)'
+                }}>
+                  <CreditCard size={12} />
+                  <span>EMI Available</span>
+                </span>
+              )}
             </div>
 
             <h1 style={{ fontSize: '2.8rem', color: 'var(--color-brand-deep)', marginBottom: '12px' }}>
@@ -107,7 +151,7 @@ export const ProjectsPage = ({ onOpenEnquiry }) => {
               <div style={{ padding: '10px 20px', backgroundColor: 'var(--color-surface-soft)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)' }}>
                 <span style={{ fontSize: '0.75rem', color: '#64748B', display: 'block' }}>Base Rate</span>
                 <strong style={{ fontSize: '1.4rem', color: 'var(--color-brand-deep)', fontFamily: 'var(--font-mono)' }}>
-                  {pRate} <span style={{ fontSize: '0.85rem', fontWeight: 500 }}>/ sq.ft</span>
+                  {pPrefix}{pRate} <span style={{ fontSize: '0.85rem', fontWeight: 500 }}>/ sq.ft</span>
                 </strong>
               </div>
 
@@ -180,7 +224,14 @@ export const ProjectsPage = ({ onOpenEnquiry }) => {
 
               {/* Right Column: Key Specifications Card */}
               <div>
-                <div className="deliverables-box" style={{ marginBottom: '24px' }}>
+                <div style={{
+                  padding: '28px',
+                  backgroundColor: '#FFFFFF',
+                  borderRadius: 'var(--radius-xl)',
+                  border: '1px solid var(--color-border)',
+                  boxShadow: 'var(--shadow-sm)',
+                  marginBottom: '24px'
+                }}>
                   <span className="badge badge-gold" style={{ marginBottom: '12px' }}>Layout Facts</span>
                   <h3 style={{ fontSize: '1.3rem', marginBottom: '16px' }}>Property Specifications</h3>
 
@@ -189,6 +240,12 @@ export const ProjectsPage = ({ onOpenEnquiry }) => {
                       <span style={{ color: 'var(--color-ink-muted)' }}>Location:</span>
                       <strong>{pLocation}</strong>
                     </div>
+                    {pCorridor && (
+                      <div style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '8px', borderBottom: '1px solid var(--color-border)' }}>
+                        <span style={{ color: 'var(--color-ink-muted)' }}>Corridor:</span>
+                        <strong>{pCorridor}</strong>
+                      </div>
+                    )}
                     <div style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '8px', borderBottom: '1px solid var(--color-border)' }}>
                       <span style={{ color: 'var(--color-ink-muted)' }}>Plot Dimensions:</span>
                       <strong>{pPlotSizes}</strong>
@@ -210,6 +267,46 @@ export const ProjectsPage = ({ onOpenEnquiry }) => {
                       <strong>{pAvailable} of {pTotal} Plots Left</strong>
                     </div>
                   </div>
+
+                  {/* Guideline Disclosure Note */}
+                  {pGuidelineNote && (
+                    <div style={{
+                      padding: '12px 14px',
+                      backgroundColor: 'var(--color-canvas)',
+                      borderRadius: 'var(--radius-sm)',
+                      border: '1px solid var(--color-border)',
+                      fontSize: '0.82rem',
+                      color: 'var(--color-ink-muted)',
+                      lineHeight: 1.5,
+                      marginTop: '16px'
+                    }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--color-brand-deep)', fontWeight: 700, marginBottom: '4px' }}>
+                        <Info size={14} color="var(--color-gold-dark)" />
+                        <span>Guideline vs Market Note:</span>
+                      </div>
+                      {pGuidelineNote}
+                    </div>
+                  )}
+
+                  {/* EMI Note */}
+                  {pEmiAvailable && pEmiNote && (
+                    <div style={{
+                      padding: '12px 14px',
+                      backgroundColor: 'rgba(5, 150, 105, 0.08)',
+                      borderRadius: 'var(--radius-sm)',
+                      border: '1px solid rgba(5, 150, 105, 0.25)',
+                      fontSize: '0.82rem',
+                      color: '#065F46',
+                      lineHeight: 1.5,
+                      marginTop: '12px'
+                    }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontWeight: 700, marginBottom: '2px' }}>
+                        <CreditCard size={14} />
+                        <span>EMI Facility:</span>
+                      </div>
+                      {pEmiNote}
+                    </div>
+                  )}
 
                   <button 
                     onClick={() => onOpenEnquiry(`Site Visit: ${pTitle}`)}
@@ -273,20 +370,40 @@ export const ProjectsPage = ({ onOpenEnquiry }) => {
   // Projects Overview (Strictly Trichy)
   return (
     <div>
+      <SeoHead 
+        title="Verified Real Estate Projects in Trichy | DTCP & RERA Approved Plots | Nam Nilam"
+        description="Explore 5 verified residential plot projects by Nam Nilam in Tiruchirappalli (Trichy): Jai Nagar, Abirami Nagar, Farm Land, Santha City, and Kasi Nath Nagar."
+        canonical="/projects"
+        schemaType="LocalBusiness"
+        schemaData={{
+          name: "Nam Nilam Trichy Property Projects",
+          description: "Verified residential plots and approved layouts in Tiruchirappalli (Trichy), Tamil Nadu.",
+          address: "Tiruchirappalli, Tamil Nadu, India"
+        }}
+      />
       <Breadcrumbs items={[{ label: 'Projects (Trichy)' }]} />
 
       <section className="page-hero">
         <div className="container">
           <div className="section-eyebrow">
             <MapPin size={14} />
-            <span>Tiruchirappalli (Trichy) Developments</span>
+            <span>Tiruchirappalli (Trichy) Commercial Projects</span>
           </div>
           <h1 style={{ fontSize: '2.8rem', color: 'var(--color-brand-deep)', marginBottom: '14px' }}>
-            Projects by Nam Nilam in Trichy
+            Verified Projects by Nam Nilam in Trichy
           </h1>
           <p style={{ fontSize: '1.15rem', color: 'var(--color-ink-muted)', maxWidth: '780px' }}>
-            Nam Nilam's direct development projects are focused specifically in Tiruchirappalli across major arterial corridors: Samayapuram (NH-45), Airport-Mathur, and Dindigul Highway.
+            Nam Nilam's direct development projects are focused specifically in Tiruchirappalli across major arterial corridors: Chennai NH (NH-45), Thirupattur, and Kariyamanickam.
           </p>
+
+          {/* Trichy cityscape hero image */}
+          <div style={{ marginTop: '32px', borderRadius: 'var(--radius-xl)', overflow: 'hidden', boxShadow: 'var(--shadow-lg)', maxHeight: '340px' }}>
+            <img
+              src="/trichy-cityscape.jpg"
+              alt="Tiruchirappalli city — Rock Fort and Cauvery river at golden hour"
+              style={{ width: '100%', height: '340px', objectFit: 'cover', objectPosition: 'center 40%', display: 'block' }}
+            />
+          </div>
         </div>
       </section>
 
@@ -295,17 +412,38 @@ export const ProjectsPage = ({ onOpenEnquiry }) => {
           <div className="trichy-projects-grid">
             {projectList.map((proj) => {
               const pTitle = proj.title || proj.name;
-              const pRate = proj.price_per_sqft || proj.rateSqft || 1500;
+              const rawRate = proj.rateSqft || proj.price_per_sqft || 850;
+              const pRate = typeof rawRate === 'string' && rawRate.startsWith('₹') ? rawRate : `₹${rawRate}`;
+              const pPrefix = proj.ratePrefix || '';
               const pImg = proj.image_url || proj.image || 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80';
               const pOverview = proj.overview || proj.description || 'Verified residential plots in high-growth corridor of Tiruchirappalli with immediate registration readiness.';
               const pWater = proj.waterTable ? proj.waterTable.split(' ')[0] : 'Potable';
 
               return (
                 <div key={proj.slug || proj.id} className="project-card">
-                  <div className="project-img-wrapper">
+                  <div className="project-img-wrapper" style={{ position: 'relative' }}>
                     <img src={pImg} alt={pTitle} className="project-img" />
                     <span className="project-tag">{proj.status || 'Ready to Register'}</span>
-                    <span className="project-rate-pill">₹{pRate} / sq.ft</span>
+                    <span className="project-rate-pill">{pPrefix}{pRate} / sq.ft</span>
+
+                    {/* EMI Available Badge */}
+                    {proj.emiAvailable && (
+                      <span style={{
+                        position: 'absolute',
+                        bottom: '12px',
+                        left: '12px',
+                        backgroundColor: '#059669',
+                        color: '#FFFFFF',
+                        fontSize: '0.72rem',
+                        fontWeight: 800,
+                        padding: '4px 10px',
+                        borderRadius: 'var(--radius-pill)',
+                        boxShadow: '0 2px 6px rgba(0,0,0,0.25)',
+                        letterSpacing: '0.04em'
+                      }}>
+                        EMI Available
+                      </span>
+                    )}
                   </div>
 
                   <div className="project-body">
@@ -375,7 +513,7 @@ export const ProjectsPage = ({ onOpenEnquiry }) => {
             <ShieldCheck size={28} color="var(--color-gold-dark)" style={{ flexShrink: 0 }} />
             <div style={{ fontSize: '0.9rem', color: 'var(--color-ink-muted)', lineHeight: 1.6 }}>
               <strong>Scope Notice: </strong>
-              Nam Nilam does not fabricate statewide property listings. All projects above are authentic, physically inspected developments in Tiruchirappalli. If you are looking for advisory in other Tamil Nadu regions, please explore our <Link to="/services/real-estate-advisory" style={{ color: 'var(--color-gold-dark)', textDecoration: 'underline' }}>Real Estate Advisory Services</Link>.
+              Nam Nilam does not fabricate statewide property listings. All 5 projects above are authentic, physically inspected developments in Tiruchirappalli. If you are looking for advisory or legal due diligence in other Tamil Nadu regions, please explore our <Link to="/services/online-legal-opinion" style={{ color: 'var(--color-gold-dark)', textDecoration: 'underline' }}>Online Legal Opinion</Link> or <Link to="/services/real-estate-advisory" style={{ color: 'var(--color-gold-dark)', textDecoration: 'underline' }}>Real Estate Advisory Services</Link>.
             </div>
           </div>
         </div>

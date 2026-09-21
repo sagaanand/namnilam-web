@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { 
   ShieldCheck, 
   Lock, 
@@ -14,20 +14,15 @@ import {
   Trash2, 
   Edit3, 
   ExternalLink, 
-  CheckCircle2, 
   Clock, 
   MapPin, 
-  Building2, 
-  Sparkles, 
   Layers, 
-  Tag, 
   Globe, 
-  Calendar,
-  Eye,
-  AlertCircle,
-  X,
-  Save,
-  RefreshCw
+  AlertCircle, 
+  X, 
+  Save, 
+  RefreshCw,
+  Eye 
 } from 'lucide-react';
 import { 
   getLeads, 
@@ -39,11 +34,17 @@ import {
   deleteProject, 
   loginAdmin 
 } from '../services/api';
-import { BRAND_INFO, TRICHY_PROJECTS } from '../data/ecosystemData';
+import { BRAND_INFO } from '../data/ecosystemData';
 
 export const AdminPage = () => {
-  // Authentication State
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  // Authentication State initialized directly from session storage
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    try {
+      return Boolean(sessionStorage.getItem('nam_nilam_admin_token'));
+    } catch {
+      return false;
+    }
+  });
   const [passcode, setPasscode] = useState('');
   const [authError, setAuthError] = useState('');
   const [isLoggingIn, setIsLoggingIn] = useState(false);
@@ -53,7 +54,6 @@ export const AdminPage = () => {
 
   // Leads State
   const [leads, setLeads] = useState([]);
-  const [leadsMetrics, setLeadsMetrics] = useState({ total_leads: 0, new_leads: 0 });
   const [leadFilterForm, setLeadFilterForm] = useState('all');
   const [leadFilterStatus, setLeadFilterStatus] = useState('all');
   const [leadSearchQuery, setLeadSearchQuery] = useState('');
@@ -85,21 +85,37 @@ export const AdminPage = () => {
   };
   const [projectFormData, setProjectFormData] = useState(initialProjectForm);
 
-  // Check existing session
-  useEffect(() => {
-    const token = sessionStorage.getItem('nam_nilam_admin_token');
-    if (token) {
-      setIsAuthenticated(true);
+  // Leads Data Fetcher
+  const fetchLeadsData = useCallback(async () => {
+    setIsLoadingLeads(true);
+    const res = await getLeads({
+      form_type: leadFilterForm,
+      status: leadFilterStatus,
+      search: leadSearchQuery
+    });
+    if (res && res.leads) {
+      setLeads(res.leads);
     }
+    setIsLoadingLeads(false);
+  }, [leadFilterForm, leadFilterStatus, leadSearchQuery]);
+
+  // Projects Data Fetcher
+  const fetchProjectsData = useCallback(async () => {
+    setIsLoadingProjects(true);
+    const data = await getProjects();
+    if (Array.isArray(data)) {
+      setProjects(data);
+    }
+    setIsLoadingProjects(false);
   }, []);
 
-  // Fetch data upon authentication
+  // Fetch data upon authentication or filter change
   useEffect(() => {
     if (isAuthenticated) {
       fetchLeadsData();
       fetchProjectsData();
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, fetchLeadsData, fetchProjectsData]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -124,19 +140,6 @@ export const AdminPage = () => {
   // -------------------------------------------------------------
   // LEADS OPERATIONS
   // -------------------------------------------------------------
-  const fetchLeadsData = async () => {
-    setIsLoadingLeads(true);
-    const res = await getLeads({
-      form_type: leadFilterForm,
-      status: leadFilterStatus,
-      search: leadSearchQuery
-    });
-    if (res && res.leads) {
-      setLeads(res.leads);
-      if (res.metrics) setLeadsMetrics(res.metrics);
-    }
-    setIsLoadingLeads(false);
-  };
 
   const handleStatusChange = async (leadId, newStatus) => {
     await updateLeadStatus(leadId, newStatus);
@@ -183,14 +186,6 @@ export const AdminPage = () => {
   // -------------------------------------------------------------
   // PROJECTS OPERATIONS
   // -------------------------------------------------------------
-  const fetchProjectsData = async () => {
-    setIsLoadingProjects(true);
-    const data = await getProjects();
-    if (Array.isArray(data)) {
-      setProjects(data);
-    }
-    setIsLoadingProjects(false);
-  };
 
   const openAddProjectModal = () => {
     setEditingProject(null);

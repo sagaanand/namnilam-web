@@ -36,7 +36,7 @@ export const Footer = ({ lang, onOpenCrm }) => {
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <Mail size={14} color="#10B981" />
-                <span>intelligence@namnilam.in</span>
+                <span>intelligence@namnilam.com</span>
               </div>
             </div>
           </div>

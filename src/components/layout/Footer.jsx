@@ -5,9 +5,10 @@ import {
   Mail, 
   MapPin, 
   MessageSquare, 
-  Clock 
+  Clock,
+  ShieldCheck 
 } from 'lucide-react';
-import { BRAND_INFO } from '../../data/ecosystemData';
+import { BRAND_INFO, TRICHY_PROJECTS } from '../../data/ecosystemData';
 
 export const Footer = () => {
   return (
@@ -60,7 +61,7 @@ export const Footer = () => {
             </div>
           </div>
 
-          {/* Practice Areas */}
+          {/* Advisory & Intelligence */}
           <div>
             <h4>Advisory & Intelligence</h4>
             <ul className="footer-links">
@@ -68,34 +69,39 @@ export const Footer = () => {
               <li><Link to="/services/property-valuation">Property Valuation Support</Link></li>
               <li><Link to="/services/due-diligence">Due Diligence Guidance</Link></li>
               <li><Link to="/services/investment-advisory">Investment Advisory</Link></li>
+              <li><Link to="/services/real-estate-consulting">Real Estate Consulting</Link></li>
               <li><Link to="/intelligence">Market Intelligence Hub</Link></li>
               <li><Link to="/intelligence/price-insights">Land Price Insights</Link></li>
+              <li><Link to="/about/approach">Our 4-Step Methodology</Link></li>
             </ul>
           </div>
 
-          {/* AI Workforce & Business */}
+          {/* AI Workforce & Business Solutions */}
           <div>
-            <h4>Nam Nilam AI Workforce</h4>
+            <h4>AI Workforce & Business</h4>
             <ul className="footer-links">
               <li><Link to="/ai">AI Workforce Overview</Link></li>
-              <li><Link to="/ai/ai-sales-agent">AI Sales Agent</Link></li>
-              <li><Link to="/ai/ai-whatsapp-agent">AI WhatsApp Agent</Link></li>
-              <li><Link to="/ai/ai-calling-agent">AI Outbound Telecaller</Link></li>
-              <li><Link to="/ai/ai-morning-brief">AI Morning Business Brief</Link></li>
-              <li><Link to="/ai/ai-revenue-leakage-agent">AI Revenue Leakage Agent</Link></li>
+              <li><Link to="/ai/sales-agent">AI Sales Agent</Link></li>
+              <li><Link to="/ai/whatsapp-agent">AI WhatsApp Agent</Link></li>
+              <li><Link to="/ai/calling-agent">AI Calling Agent</Link></li>
+              <li><Link to="/ai/morning-brief">AI Morning Brief</Link></li>
+              <li><Link to="/ai/revenue-leakage-agent">AI Revenue Leakage Agent</Link></li>
+              <li><Link to="/ai/use-cases/real-estate-whatsapp-automation">WhatsApp Automation Use Case</Link></li>
+              <li><Link to="/business">Business Solutions</Link></li>
               <li><Link to="/academy">Nam Nilam Academy</Link></li>
             </ul>
           </div>
 
           {/* Trichy Projects & Quick Contact */}
           <div>
-            <h4>Trichy Projects & Contact</h4>
+            <h4>Projects in Trichy</h4>
             <ul className="footer-links" style={{ marginBottom: '20px' }}>
-              <li><Link to="/projects">Projects in Trichy</Link></li>
-              <li><Link to="/projects/cauvery-green-city-samayapuram">Cauvery Green City (Samayapuram)</Link></li>
-              <li><Link to="/projects/airport-tech-vista-mathur">Airport Tech Vista (Mathur)</Link></li>
-              <li><Link to="/projects/royal-meadows-manikandam">Royal Meadows (Manikandam)</Link></li>
-              <li><Link to="/resources">Buyer Checklists & Guides</Link></li>
+              {TRICHY_PROJECTS.map((proj) => (
+                <li key={proj.slug}>
+                  <Link to={`/projects/${proj.slug}`}>{proj.title} ({proj.location.split(',')[0]})</Link>
+                </li>
+              ))}
+              <li><Link to="/resources">Buyer Checklists & AI Guides</Link></li>
               <li><Link to="/contact">Intent-Based Enquiry Desk</Link></li>
             </ul>
 
@@ -114,14 +120,16 @@ export const Footer = () => {
 
         {/* Disclaimer & Bottom Bar */}
         <div className="footer-bottom">
-          <p style={{ lineHeight: 1.6 }}>
-            <strong>Important Regulatory Disclaimer: </strong>
-            Nam Nilam (Nam Nilam Infra Private Limited) is an independent real estate intelligence, advisory, education and digital transformation company. Property advisory and due diligence guidance provided are intended for informed decision support. Legal title verification should be completed with independent qualified advocates prior to executing registration deeds. All projects listed under Projects currently reflect specific initiatives in Tiruchirappalli (Trichy).
+          <p style={{ lineHeight: 1.6, marginBottom: '12px' }}>
+            <strong>Important Regulatory & Geographic Scope Notice: </strong>
+            Nam Nilam (Nam Nilam Infra Private Limited) is an independent real estate intelligence, advisory, education and digital transformation company. Advisory, intelligence, academy, and business solutions serve clients across <strong>Tamil Nadu</strong>. Property development projects currently reflect specific layout initiatives in <strong>Tiruchirappalli (Trichy)</strong> only. We do not claim or imply nationwide or statewide project inventory.
           </p>
-
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px', borderTop: '1px solid rgba(255, 255, 255, 0.08)', paddingTop: '16px' }}>
-            <span>© {new Date().getFullYear()} Nam Nilam Infra Private Limited. All Rights Reserved.</span>
-            <span>Trichy • Tamil Nadu • India</span>
+          <p style={{ lineHeight: 1.6 }}>
+            Advisory and due diligence guidance are provided for objective decision support and do not constitute guaranteed investment returns or financial underwriting. All legal title scrutinies must be completed with qualified legal advocates prior to registration.
+          </p>
+          <div style={{ marginTop: '16px', fontSize: '0.78rem', color: '#64748B', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '10px' }}>
+            <span>© {new Date().getFullYear()} Nam Nilam Infra Private Limited. All rights reserved.</span>
+            <span>Tiruchirappalli, Tamil Nadu, India</span>
           </div>
         </div>
       </div>

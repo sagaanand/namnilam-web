@@ -19,11 +19,11 @@
   --color-brand-surface: #141E2B;
   --color-brand-light: #1E293B;
 
-  /* Canvas & Warm Architectural Surfaces */
-  --color-canvas: #FAF9F5;
+  /* Canvas & Light Green Architectural Surfaces */
+  --color-canvas: #F0F7F2;
   --color-surface: #FFFFFF;
-  --color-surface-soft: #F4F3EE;
-  --color-surface-glass: rgba(255, 255, 255, 0.88);
+  --color-surface-soft: #E8F5EC;
+  --color-surface-glass: rgba(240, 247, 242, 0.92);
 
   /* Typography */
   --color-ink: #0F172A;
@@ -337,11 +337,267 @@ input:focus, select:focus, textarea:focus {
   transition: all var(--transition-smooth);
 }
 
-.nav-content {
+/* Split Navbar (Logo in Center, Menu on Left and Right) */
+.navbar-split-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--color-surface-glass);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--color-border);
+  padding: 0;
+}
+
+.nav-split-content {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 80px;
+  height: 82px;
+  position: relative;
+}
+
+.nav-split-group {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex: 1 1 0;
+}
+
+.nav-split-left {
+  justify-content: flex-end;
+  padding-right: 28px;
+}
+
+.nav-split-right {
+  justify-content: flex-start;
+  padding-left: 28px;
+}
+
+/* Centered Brand Box */
+.brand-center-box {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+}
+
+.brand-link-center {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.brand-link-center .brand-logo-img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(197, 160, 89, 0.28));
+  transition: transform var(--transition-fast);
+}
+
+/* Logo-only mode: larger when no text beside it */
+.brand-logo-only {
+  width: 60px !important;
+  height: 60px !important;
+}
+
+.brand-link-center:hover .brand-logo-img {
+  transform: scale(1.04);
+}
+
+.brand-text {
+  display: inline-flex;
+  flex-direction: column;
+  width: fit-content;
+  align-items: stretch;
+}
+
+.brand-title {
+  font-size: 1.38rem;
+  font-weight: 800;
+  color: var(--color-brand-deep);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  white-space: nowrap;
+}
+
+/* Tagline reduced and fitted with the exact same length as Nam Nilam */
+.brand-sub {
+  font-size: 0.49rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-gold-dark);
+  white-space: nowrap;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  line-height: 1.2;
+  margin-top: 2px;
+}
+
+/* Dropdown Menu Architecture */
+.nav-dropdown-container {
+  position: relative;
+  display: inline-block;
+}
+
+.nav-dropdown-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: inherit;
+}
+
+.dropdown-chevron {
+  transition: transform var(--transition-fast);
+}
+
+.dropdown-chevron.rotate {
+  transform: rotate(180deg);
+}
+
+.nav-dropdown-flyout {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-top: 14px;
+  z-index: 120;
+  min-width: 290px;
+  animation: fadeInDown 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -6px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+.nav-dropdown-panel {
+  background-color: var(--color-canvas);
+  border: 1px solid var(--color-gold-border);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 16px 36px rgba(10, 20, 40, 0.16), 0 0 0 1px rgba(197, 160, 89, 0.12);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dropdown-sub-item {
+  display: block;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.dropdown-sub-item:hover, .dropdown-sub-item.active {
+  background-color: rgba(197, 160, 89, 0.1);
+}
+
+.dropdown-sub-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+
+.dropdown-sub-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-brand-deep);
+}
+
+.dropdown-sub-badge {
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 7px;
+  border-radius: 4px;
+  background-color: rgba(16, 185, 129, 0.15);
+  color: #10B981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.dropdown-sub-desc {
+  font-size: 0.76rem;
+  color: var(--color-ink-muted);
+  line-height: 1.35;
+}
+
+/* Mobile Dropdown & Items */
+.mobile-dropdown-group {
+  width: 100%;
+}
+
+.mobile-dropdown-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mobile-sub-menu {
+  background-color: rgba(197, 160, 89, 0.05);
+  border-radius: var(--radius-md);
+  margin: 4px 0 10px 12px;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mobile-sub-item {
+  padding: 10px 14px;
+  text-align: left;
+  border: none;
+  background: none;
+  color: var(--color-ink-light);
+  font-size: 0.88rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  width: 100%;
+}
+
+.mobile-sub-item:hover, .mobile-sub-item:active {
+  color: var(--color-gold-dark);
+  background-color: rgba(197, 160, 89, 0.12);
+}
+
+@media (max-width: 1024px) {
+  .nav-split-content {
+    justify-content: space-between;
+    height: 72px;
+  }
+
+  .nav-split-group {
+    display: none;
+  }
+
+  .brand-center-box {
+    padding: 0;
+  }
+
+  .mobile-toggle-wrapper {
+    display: block;
+  }
 }
 
 .brand-link {
@@ -383,11 +639,12 @@ input:focus, select:focus, textarea:focus {
 }
 
 .nav-item {
-  font-size: 0.9rem;
+  font-size: 0.86rem;
   font-weight: 600;
   color: var(--color-ink-light);
   padding: 6px 2px;
   position: relative;
+  white-space: nowrap;
   transition: color var(--transition-fast);
 }
 
@@ -404,6 +661,43 @@ input:focus, select:focus, textarea:focus {
   height: 2px;
   background: var(--gradient-gold);
   border-radius: 2px;
+}
+
+.nav-item-ai {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 5px;
+  background: linear-gradient(135deg, rgba(223, 186, 115, 0.16) 0%, rgba(197, 160, 89, 0.08) 100%);
+  border: 1px solid rgba(223, 186, 115, 0.4);
+  color: var(--color-brand-deep) !important;
+  font-weight: 800 !important;
+  padding: 4px 10px !important;
+  border-radius: var(--radius-pill);
+  transition: all var(--transition-fast);
+}
+
+.nav-item-ai:hover, .nav-item-ai.active {
+  background: var(--color-brand-deep);
+  color: #DFBA73 !important;
+  border-color: #DFBA73;
+}
+
+.nav-ai-sparkle {
+  color: var(--color-gold-dark);
+  transition: color var(--transition-fast);
+}
+
+.nav-item-ai:hover .nav-ai-sparkle, .nav-item-ai.active .nav-ai-sparkle {
+  color: #DFBA73;
+}
+
+.mobile-ai-item {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(223, 186, 115, 0.08) !important;
+  border: 1px solid rgba(223, 186, 115, 0.25) !important;
+  margin: 4px 0 !important;
 }
 
 /* Mobile Toggle Hamburger Button - strictly hidden on desktop */
@@ -493,6 +787,55 @@ input:focus, select:focus, textarea:focus {
   margin-top: 14px;
   padding: 16px 20px 4px 20px;
   border-top: 1px solid var(--color-border);
+}
+
+/* ── Nam Nilam AI Standalone Button (Desktop) ── */
+.btn-namnilam-ai {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  background: var(--gradient-gold);
+  color: #0B1118;
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(197, 160, 89, 0.35);
+  transition: all var(--transition-smooth);
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-namnilam-ai:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(197, 160, 89, 0.5);
+  color: #0B1118;
+}
+
+.btn-namnilam-ai.active {
+  box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.35), 0 6px 18px rgba(197, 160, 89, 0.4);
+}
+
+/* ── Nam Nilam AI Mobile Featured Button ── */
+.mobile-ai-featured-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-radius: var(--radius-lg);
+  background: var(--gradient-gold);
+  text-decoration: none;
+  margin-bottom: 8px;
+  box-shadow: 0 4px 14px rgba(197, 160, 89, 0.3);
+  transition: all var(--transition-smooth);
+}
+
+.mobile-ai-featured-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(197, 160, 89, 0.4);
 }
 
 /* Breadcrumbs */

@@ -15,28 +15,32 @@ import {
 } from 'lucide-react';
 import { BRAND_INFO } from '../data/ecosystemData';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
+import { SeoHead } from '../components/common/SeoHead';
 import { submitLead } from '../services/api';
 
 export const ContactPage = () => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
-  const [selectedIntent, setSelectedIntent] = useState('Land / Plot Purchase Advisory');
+  const [selectedIntent, setSelectedIntent] = useState('Buy / Invest');
   const [location, setLocation] = useState('Trichy');
+  const [requirement, setRequirement] = useState('');
   const [budget, setBudget] = useState('₹20 Lakhs – ₹40 Lakhs');
   const [message, setMessage] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [waLink, setWaLink] = useState('');
 
   const intentOptions = [
-    'Land / Plot Purchase Advisory',
-    'Property Valuation & Legal Check',
-    'Sell / List My Property',
-    'Real Estate Business Partnership',
-    'Digital Marketing / Tech Services',
-    'Business Automation',
-    'Training / Real Estate Academy',
-    'Other Enquiry'
+    'Buy / Invest',
+    'Property Advisory',
+    'Property Valuation',
+    'Investment Advisory',
+    'Real Estate Business',
+    'Digital Marketing',
+    'Automation',
+    'AI Agents',
+    'Training',
+    'Other'
   ];
 
   const handleSubmit = (e) => {
@@ -56,7 +60,7 @@ export const ContactPage = () => {
       intent_purpose: selectedIntent,
       category: 'Contact Us',
       location,
-      message: `${message}${budget ? ' | Budget: ' + budget : ''}`
+      message: `${requirement ? 'Requirement: ' + requirement + ' | ' : ''}${message}${budget ? ' | Budget: ' + budget : ''}`
     });
 
     // Compose official WhatsApp message
@@ -66,7 +70,10 @@ export const ContactPage = () => {
     text += `*Name:* ${encodeURIComponent(name)}%0A`;
     text += `*Phone:* ${encodeURIComponent(phone)}%0A`;
     text += `*Location:* ${encodeURIComponent(location)}%0A`;
-    if (selectedIntent.includes('Buy') || selectedIntent.includes('Advisory')) {
+    if (requirement) {
+      text += `*Requirement:* ${encodeURIComponent(requirement)}%0A`;
+    }
+    if (selectedIntent.includes('Buy') || selectedIntent.includes('Advisory') || selectedIntent.includes('Investment')) {
       text += `*Budget:* ${encodeURIComponent(budget)}%0A`;
     }
     if (message) {
@@ -81,6 +88,13 @@ export const ContactPage = () => {
 
   return (
     <div>
+      <SeoHead 
+        title="Contact & Advisory Desk | Nam Nilam"
+        description="Connect with Nam Nilam's real estate intelligence, property advisory, and AI automation desk in Tiruchirappalli, Tamil Nadu."
+        canonical="/contact"
+        breadcrumbs={[{ label: 'Contact' }]}
+      />
+
       <Breadcrumbs items={[{ label: 'Contact' }]} />
 
       <section className="page-hero">
@@ -93,7 +107,7 @@ export const ContactPage = () => {
             Talk to Nam Nilam
           </h1>
           <p style={{ fontSize: '1.15rem', color: 'var(--color-ink-muted)', maxWidth: '780px' }}>
-            Tell us what you are trying to achieve. Our advisory and technical team in Tiruchirappalli is here to guide you with clarity and data.
+            Tell us what you are trying to achieve. Our advisory, intelligence, and technical team in Tiruchirappalli is here to guide you with clarity and data.
           </p>
         </div>
       </section>
@@ -112,8 +126,8 @@ export const ContactPage = () => {
               {!submitted ? (
                 <form onSubmit={handleSubmit}>
                   <div style={{ marginBottom: '24px' }}>
-                    <label style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--color-brand-deep)', display: 'block', marginBottom: '12px' }}>
-                      What do you need help with? *
+                    <label style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--color-brand-deep)', display: 'block', marginBottom: '12px' }}>
+                      How can we help you? *
                     </label>
                     <div className="intent-selector-group">
                       {intentOptions.map((opt) => (
@@ -128,6 +142,7 @@ export const ContactPage = () => {
                       ))}
                     </div>
                   </div>
+
 
                   <div className="form-grid-2">
                     <div>
@@ -203,27 +218,53 @@ export const ContactPage = () => {
                     </div>
                   )}
 
+                  <div style={{ marginBottom: '18px' }}>
+                    <label style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--color-ink-muted)', display: 'block', marginBottom: '6px' }}>
+                      Specific Requirement (e.g. 1,200 sq.ft plot, Airport corridor, or CRM setup)
+                    </label>
+                    <input 
+                      type="text" 
+                      placeholder="e.g. 2-cent residential plot in Trichy or WhatsApp bot for my agency"
+                      value={requirement}
+                      onChange={(e) => setRequirement(e.target.value)}
+                      style={{ width: '100%', height: '46px', padding: '0 14px', borderRadius: 'var(--radius-md)' }}
+                    />
+                  </div>
+
                   <div style={{ marginBottom: '24px' }}>
                     <label style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--color-ink-muted)', display: 'block', marginBottom: '6px' }}>
-                      Brief Requirement or Question
+                      Message or Specific Questions
                     </label>
                     <textarea 
                       rows="3"
-                      placeholder="Please mention any specific property requirements, survey questions, or business automation goals..."
+                      placeholder="Please mention any specific timeline, legal questions, or operational challenges..."
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       style={{ width: '100%', padding: '12px 14px', borderRadius: 'var(--radius-md)' }}
                     ></textarea>
                   </div>
 
-                  <button 
-                    type="submit" 
-                    className="btn btn-primary btn-lg"
-                    style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}
-                  >
-                    <Send size={18} />
-                    <span>Submit Enquiry & Connect on WhatsApp</span>
-                  </button>
+                  <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                    <button 
+                      type="submit" 
+                      className="btn btn-primary btn-lg"
+                      style={{ flex: '1 1 200px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}
+                    >
+                      <Send size={18} />
+                      <span>Submit Enquiry</span>
+                    </button>
+
+                    <a
+                      href={`https://wa.me/${BRAND_INFO.whatsappNumber}?text=${encodeURIComponent(`Hello Nam Nilam, I would like to enquire about: ${selectedIntent}.`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-whatsapp btn-lg"
+                      style={{ flex: '1 1 180px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
+                    >
+                      <MessageSquare size={18} />
+                      <span>WhatsApp Us</span>
+                    </a>
+                  </div>
                 </form>
               ) : (
                 <div style={{ textAlign: 'center', padding: '32px 0' }}>
