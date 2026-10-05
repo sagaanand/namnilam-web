@@ -393,7 +393,9 @@ export const HomePage = ({ onOpenEnquiry }) => {
                 <div className="project-img-wrapper" style={{ position: 'relative' }}>
                   <img src={proj.image} alt={proj.title} className="project-img" style={{ height: '210px', width: '100%', objectFit: 'cover' }} />
                   <span className="project-tag">{proj.status}</span>
-                  <span className="project-rate-pill">{proj.rateSqft} / sq.ft</span>
+                  <span className="project-rate-pill">
+                    {proj.status === 'Launching Soon' || proj.rateSqft === 'Launching Soon' ? 'Stay Tuned' : `${proj.rateSqft} / sq.ft`}
+                  </span>
                   {proj.emiAvailable && (
                     <span style={{ position: 'absolute', bottom: '12px', left: '12px', backgroundColor: '#059669', color: '#FFFFFF', padding: '3px 10px', borderRadius: 'var(--radius-pill)', fontSize: '0.72rem', fontWeight: 700 }}>
                       EMI Available

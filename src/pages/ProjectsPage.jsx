@@ -35,17 +35,18 @@ export const ProjectsPage = ({ onOpenEnquiry }) => {
   }, []);
 
   // If specific project slug is provided
-  const seedProject = TRICHY_PROJECTS.find(p => p.slug === slug);
-  const matchedProject = slug ? (projectList.find(p => p.slug === slug) || seedProject) : null;
+  const seedProject = TRICHY_PROJECTS.find(p => p.slug === slug || (p.aliases && p.aliases.includes(slug)));
+  const matchedProject = slug ? (projectList.find(p => p.slug === slug || (p.aliases && p.aliases.includes(slug))) || seedProject) : null;
   const project = matchedProject ? { ...seedProject, ...matchedProject } : null;
 
   if (slug && project) {
     const pTitle = project.title || project.name || 'Project Details';
     const pLocation = project.location || 'Trichy';
     const rawRate = project.rateSqft || project.price_per_sqft || 850;
-    const pRate = typeof rawRate === 'string' && rawRate.startsWith('₹') ? rawRate : `₹${rawRate}`;
+    const isLaunchingSoon = project.status === 'Launching Soon' || rawRate === 'Launching Soon' || rawRate === 'Stay Tuned';
+    const pRate = isLaunchingSoon ? 'Launching Soon' : (typeof rawRate === 'string' && rawRate.startsWith('₹') ? rawRate : `₹${rawRate}`);
     const pPrefix = project.ratePrefix || '';
-    const pImage = project.image || project.image_url || 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80';
+    const pImage = project.image || project.image_url || '/projects/jai-nagar.jpg';
     const pOverview = project.overview || project.description || 'Master-planned approved residential layout in high-growth corridor of Tiruchirappalli.';
     const pWater = project.waterTable || '20 ft (Sweet Ground Water)';
     const pGuideline = project.guidelineValue || 'Fair Market Indexed';
@@ -151,7 +152,8 @@ export const ProjectsPage = ({ onOpenEnquiry }) => {
               <div style={{ padding: '10px 20px', backgroundColor: 'var(--color-surface-soft)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)' }}>
                 <span style={{ fontSize: '0.75rem', color: '#64748B', display: 'block' }}>Base Rate</span>
                 <strong style={{ fontSize: '1.4rem', color: 'var(--color-brand-deep)', fontFamily: 'var(--font-mono)' }}>
-                  {pPrefix}{pRate} <span style={{ fontSize: '0.85rem', fontWeight: 500 }}>/ sq.ft</span>
+                  {isLaunchingSoon ? 'Stay Tuned' : `${pPrefix}${pRate} `}
+                  {!isLaunchingSoon && <span style={{ fontSize: '0.85rem', fontWeight: 500 }}>/ sq.ft</span>}
                 </strong>
               </div>
 
@@ -418,13 +420,14 @@ export const ProjectsPage = ({ onOpenEnquiry }) => {
               const pImg = proj.image_url || proj.image || 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80';
               const pOverview = proj.overview || proj.description || 'Verified residential plots in high-growth corridor of Tiruchirappalli with immediate registration readiness.';
               const pWater = proj.waterTable ? proj.waterTable.split(' ')[0] : 'Potable';
+              const isProjLaunchingSoon = proj.status === 'Launching Soon' || pRate === 'Launching Soon' || pRate === 'Stay Tuned';
 
               return (
                 <div key={proj.slug || proj.id} className="project-card">
                   <div className="project-img-wrapper" style={{ position: 'relative' }}>
                     <img src={pImg} alt={pTitle} className="project-img" />
                     <span className="project-tag">{proj.status || 'Ready to Register'}</span>
-                    <span className="project-rate-pill">{pPrefix}{pRate} / sq.ft</span>
+                    <span className="project-rate-pill">{isProjLaunchingSoon ? 'Stay Tuned' : `${pPrefix}${pRate} / sq.ft`}</span>
 
                     {/* EMI Available Badge */}
                     {proj.emiAvailable && (
