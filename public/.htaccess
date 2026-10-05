@@ -10,17 +10,19 @@
   RewriteCond %{HTTP_HOST} ^(www\.)?namnilam\.com$ [NC]
   RewriteRule ^(.*)$ https://namnilam.com/$1 [L,R=301]
 
-  # If requested from /projects/* and file not found, try /public/projects/*
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteRule ^projects/(.+\.(jpg|jpeg|png|webp|svg))$ public/projects/$1 [L,NC]
-
-  # Allow direct access to existing files, directories, or the api folder
-  RewriteCond %{REQUEST_FILENAME} -f [OR]
-  RewriteCond %{REQUEST_FILENAME} -d [OR]
+  # Allow direct access to api folder
   RewriteCond %{REQUEST_URI} ^/api/
   RewriteRule ^ - [L]
 
-  # Route all other frontend requests to index.html
+  # Allow direct access to existing real files (images, css, js, icons, fonts)
+  RewriteCond %{REQUEST_FILENAME} -f
+  RewriteRule ^ - [L]
+
+  # Rewrite /projects/*.jpg to /public/projects/*.jpg if needed
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^projects/(.+\.(jpg|jpeg|png|webp|svg|ico))$ public/projects/$1 [L,NC]
+
+  # Route all other frontend routes (including /projects, /services, etc.) to index.html
   RewriteRule ^ index.html [L]
 </IfModule>
 
