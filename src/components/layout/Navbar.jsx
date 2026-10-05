@@ -145,6 +145,12 @@ export const Navbar = () => {
                 src="/nam-nilam-logo.png" 
                 alt="Nam Nilam — Real Estate Intelligence & Advisory" 
                 className="brand-logo-img brand-logo-only"
+                onError={(e) => {
+                  if (!e.currentTarget.dataset.fallback) {
+                    e.currentTarget.dataset.fallback = '1';
+                    e.currentTarget.src = '/public/nam-nilam-logo.png';
+                  }
+                }}
               />
             </Link>
           </div>

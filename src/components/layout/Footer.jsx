@@ -22,6 +22,12 @@ export const Footer = () => {
                 src="/nam-nilam-logo.png" 
                 alt="Nam Nilam Emblem" 
                 style={{ width: '52px', height: '52px', borderRadius: '50%', objectFit: 'contain' }}
+                onError={(e) => {
+                  if (!e.currentTarget.dataset.fallback) {
+                    e.currentTarget.dataset.fallback = '1';
+                    e.currentTarget.src = '/public/nam-nilam-logo.png';
+                  }
+                }}
               />
               <div>
                 <h3 style={{ fontSize: '1.35rem', color: '#FFFFFF', lineHeight: 1.1 }}>

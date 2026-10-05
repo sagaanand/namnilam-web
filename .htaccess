@@ -18,9 +18,10 @@
   RewriteCond %{REQUEST_FILENAME} -f
   RewriteRule ^ - [L]
 
-  # Rewrite /projects/*.jpg to /public/projects/*.jpg if needed
+  # If requested static file exists in public/ (e.g., logo, images), serve from public/
   RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteRule ^projects/(.+\.(jpg|jpeg|png|webp|svg|ico))$ public/projects/$1 [L,NC]
+  RewriteCond %{DOCUMENT_ROOT}/public/$1 -f
+  RewriteRule ^(.*)$ public/$1 [L]
 
   # Route all other frontend routes (including /projects, /services, etc.) to index.html
   RewriteRule ^ index.html [L]
