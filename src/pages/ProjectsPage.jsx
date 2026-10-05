@@ -57,8 +57,8 @@ export const ProjectsPage = ({ onOpenEnquiry }) => {
     const pCagr = project.cagr || '+16.5%';
     const pAvailable = project.availablePlots || project.available_units || 12;
     const pTotal = project.totalPlots || project.total_units || 45;
-    const pApproval = project.approvalNo || project.approval || 'DTCP Approved';
-    const pRera = project.reraNumber || 'TN-RERA Sanctioned';
+    const pApproval = project.approval || project.approvalNo || 'DTCP Approved';
+    const pRera = project.reraNumber || null;
     const pPlotSizes = project.plotSizes || '1,200 – 2,400 sq.ft';
 
     const pHighlights = Array.isArray(project.highlights) && project.highlights.length > 0
@@ -85,7 +85,7 @@ export const ProjectsPage = ({ onOpenEnquiry }) => {
       <div>
         <SeoHead 
           title={`${pTitle} - Plots in ${pLocation} Trichy | Nam Nilam`}
-          description={`${pTitle} in ${pLocation}, Trichy. ${pApproval}, ${pRera}. ${pPrefix}${pRate} per sq.ft. Clear documents and immediate patta transfer.`}
+          description={`${pTitle} in ${pLocation}, Trichy. ${pApproval}${pRera ? `, RERA: ${pRera}` : ''}. ${pPrefix}${pRate} per sq.ft. Clear documents and immediate patta transfer.`}
           canonical={`/projects/${project.slug || slug}`}
           schemaType="LocalBusiness"
           schemaData={{
@@ -118,9 +118,11 @@ export const ProjectsPage = ({ onOpenEnquiry }) => {
                 <ShieldCheck size={12} />
                 {pApproval}
               </span>
-              <span className="badge badge-dark">
-                RERA: {pRera}
-              </span>
+              {pRera && (
+                <span className="badge badge-dark">
+                  RERA: {pRera}
+                </span>
+              )}
               {pEmiAvailable && (
                 <span style={{
                   display: 'inline-flex',
@@ -383,7 +385,7 @@ export const ProjectsPage = ({ onOpenEnquiry }) => {
     <div>
       <SeoHead 
         title="Verified Real Estate Projects in Trichy | DTCP & RERA Approved Plots | Nam Nilam"
-        description="Explore 5 verified residential plot projects by Nam Nilam in Tiruchirappalli (Trichy): Jai Nagar, Abirami Nagar, Farm Land, Santha City, and Kasi Nath Nagar."
+        description="Explore 5 verified residential plot projects by Nam Nilam in Tiruchirappalli (Trichy): Jai Nagar, Abirami Nagar, Farm Land, Sentha City, and Kasi Nath Nagar."
         canonical="/projects"
         schemaType="LocalBusiness"
         schemaData={{
@@ -497,7 +499,7 @@ export const ProjectsPage = ({ onOpenEnquiry }) => {
                     }}>
                       <div>
                         <span style={{ color: '#64748B', display: 'block' }}>Approval</span>
-                        <strong>{proj.approval || 'DTCP Approved'}</strong>
+                        <strong>{proj.approval || proj.approvalNo || 'DTCP Approved'}</strong>
                       </div>
                       <div>
                         <span style={{ color: '#64748B', display: 'block' }}>Water Table</span>
