@@ -101,8 +101,8 @@ export const ProjectDetailModal = ({
               <span style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--color-brand)' }}>{property.rateSqft} / sq.ft</span>
             </div>
             <div>
-              <span style={{ fontSize: '0.75rem', color: 'var(--color-ink-muted)', display: 'block' }}>Groundwater Level</span>
-              <span style={{ fontSize: '1.1rem', fontWeight: 700, color: '#0284C7' }}>{property.waterTable}</span>
+              <span style={{ fontSize: '0.75rem', color: 'var(--color-ink-muted)', display: 'block' }}>Availability</span>
+              <span style={{ fontSize: '1.1rem', fontWeight: 700, color: '#059669' }}>{property.plotsAvailable ? `${property.plotsAvailable} Plots` : (property.availablePlots ? `${property.availablePlots} Plots` : 'Available')}</span>
             </div>
             <div>
               <span style={{ fontSize: '0.75rem', color: 'var(--color-ink-muted)', display: 'block' }}>Internal Road</span>

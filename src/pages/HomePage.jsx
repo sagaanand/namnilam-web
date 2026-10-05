@@ -443,11 +443,11 @@ export const HomePage = ({ onOpenEnquiry }) => {
                   }}>
                     <div>
                       <span style={{ color: '#64748B', display: 'block' }}>Approval</span>
-                      <strong>{proj.approvalNo ? proj.approvalNo.split('|')[0].trim() : 'Approved Layout'}</strong>
+                      <strong>{proj.approval || (proj.approvalNo ? proj.approvalNo.split('|')[0].trim() : 'Approved Layout')}</strong>
                     </div>
                     <div>
-                      <span style={{ color: '#64748B', display: 'block' }}>Water Table</span>
-                      <strong style={{ color: '#059669' }}>{proj.waterTable ? proj.waterTable.split(' ')[0] : 'Potable'}</strong>
+                      <span style={{ color: '#64748B', display: 'block' }}>Availability</span>
+                      <strong style={{ color: '#059669' }}>{proj.availablePlots || proj.available_units || 0} Plots Left</strong>
                     </div>
                   </div>
 

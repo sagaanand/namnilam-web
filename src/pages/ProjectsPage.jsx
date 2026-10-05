@@ -48,7 +48,6 @@ export const ProjectsPage = ({ onOpenEnquiry }) => {
     const pPrefix = project.ratePrefix || '';
     const pImage = project.image || project.image_url || '/projects/jai-nagar.jpg';
     const pOverview = project.overview || project.description || 'Master-planned approved residential layout in high-growth corridor of Tiruchirappalli.';
-    const pWater = project.waterTable || '20 ft (Sweet Ground Water)';
     const pGuideline = project.guidelineValue || 'Fair Market Indexed';
     const pGuidelineNote = project.guidelineNote;
     const pEmiAvailable = project.emiAvailable;
@@ -264,10 +263,6 @@ export const ProjectsPage = ({ onOpenEnquiry }) => {
                       <strong>{pPlotSizes}</strong>
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '8px', borderBottom: '1px solid var(--color-border)' }}>
-                      <span style={{ color: 'var(--color-ink-muted)' }}>Groundwater Level:</span>
-                      <strong style={{ color: '#059669' }}>{pWater}</strong>
-                    </div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '8px', borderBottom: '1px solid var(--color-border)' }}>
                       <span style={{ color: 'var(--color-ink-muted)' }}>Govt Guideline:</span>
                       <strong>{pGuideline}</strong>
                     </div>
@@ -430,7 +425,6 @@ export const ProjectsPage = ({ onOpenEnquiry }) => {
               const pPrefix = proj.ratePrefix || '';
               const pImg = proj.image_url || proj.image || 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80';
               const pOverview = proj.overview || proj.description || 'Verified residential plots in high-growth corridor of Tiruchirappalli with immediate registration readiness.';
-              const pWater = proj.waterTable ? proj.waterTable.split(' ')[0] : 'Potable';
               const isProjLaunchingSoon = proj.status === 'Launching Soon' || pRate === 'Launching Soon' || pRate === 'Stay Tuned';
 
               return (
@@ -502,8 +496,8 @@ export const ProjectsPage = ({ onOpenEnquiry }) => {
                         <strong>{proj.approval || proj.approvalNo || 'DTCP Approved'}</strong>
                       </div>
                       <div>
-                        <span style={{ color: '#64748B', display: 'block' }}>Water Table</span>
-                        <strong style={{ color: '#059669' }}>{pWater}</strong>
+                        <span style={{ color: '#64748B', display: 'block' }}>Availability</span>
+                        <strong style={{ color: '#059669' }}>{proj.availablePlots || proj.available_units || 0} Plots Left</strong>
                       </div>
                     </div>
 

@@ -30,7 +30,6 @@ export const TRICHY_PROJECTS = [
     availablePlots: 20,
     approvalNo: "DTCP Approved | RERA Registered",
     reraNumber: "TN/16/Layout/0512/2024",
-    waterTable: "25 ft (Sweet Drinking Water)",
     image: "/projects/jai-nagar.jpg",
     overview: "Jai Nagar is a prime DTCP-approved layout strategically situated on the Chennai-Trichy National Highway (NH-45) near Siruganur. Offering rapid capital growth, immediate registration readiness, and sweet Kaveri-basin drinking water at 25 feet.",
     highlights: [
@@ -72,7 +71,6 @@ export const TRICHY_PROJECTS = [
     approvalNo: "Approved Layout with Clear Title",
     reraNumber: "TN/16/Layout/0788/2024",
     guidelineValue: "₹220 / sq.ft",
-    waterTable: "20 ft (Perennial Aquifer)",
     image: "/projects/abirami-nagar.jpg",
     overview: "Abirami Nagar provides highly affordable, vetted residential plots in Thirupattur, Trichy. With an attractive rate of ₹350/sq.ft and easy EMI options, this layout is ideal for early plot investment and independent home construction.",
     highlights: [
@@ -111,7 +109,6 @@ export const TRICHY_PROJECTS = [
     approvalNo: "Verified Agricultural Title Deeds",
     reraNumber: "Agro Heritage Verified",
     guidelineValue: "₹65 / sq.ft",
-    waterTable: "30 ft (Borewell & Natural Aquifer)",
     image: "/projects/farm-land.jpg",
     overview: "Farm Land at Koonalai off the Chennai National Highway (NH-45) offers fertile agricultural plots designed for organic farming, weekend retreat farmhouses, and strategic land-banking at an unbeatable starting rate of ₹140/sq.ft.",
     highlights: [
@@ -152,7 +149,6 @@ export const TRICHY_PROJECTS = [
     approvalNo: "DTCP Approved Only",
     reraNumber: null,
     guidelineValue: "₹240 / sq.ft",
-    waterTable: "26 ft (Deep Aquifer)",
     image: "/projects/sentha-city.jpg",
     overview: "Sentha City is a well-planned gated community layout situated in Aayakudi, Trichy. Offered at ₹400/sq.ft, this community features wide internal roads, grand entrance gateway, and quick access to educational institutions and religious centers.",
     highlights: [
@@ -192,7 +188,6 @@ export const TRICHY_PROJECTS = [
     approvalNo: "Approved Layout with Valid Sub-Division",
     reraNumber: "TN/16/Layout/0631/2024",
     guidelineValue: "₹280 / sq.ft",
-    waterTable: "22 ft (Sweet Aquifer)",
     image: "/projects/kasinath-nagar.jpg",
     overview: "Kasinath Nagar is a tremendous upcoming residential project in Thirupattur, Trichy. Stay tuned for official plot launch, booking opportunities, and introductory pricing.",
     highlights: [
