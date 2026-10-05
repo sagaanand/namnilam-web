@@ -189,6 +189,15 @@ export const ProjectsPage = ({ onOpenEnquiry }) => {
                     src={pImage} 
                     alt={pTitle} 
                     style={{ width: '100%', height: '420px', objectFit: 'cover' }} 
+                    onError={(e) => {
+                      if (!e.currentTarget.dataset.fallback) {
+                        e.currentTarget.dataset.fallback = '1';
+                        const cur = e.currentTarget.src;
+                        e.currentTarget.src = cur.includes('/public/') 
+                          ? cur.replace('/public/projects/', '/projects/') 
+                          : cur.replace('/projects/', '/public/projects/');
+                      }
+                    }}
                   />
                 </div>
 
@@ -425,7 +434,20 @@ export const ProjectsPage = ({ onOpenEnquiry }) => {
               return (
                 <div key={proj.slug || proj.id} className="project-card">
                   <div className="project-img-wrapper" style={{ position: 'relative' }}>
-                    <img src={pImg} alt={pTitle} className="project-img" />
+                    <img 
+                      src={pImg} 
+                      alt={pTitle} 
+                      className="project-img" 
+                      onError={(e) => {
+                        if (!e.currentTarget.dataset.fallback) {
+                          e.currentTarget.dataset.fallback = '1';
+                          const cur = e.currentTarget.src;
+                          e.currentTarget.src = cur.includes('/public/') 
+                            ? cur.replace('/public/projects/', '/projects/') 
+                            : cur.replace('/projects/', '/public/projects/');
+                        }
+                      }}
+                    />
                     <span className="project-tag">{proj.status || 'Ready to Register'}</span>
                     <span className="project-rate-pill">{isProjLaunchingSoon ? 'Stay Tuned' : `${pPrefix}${pRate} / sq.ft`}</span>
 

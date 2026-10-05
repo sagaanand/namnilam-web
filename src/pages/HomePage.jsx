@@ -391,7 +391,21 @@ export const HomePage = ({ onOpenEnquiry }) => {
             {TRICHY_PROJECTS.map((proj) => (
               <div key={proj.slug} className="project-card">
                 <div className="project-img-wrapper" style={{ position: 'relative' }}>
-                  <img src={proj.image} alt={proj.title} className="project-img" style={{ height: '210px', width: '100%', objectFit: 'cover' }} />
+                  <img 
+                    src={proj.image} 
+                    alt={proj.title} 
+                    className="project-img" 
+                    style={{ height: '210px', width: '100%', objectFit: 'cover' }} 
+                    onError={(e) => {
+                      if (!e.currentTarget.dataset.fallback) {
+                        e.currentTarget.dataset.fallback = '1';
+                        const cur = e.currentTarget.src;
+                        e.currentTarget.src = cur.includes('/public/') 
+                          ? cur.replace('/public/projects/', '/projects/') 
+                          : cur.replace('/projects/', '/public/projects/');
+                      }
+                    }}
+                  />
                   <span className="project-tag">{proj.status}</span>
                   <span className="project-rate-pill">
                     {proj.status === 'Launching Soon' || proj.rateSqft === 'Launching Soon' ? 'Stay Tuned' : `${proj.rateSqft} / sq.ft`}

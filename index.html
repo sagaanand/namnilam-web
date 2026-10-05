@@ -32,6 +32,17 @@
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <script type="module">
+      try {
+        await import('/src/main.jsx');
+      } catch (err) {
+        // Fallback for Hostinger Git direct static deployment without dev server
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = '/assets/index-Br34Vj9F.css';
+        document.head.appendChild(link);
+        await import('/assets/index-BskN1Ahf.js');
+      }
+    </script>
   </body>
 </html>
