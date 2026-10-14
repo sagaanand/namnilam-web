@@ -1,35 +1,88 @@
 /**
  * Nam Nilam Unified API Client Service
  * Connects frontend forms and Admin dashboard to Hostinger PHP backend
- * with automatic attribution capture, resilience for local dev, and local fallback cache.
+ * with server-side authentication, rate limiting, and secure authorization headers.
  */
 
 import { TRICHY_PROJECTS } from '../data/ecosystemData';
+import { VERIFIED_PROPERTIES } from '../data/propertiesData';
 
 const API_BASE = '/api';
 
 /**
+ * Administrative Token Helpers (sessionStorage only)
+ */
+export const getAdminToken = () => {
+  if (typeof window === 'undefined') return null;
+  try {
+    return sessionStorage.getItem('nam_nilam_admin_token') || null;
+  } catch {
+    return null;
+  }
+};
+
+export const setAdminToken = (token) => {
+  if (typeof window === 'undefined') return;
+  try {
+    sessionStorage.setItem('nam_nilam_admin_token', token);
+  } catch {
+    //
+  }
+};
+
+export const clearAdminToken = () => {
+  if (typeof window === 'undefined') return;
+  try {
+    sessionStorage.removeItem('nam_nilam_admin_token');
+  } catch {
+    //
+  }
+};
+
+const getAuthHeaders = () => {
+  const token = getAdminToken();
+  const headers = { 'Content-Type': 'application/json' };
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`;
+  }
+  return headers;
+};
+
+/**
  * Safe JSON fetch helper
- * Handles environments where backend is unreachable or local dev servers serve raw PHP files
+ * Handles environments where backend is unreachable, unauthorized, or local dev servers serve raw PHP files
  */
 const safeJsonFetch = async (url, options = {}) => {
   try {
     const res = await fetch(url, options);
-    if (!res.ok) return null;
     const text = await res.text();
     const trimmed = text.trim();
-    // If response is raw PHP code or HTML, it is not a running JSON backend API (e.g. Vite dev server serving raw files)
+
+    // If response is raw PHP code or HTML (e.g. Vite dev server serving raw files or HTML error)
     if (trimmed.startsWith('<?php') || trimmed.startsWith('<!DOCTYPE') || trimmed.startsWith('<html') || trimmed.startsWith('<')) {
       return null;
     }
-    return JSON.parse(text);
+
+    let parsed = null;
+    try {
+      parsed = JSON.parse(text);
+    } catch {
+      return null;
+    }
+
+    if (res.status === 401 || res.status === 403) {
+      return { ...parsed, unauthorized: true, status: res.status };
+    }
+
+    return parsed;
   } catch {
     return null;
   }
 };
 
 /**
- * Capture full attribution metadata for any lead
+ * Capture public customer enquiry lead
+ * Preserves public submissions without requiring authentication
  */
 export const submitLead = async (leadData) => {
   const payload = {
@@ -46,20 +99,6 @@ export const submitLead = async (leadData) => {
     timestamp: new Date().toISOString()
   };
 
-  // Always save a local copy in browser cache for offline reliability
-  try {
-    const existing = JSON.parse(localStorage.getItem('nam_nilam_leads') || '[]');
-    const localLead = {
-      id: 'lead_' + Date.now(),
-      created_at: new Date().toISOString(),
-      status: 'new',
-      ...payload
-    };
-    localStorage.setItem('nam_nilam_leads', JSON.stringify([localLead, ...existing]));
-  } catch (e) {
-    console.warn('Local lead cache error', e);
-  }
-
   // Submit to Hostinger backend
   try {
     const result = await safeJsonFetch(`${API_BASE}/leads.php`, {
@@ -71,101 +110,120 @@ export const submitLead = async (leadData) => {
     if (result && result.success) {
       return result;
     }
-  } catch (err) {
-    // Silently proceed with local cache
+    if (result && result.error) {
+      return result;
+    }
+  } catch {
+    // Proceed to graceful response
   }
 
+  // Graceful response if backend is offline/unreachable
   return { success: true, localOnly: true, data: payload };
 };
 
 /**
  * Fetch all leads for Admin Dashboard with optional filters
+ * Strictly requires server authorization; unauthenticated callers are rejected
  */
 export const getLeads = async (filters = {}) => {
+  const token = getAdminToken();
+  if (!token) {
+    return {
+      success: false,
+      unauthorized: true,
+      error: 'Authentication required. Please sign in to the Admin Dashboard.'
+    };
+  }
+
   try {
     const params = new URLSearchParams();
     if (filters.form_type && filters.form_type !== 'all') params.append('form_type', filters.form_type);
     if (filters.status && filters.status !== 'all') params.append('status', filters.status);
     if (filters.search) params.append('search', filters.search);
 
-    const data = await safeJsonFetch(`${API_BASE}/leads.php?${params.toString()}`);
+    const data = await safeJsonFetch(`${API_BASE}/leads.php?${params.toString()}`, {
+      method: 'GET',
+      headers: getAuthHeaders()
+    });
+
+    if (data && data.unauthorized) {
+      clearAdminToken();
+      return { success: false, unauthorized: true, error: 'Session expired. Please log in again.' };
+    }
+
     if (data && data.success && data.leads) {
       return data;
     }
-  } catch (err) {
-    // Proceed to fallback
+  } catch {
+    //
   }
 
-  // Fallback to local storage
-  const localLeads = JSON.parse(localStorage.getItem('nam_nilam_leads') || '[]');
   return {
-    success: true,
-    localOnly: true,
-    metrics: {
-      total_leads: localLeads.length,
-      new_leads: localLeads.filter(l => l.status === 'new').length,
-      by_form: {},
-      by_source_page: {}
-    },
-    leads: localLeads
+    success: false,
+    error: 'Failed to retrieve leads from server.'
   };
 };
 
 /**
- * Update lead status in backend and local cache
+ * Update lead status in backend
+ * Requires admin authorization
  */
 export const updateLeadStatus = async (id, status, admin_notes = '') => {
+  const token = getAdminToken();
+  if (!token) {
+    return { success: false, unauthorized: true, error: 'Authentication required.' };
+  }
+
   try {
     const resData = await safeJsonFetch(`${API_BASE}/leads.php`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: getAuthHeaders(),
       body: JSON.stringify({ action: 'update_status', id, status, admin_notes })
     });
+    if (resData && resData.unauthorized) {
+      clearAdminToken();
+      return { success: false, unauthorized: true, error: 'Session expired.' };
+    }
     if (resData && resData.success) return resData;
-  } catch (err) {
-    // Proceed to fallback
+    if (resData && resData.error) return resData;
+  } catch {
+    //
   }
 
-  // Fallback update local storage
-  try {
-    const existing = JSON.parse(localStorage.getItem('nam_nilam_leads') || '[]');
-    const updated = existing.map(l => l.id === id ? { ...l, status, admin_notes } : l);
-    localStorage.setItem('nam_nilam_leads', JSON.stringify(updated));
-  } catch (e) {
-    console.warn(e);
-  }
-
-  return { success: true };
+  return { success: false, error: 'Failed to update lead status.' };
 };
 
 /**
  * Delete a lead
+ * Requires admin authorization
  */
 export const deleteLead = async (id) => {
+  const token = getAdminToken();
+  if (!token) {
+    return { success: false, unauthorized: true, error: 'Authentication required.' };
+  }
+
   try {
     const resData = await safeJsonFetch(`${API_BASE}/leads.php`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: getAuthHeaders(),
       body: JSON.stringify({ action: 'delete', id })
     });
+    if (resData && resData.unauthorized) {
+      clearAdminToken();
+      return { success: false, unauthorized: true, error: 'Session expired.' };
+    }
     if (resData && resData.success) return resData;
-  } catch (err) {
-    // Proceed to fallback
+    if (resData && resData.error) return resData;
+  } catch {
+    //
   }
 
-  try {
-    const existing = JSON.parse(localStorage.getItem('nam_nilam_leads') || '[]');
-    const filtered = existing.filter(l => l.id !== id);
-    localStorage.setItem('nam_nilam_leads', JSON.stringify(filtered));
-  } catch (e) {
-    console.warn(e);
-  }
-
-  return { success: true };
+  return { success: false, error: 'Failed to delete lead.' };
 };
 
 /**
- * Fetch projects from backend (with default static fallback)
+ * Fetch projects from backend (Public endpoint)
  */
 export const getProjects = async (slug = '') => {
   try {
@@ -175,15 +233,8 @@ export const getProjects = async (slug = '') => {
       if (slug && data.project) return data.project;
       if (data.projects && data.projects.length > 0) return data.projects;
     }
-  } catch (err) {
-    // Fallback to cache
-  }
-
-  // Fallback to local storage or ecosystem seed data
-  const localProjects = JSON.parse(localStorage.getItem('nam_nilam_custom_projects') || 'null');
-  if (localProjects && localProjects.length > 0) {
-    if (slug) return localProjects.find(p => p.slug === slug) || null;
-    return localProjects;
+  } catch {
+    // Fallback to static seed data
   }
 
   if (slug) return TRICHY_PROJECTS.find(p => p.slug === slug) || null;
@@ -192,100 +243,226 @@ export const getProjects = async (slug = '') => {
 
 /**
  * Create a new project
+ * Requires admin authorization
  */
 export const createProject = async (projectData) => {
+  const token = getAdminToken();
+  if (!token) {
+    return { success: false, unauthorized: true, error: 'Authentication required.' };
+  }
+
   try {
     const resData = await safeJsonFetch(`${API_BASE}/projects.php`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: getAuthHeaders(),
       body: JSON.stringify(projectData)
     });
+    if (resData && resData.unauthorized) {
+      clearAdminToken();
+      return { success: false, unauthorized: true, error: 'Session expired.' };
+    }
     if (resData && resData.success) return resData;
-  } catch (err) {
-    // Fallback to local storage
+    if (resData && resData.error) return resData;
+  } catch {
+    //
   }
 
-  // Save to local storage
-  const existing = JSON.parse(localStorage.getItem('nam_nilam_custom_projects') || '[]');
-  const newProject = {
-    id: 'proj_' + Date.now(),
-    ...projectData,
-    slug: projectData.slug || projectData.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')
-  };
-  localStorage.setItem('nam_nilam_custom_projects', JSON.stringify([newProject, ...existing]));
-  return { success: true, localOnly: true, project: newProject };
+  return { success: false, error: 'Failed to create project.' };
 };
 
 /**
  * Update an existing project
+ * Requires admin authorization
  */
-export const updateProject = async (id, projectData) => {
+export const updateProject = async (idOrData, projectData = {}) => {
+  const token = getAdminToken();
+  if (!token) {
+    return { success: false, unauthorized: true, error: 'Authentication required.' };
+  }
+
+  const payload = typeof idOrData === 'object' ? { ...idOrData, ...projectData } : { id: idOrData, ...projectData };
+
   try {
     const resData = await safeJsonFetch(`${API_BASE}/projects.php`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action: 'update', id, ...projectData })
+      headers: getAuthHeaders(),
+      body: JSON.stringify({ action: 'update', ...payload })
     });
+    if (resData && resData.unauthorized) {
+      clearAdminToken();
+      return { success: false, unauthorized: true, error: 'Session expired.' };
+    }
     if (resData && resData.success) return resData;
-  } catch (err) {
-    // Fallback to local storage
+    if (resData && resData.error) return resData;
+  } catch {
+    //
   }
 
-  const existing = JSON.parse(localStorage.getItem('nam_nilam_custom_projects') || '[]');
-  const updated = existing.map(p => p.id === id ? { ...p, ...projectData } : p);
-  localStorage.setItem('nam_nilam_custom_projects', JSON.stringify(updated));
-  return { success: true, localOnly: true };
+  return { success: false, error: 'Failed to update project.' };
 };
 
 /**
  * Delete a project
+ * Requires admin authorization
  */
 export const deleteProject = async (id) => {
+  const token = getAdminToken();
+  if (!token) {
+    return { success: false, unauthorized: true, error: 'Authentication required.' };
+  }
+
   try {
     const resData = await safeJsonFetch(`${API_BASE}/projects.php`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: getAuthHeaders(),
       body: JSON.stringify({ action: 'delete', id })
     });
+    if (resData && resData.unauthorized) {
+      clearAdminToken();
+      return { success: false, unauthorized: true, error: 'Session expired.' };
+    }
     if (resData && resData.success) return resData;
-  } catch (err) {
-    // Fallback to local storage
+    if (resData && resData.error) return resData;
+  } catch {
+    //
   }
 
-  const existing = JSON.parse(localStorage.getItem('nam_nilam_custom_projects') || '[]');
-  const filtered = existing.filter(p => p.id !== id);
-  localStorage.setItem('nam_nilam_custom_projects', JSON.stringify(filtered));
-  return { success: true, localOnly: true };
+  return { success: false, error: 'Failed to delete project.' };
 };
 
 /**
- * Verify Admin Passcode
+ * Fetch verified properties from backend (Public endpoint)
+ * Gracefully falls back to VERIFIED_PROPERTIES on static/offline/dev
+ */
+export const getProperties = async (slug = '', filters = {}) => {
+  try {
+    let url = `${API_BASE}/properties.php`;
+    const params = new URLSearchParams();
+    if (slug) params.append('slug', slug);
+    if (filters.locality) params.append('locality', filters.locality);
+    if (filters.property_type) params.append('property_type', filters.property_type);
+    if (filters.project_id) params.append('project_id', filters.project_id);
+
+    const qs = params.toString();
+    if (qs) url += `?${qs}`;
+
+    const data = await safeJsonFetch(url);
+    if (data) {
+      if (slug && data.property) return data.property;
+      if (data.properties && Array.isArray(data.properties) && data.properties.length > 0) {
+        return data.properties;
+      }
+    }
+  } catch {
+    // Fallback to static verified inventory
+  }
+
+  if (slug) {
+    return VERIFIED_PROPERTIES.find(p => p.slug === slug) || null;
+  }
+
+  let list = [...VERIFIED_PROPERTIES];
+  if (filters.locality) {
+    list = list.filter(p => p.locality.toLowerCase().includes(filters.locality.toLowerCase()));
+  }
+  if (filters.property_type) {
+    list = list.filter(p => p.property_type.toLowerCase() === filters.property_type.toLowerCase());
+  }
+  if (filters.project_id) {
+    list = list.filter(p => p.project_id === filters.project_id || p.project_slug === filters.project_id);
+  }
+  return list;
+};
+
+/**
+ * Save / Create / Update property listing
+ * Requires admin authorization
+ */
+export const saveProperty = async (propertyData) => {
+  const token = getAdminToken();
+  if (!token) {
+    return { success: false, unauthorized: true, error: 'Authentication required.' };
+  }
+
+  try {
+    const resData = await safeJsonFetch(`${API_BASE}/properties.php`, {
+      method: 'POST',
+      headers: getAuthHeaders(),
+      body: JSON.stringify(propertyData)
+    });
+    if (resData && resData.unauthorized) {
+      clearAdminToken();
+      return { success: false, unauthorized: true, error: 'Session expired.' };
+    }
+    if (resData && resData.success) return resData;
+    if (resData && resData.error) return resData;
+  } catch {
+    //
+  }
+
+  return { success: false, error: 'Failed to save property listing.' };
+};
+
+/**
+ * Delete a property listing
+ * Requires admin authorization
+ */
+export const deleteProperty = async (id) => {
+  const token = getAdminToken();
+  if (!token) {
+    return { success: false, unauthorized: true, error: 'Authentication required.' };
+  }
+
+  try {
+    const resData = await safeJsonFetch(`${API_BASE}/properties.php`, {
+      method: 'POST',
+      headers: getAuthHeaders(),
+      body: JSON.stringify({ action: 'delete', id })
+    });
+    if (resData && resData.unauthorized) {
+      clearAdminToken();
+      return { success: false, unauthorized: true, error: 'Session expired.' };
+    }
+    if (resData && resData.success) return resData;
+    if (resData && resData.error) return resData;
+  } catch {
+    //
+  }
+
+  return { success: false, error: 'Failed to delete property listing.' };
+};
+
+/**
+ * Authenticate Admin with Server
+ * Authorization decisions are exclusively made by server-side /api/auth.php
+ * No client-side PIN hardcoding or bypass fallback
  */
 export const loginAdmin = async (passcode) => {
+  if (!passcode || !passcode.trim()) {
+    return { success: false, error: 'Passcode is required.' };
+  }
+
   try {
     const data = await safeJsonFetch(`${API_BASE}/auth.php`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ passcode })
+      body: JSON.stringify({ passcode: passcode.trim() })
     });
+
     if (data && data.success && data.token) {
-      sessionStorage.setItem('nam_nilam_admin_token', data.token);
+      setAdminToken(data.token);
       return data;
     }
-  } catch (err) {
-    // Fallback to local pin check
+
+    if (data && data.error) {
+      return { success: false, error: data.error };
+    }
+  } catch {
+    //
   }
 
-  // Local PIN check fallback: '97876' or 'namnilam@2026' or 'admin123'
-  if (passcode === '97876' || passcode === 'namnilam@2026' || passcode === 'admin123') {
-    const token = 'nn_adm_local_' + Date.now();
-    sessionStorage.setItem('nam_nilam_admin_token', token);
-    return {
-      success: true,
-      token,
-      user: { username: 'admin', role: 'Super Administrator' }
-    };
-  }
-
-  return { success: false, error: 'Invalid passcode' };
+  return {
+    success: false,
+    error: 'Authentication failed. Please verify network connectivity and administrative credentials.'
+  };
 };

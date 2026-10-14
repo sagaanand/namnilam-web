@@ -1,5 +1,47 @@
+# Nam Nilam Search Engine & AI Crawler Policy
+# https://namnilam.com
+
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /api/
 
-# Sitemaps
+# Search Engine Specific Directives
+User-agent: Googlebot
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+User-agent: Bingbot
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+User-agent: Applebot
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+# AI Search & Retrieval Crawlers (Discovery & Citations)
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+User-agent: Claude-Web
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+# XML Sitemap
 Sitemap: https://namnilam.com/sitemap.xml

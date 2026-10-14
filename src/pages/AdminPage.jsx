@@ -7,13 +7,11 @@ import {
   FolderKanban, 
   Plus, 
   Search, 
-  Filter, 
   Download, 
   Phone, 
   MessageSquare, 
   Trash2, 
   Edit3, 
-  ExternalLink, 
   Clock, 
   MapPin, 
   Layers, 
@@ -93,7 +91,11 @@ export const AdminPage = () => {
       status: leadFilterStatus,
       search: leadSearchQuery
     });
-    if (res && res.leads) {
+    if (res && res.unauthorized) {
+      sessionStorage.removeItem('nam_nilam_admin_token');
+      setIsAuthenticated(false);
+      setAuthError('Session expired or unauthorized. Please enter your admin PIN.');
+    } else if (res && res.leads) {
       setLeads(res.leads);
     }
     setIsLoadingLeads(false);
@@ -142,13 +144,25 @@ export const AdminPage = () => {
   // -------------------------------------------------------------
 
   const handleStatusChange = async (leadId, newStatus) => {
-    await updateLeadStatus(leadId, newStatus);
+    const res = await updateLeadStatus(leadId, newStatus);
+    if (res && res.unauthorized) {
+      sessionStorage.removeItem('nam_nilam_admin_token');
+      setIsAuthenticated(false);
+      setAuthError('Session expired. Please log in again.');
+      return;
+    }
     setLeads(prev => prev.map(l => l.id === leadId ? { ...l, status: newStatus } : l));
   };
 
   const handleDeleteLead = async (leadId) => {
     if (window.confirm('Are you sure you want to delete this lead?')) {
-      await deleteLead(leadId);
+      const res = await deleteLead(leadId);
+      if (res && res.unauthorized) {
+        sessionStorage.removeItem('nam_nilam_admin_token');
+        setIsAuthenticated(false);
+        setAuthError('Session expired. Please log in again.');
+        return;
+      }
       setLeads(prev => prev.filter(l => l.id !== leadId));
     }
   };
@@ -227,10 +241,22 @@ export const AdminPage = () => {
     }
 
     if (editingProject) {
-      await updateProject(projectFormData);
+      const res = await updateProject(projectFormData);
+      if (res && res.unauthorized) {
+        sessionStorage.removeItem('nam_nilam_admin_token');
+        setIsAuthenticated(false);
+        setAuthError('Session expired. Please log in again.');
+        return;
+      }
       setProjects(prev => prev.map(p => p.id === projectFormData.id ? { ...p, ...projectFormData } : p));
     } else {
-      await createProject(projectFormData);
+      const res = await createProject(projectFormData);
+      if (res && res.unauthorized) {
+        sessionStorage.removeItem('nam_nilam_admin_token');
+        setIsAuthenticated(false);
+        setAuthError('Session expired. Please log in again.');
+        return;
+      }
       setProjects(prev => [projectFormData, ...prev]);
     }
 
@@ -239,7 +265,13 @@ export const AdminPage = () => {
 
   const handleDeleteProject = async (id, title) => {
     if (window.confirm(`Are you sure you want to delete project: "${title}"?`)) {
-      await deleteProject(id);
+      const res = await deleteProject(id);
+      if (res && res.unauthorized) {
+        sessionStorage.removeItem('nam_nilam_admin_token');
+        setIsAuthenticated(false);
+        setAuthError('Session expired. Please log in again.');
+        return;
+      }
       setProjects(prev => prev.filter(p => p.id !== id));
     }
   };

@@ -1,29 +1,59 @@
 # Nam Nilam Hostinger Apache Configuration
-# Enables React Router SPA navigation and direct API execution
+# Phase 1 Security Hardened + Phase 2 SEO & Pre-rendering
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
 
-  # Redirect HTTP to HTTPS for namnilam.com
+  # 1. Canonical HTTPS Enforcement
   RewriteCond %{HTTPS} off
   RewriteCond %{HTTP_HOST} ^(www\.)?namnilam\.com$ [NC]
   RewriteRule ^(.*)$ https://namnilam.com/$1 [L,R=301]
 
-  # Allow direct access to api folder
+  # 2. Canonical Hostname (www to non-www)
+  RewriteCond %{HTTP_HOST} ^www\.namnilam\.com$ [NC]
+  RewriteRule ^(.*)$ https://namnilam.com/$1 [L,R=301]
+
+  # 3. Security: Block hidden, env, sql, database, log, and shell files
+  <FilesMatch "^\.env|(\.(sql|sqlite|log|ini|env|bak|sh))$">
+    <IfModule mod_authz_core.c>
+      Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+      Order allow,deny
+      Deny from all
+    </IfModule>
+  </FilesMatch>
+
+  # 4. Pass Authorization header to PHP in FastCGI / Apache environments
+  SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
+  RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+  # 5. Allow direct execution of API endpoints
   RewriteCond %{REQUEST_URI} ^/api/
   RewriteRule ^ - [L]
 
-  # Allow direct access to existing real files (images, css, js, icons, fonts)
+  # 6. Allow direct access to existing real files (css, js, images, svg, icons)
   RewriteCond %{REQUEST_FILENAME} -f
   RewriteRule ^ - [L]
 
-  # If requested static file exists in public/ (e.g., logo, images), serve from public/
+  # 7. Allow direct access to pre-rendered static route directories with index.html
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteCond %{REQUEST_FILENAME}/index.html -f
+  RewriteRule ^ - [L]
+
+  # 8. Dynamic Crawler Fallback for new MySQL properties if static file does not exist
+  RewriteCond %{HTTP_USER_AGENT} (googlebot|bingbot|baiduspider|yandex|duckduckbot|slurp|twitterbot|facebookexternalhit|linkedinbot|embedly|quora|outbrain|pinterest|vkShare|w3c_validator|whatsapp|oai-searchbot|chatgpt-user|claudebot|perplexitybot) [NC]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_URI} ^/properties/([^/]+)/?$ [NC]
+  RewriteRule ^properties/([^/]+)/?$ api/prerender.php?slug=$1 [L,QSA]
+
+  # 9. Fallback to public/ asset if requested file exists there
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{DOCUMENT_ROOT}/public/$1 -f
   RewriteRule ^(.*)$ public/$1 [L]
 
-  # Route all other frontend routes (including /projects, /services, etc.) to index.html
+  # 10. SPA Client-Side Fallback for all other routes
   RewriteRule ^ index.html [L]
 </IfModule>
 
@@ -35,4 +65,6 @@
   Header set X-Frame-Options "SAMEORIGIN"
   # Enable XSS protection
   Header set X-XSS-Protection "1; mode=block"
+  # Referrer policy
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
 </IfModule>

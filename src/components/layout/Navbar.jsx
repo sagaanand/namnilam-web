@@ -41,11 +41,11 @@ export const Navbar = () => {
     }
   ];
 
-  // Right Menu Items (3 Items: Academy, Nam Nilam AI, Projects)
+  // Right Menu Items (3 Items: Projects, Academy, Nam Nilam AI)
   const rightLinks = [
+    { name: 'Projects', path: '/projects' },
     { name: 'Academy', path: '/academy' },
-    { name: 'Nam Nilam AI', path: '/ai', isAi: true },
-    { name: 'Projects', path: '/projects' }
+    { name: 'Nam Nilam AI', path: '/ai', isAi: true }
   ];
 
   const handleNav = (path) => {

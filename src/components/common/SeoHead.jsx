@@ -10,12 +10,13 @@ export const SeoHead = ({
   image = '/nam-nilam-logo.png',
   schemaData = null,
   breadcrumbs = null,
+  noindex = false,
   faqs = null
 }) => {
   const location = useLocation();
   const siteUrl = 'https://namnilam.com';
   const currentPath = canonical || location.pathname;
-  const fullUrl = `${siteUrl}${currentPath}`;
+  const fullUrl = currentPath.startsWith('http') ? currentPath : `${siteUrl}${currentPath}`;
   const fullImageUrl = image.startsWith('http') ? image : `${siteUrl}${image}`;
 
   const defaultDescription = 'Nam Nilam — Real Estate Intelligence, Advisory, Education and Digital Transformation for the real estate ecosystem across Tamil Nadu.';
@@ -40,7 +41,7 @@ export const SeoHead = ({
 
     // 3. Set standard meta tags
     setMeta('description', finalDescription);
-    setMeta('robots', 'index, follow');
+    setMeta('robots', noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
 
     // 4. Set Open Graph tags
     setMeta('og:title', finalTitle, true);

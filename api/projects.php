@@ -1,9 +1,13 @@
 <?php
 /**
  * Nam Nilam Projects Management API (CRUD)
+ * Public project discovery & listing.
+ * Project creation, updates, and deletion protected by admin authentication.
  */
 
 require_once __DIR__ . '/db.php';
+require_once __DIR__ . '/auth_helper.php';
+
 $pdo = getDatabaseConnection();
 
 $defaultProjects = [
@@ -112,10 +116,10 @@ $defaultProjects = [
 $method = $_SERVER['REQUEST_METHOD'];
 
 // -------------------------------------------------------------
-// GET: List all projects
+// GET: List all projects OR single project by slug (PUBLIC)
 // -------------------------------------------------------------
 if ($method === 'GET') {
-    $slug = isset($_GET['slug']) ? trim($_GET['slug']) : '';
+    $slug = isset($_GET['slug']) ? trim((string)$_GET['slug']) : '';
 
     if ($pdo) {
         try {
@@ -136,7 +140,7 @@ if ($method === 'GET') {
                 }
             }
         } catch (Throwable $e) {
-            // Fallback to default
+            // Fallback to default in-memory list
         }
     }
 
@@ -161,19 +165,26 @@ if ($method === 'GET') {
 }
 
 // -------------------------------------------------------------
-// POST: Create, Update, or Delete
+// POST: Create, Update, or Delete (PROTECTED — Admin Token Required)
 // -------------------------------------------------------------
 if ($method === 'POST') {
+    requireAdminAuth();
+
     $rawInput = file_get_contents('php://input');
     $data = json_decode($rawInput, true);
     if (!$data) $data = $_POST;
 
-    $action = isset($data['action']) ? $data['action'] : 'create';
+    $action = isset($data['action']) ? trim((string)$data['action']) : 'create';
 
     if ($pdo) {
         try {
             if ($action === 'delete') {
-                $id = isset($data['id']) ? trim($data['id']) : '';
+                $id = isset($data['id']) ? trim((string)$data['id']) : '';
+                if (empty($id)) {
+                    http_response_code(400);
+                    echo json_encode(['success' => false, 'error' => 'Project ID is required for deletion.']);
+                    exit();
+                }
                 $stmt = $pdo->prepare("DELETE FROM projects WHERE id = ?");
                 $stmt->execute([$id]);
                 echo json_encode(['success' => true, 'message' => "Project {$id} deleted"]);
@@ -181,20 +192,22 @@ if ($method === 'POST') {
             }
 
             if ($action === 'create' || $action === 'update') {
-                $id = isset($data['id']) && !empty($data['id']) ? trim($data['id']) : 'proj_' . time();
-                $title = isset($data['title']) ? trim($data['title']) : '';
-                $slug = isset($data['slug']) && !empty($data['slug']) ? trim($data['slug']) : strtolower(preg_replace('/[^A-Za-z0-9-]+/', '-', $title));
-                $location = isset($data['location']) ? trim($data['location']) : 'Trichy';
-                $type = isset($data['type']) ? trim($data['type']) : 'Residential Plots';
+                $id = isset($data['id']) && !empty($data['id']) ? trim((string)$data['id']) : 'proj_' . time();
+                $title = isset($data['title']) ? mb_substr(strip_tags(trim((string)$data['title'])), 0, 255) : '';
+                $slug = isset($data['slug']) && !empty($data['slug']) 
+                    ? strtolower(preg_replace('/[^A-Za-z0-9-]+/', '-', trim((string)$data['slug']))) 
+                    : strtolower(preg_replace('/[^A-Za-z0-9-]+/', '-', $title));
+                $location = isset($data['location']) ? mb_substr(strip_tags(trim((string)$data['location'])), 0, 255) : 'Trichy';
+                $type = isset($data['type']) ? mb_substr(strip_tags(trim((string)$data['type'])), 0, 100) : 'Residential Plots';
                 $pricePerSqft = isset($data['price_per_sqft']) ? floatval($data['price_per_sqft']) : 1500;
-                $startingPrice = isset($data['starting_price']) ? trim($data['starting_price']) : '₹18 Lakhs';
-                $status = isset($data['status']) ? trim($data['status']) : 'Ready to Register';
-                $approval = isset($data['approval']) ? trim($data['approval']) : 'DTCP Approved';
+                $startingPrice = isset($data['starting_price']) ? mb_substr(strip_tags(trim((string)$data['starting_price'])), 0, 100) : '₹18 Lakhs';
+                $status = isset($data['status']) ? mb_substr(strip_tags(trim((string)$data['status'])), 0, 100) : 'Ready to Register';
+                $approval = isset($data['approval']) ? mb_substr(strip_tags(trim((string)$data['approval'])), 0, 191) : 'DTCP Approved';
                 $totalUnits = isset($data['total_units']) ? intval($data['total_units']) : 50;
                 $availableUnits = isset($data['available_units']) ? intval($data['available_units']) : 15;
-                $amenities = isset($data['amenities']) ? trim($data['amenities']) : '';
-                $description = isset($data['description']) ? trim($data['description']) : '';
-                $imageUrl = isset($data['image_url']) ? trim($data['image_url']) : '';
+                $amenities = isset($data['amenities']) ? mb_substr(strip_tags(trim((string)$data['amenities'])), 0, 1000) : '';
+                $description = isset($data['description']) ? mb_substr(strip_tags(trim((string)$data['description'])), 0, 5000) : '';
+                $imageUrl = isset($data['image_url']) ? mb_substr(strip_tags(trim((string)$data['image_url'])), 0, 500) : '';
                 $featured = !empty($data['featured']) ? 1 : 0;
                 $displayOrder = isset($data['display_order']) ? intval($data['display_order']) : 0;
 
@@ -218,15 +231,17 @@ if ($method === 'POST') {
                     $featured, $displayOrder
                 ]);
 
-                echo json_encode(['success' => true, 'id' => $id, 'message' => 'Saved successfully']);
+                echo json_encode(['success' => true, 'id' => $id, 'message' => 'Project saved successfully']);
                 exit();
             }
         } catch (Throwable $e) {
-            // Fallthrough to response
+            http_response_code(500);
+            echo json_encode(['success' => false, 'error' => 'Database error executing project operation']);
+            exit();
         }
     }
 
-    echo json_encode(['success' => true, 'message' => 'Processed']);
+    echo json_encode(['success' => true, 'message' => 'Project operation processed']);
     exit();
 }
 

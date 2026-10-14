@@ -1,8 +1,10 @@
 <?php
 /**
  * Nam Nilam Database Connection Helper
- * Supports Hostinger MySQL (u665690797_nncpro) with graceful fallback
+ * Securely connects to MySQL using environment-driven credentials with graceful SQLite fallback
  */
+
+require_once __DIR__ . '/config.php';
 
 // Enable CORS for frontend API calls
 header("Access-Control-Allow-Origin: *");
@@ -22,78 +24,95 @@ function getDatabaseConnection() {
         return $pdo;
     }
 
-    // Hostinger MySQL Credentials
-    $db_host = 'localhost';
-    $db_name = 'u665690797_nncpro';
-    $db_user = 'u665690797_nncpro';
-    $db_pass = 'NamNilam@2026';
+    $db_host = getAppConfig('DB_HOST', 'localhost');
+    $db_name = getAppConfig('DB_NAME', '');
+    $db_user = getAppConfig('DB_USER', '');
+    $db_pass = getAppConfig('DB_PASS');
 
-    try {
-        $dsn = "mysql:host={$db_host};dbname={$db_name};charset=utf8mb4";
-        $pdo = new PDO($dsn, $db_user, $db_pass, [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            PDO::ATTR_EMULATE_PREPARES => false,
-            PDO::ATTR_TIMEOUT => 2
-        ]);
-        return $pdo;
-    } catch (Throwable $e) {
-        // Try local SQLite if driver is available
-        if (extension_loaded('pdo_sqlite')) {
-            try {
-                $sqlite_path = sys_get_temp_dir() . '/namnilam_local.sqlite';
-                $pdo = new PDO("sqlite:" . $sqlite_path, null, null, [
-                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-                ]);
-
-                $pdo->exec("
-                    CREATE TABLE IF NOT EXISTS leads (
-                        id TEXT PRIMARY KEY,
-                        name TEXT NOT NULL,
-                        phone TEXT NOT NULL,
-                        email TEXT,
-                        form_type TEXT NOT NULL,
-                        source_page TEXT NOT NULL,
-                        referrer_url TEXT,
-                        intent_purpose TEXT,
-                        category TEXT DEFAULT 'General',
-                        location TEXT DEFAULT 'Trichy',
-                        message TEXT,
-                        status TEXT DEFAULT 'new',
-                        admin_notes TEXT,
-                        ip_address TEXT,
-                        user_agent TEXT,
-                        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-                    );
-
-                    CREATE TABLE IF NOT EXISTS projects (
-                        id TEXT PRIMARY KEY,
-                        title TEXT NOT NULL,
-                        slug TEXT UNIQUE NOT NULL,
-                        location TEXT NOT NULL,
-                        type TEXT DEFAULT 'Residential Plots',
-                        price_per_sqft REAL DEFAULT 0,
-                        starting_price TEXT DEFAULT '₹15 Lakhs',
-                        status TEXT DEFAULT 'Ready to Register',
-                        approval TEXT DEFAULT 'DTCP Approved',
-                        total_units INTEGER DEFAULT 50,
-                        available_units INTEGER DEFAULT 15,
-                        amenities TEXT,
-                        description TEXT,
-                        image_url TEXT,
-                        featured INTEGER DEFAULT 0,
-                        display_order INTEGER DEFAULT 0,
-                        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-                    );
-                ");
-
-                return $pdo;
-            } catch (Throwable $sqliteEx) {
-                // Return null to fallback to static JSON
-                return null;
-            }
+    // Attempt MySQL connection only if credentials are fully configured in .env
+    if (!empty($db_pass) && !empty($db_name) && !empty($db_user)) {
+        try {
+            $dsn = "mysql:host={$db_host};dbname={$db_name};charset=utf8mb4";
+            $pdo = new PDO($dsn, $db_user, $db_pass, [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                PDO::ATTR_EMULATE_PREPARES => false,
+                PDO::ATTR_TIMEOUT => 2
+            ]);
+            return $pdo;
+        } catch (Throwable $e) {
+            // Log connection failure internally without leaking credentials to client
+            error_log('MySQL connection failure: ' . $e->getMessage());
         }
-        return null;
     }
+
+    // Try local SQLite if driver is available (for local dev, testing, or offline resilience)
+    if (extension_loaded('pdo_sqlite')) {
+        try {
+            $sqlite_path = sys_get_temp_dir() . '/namnilam_local.sqlite';
+            $pdo = new PDO("sqlite:" . $sqlite_path, null, null, [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+            ]);
+
+            $pdo->exec("
+                CREATE TABLE IF NOT EXISTS leads (
+                    id TEXT PRIMARY KEY,
+                    name TEXT NOT NULL,
+                    phone TEXT NOT NULL,
+                    email TEXT,
+                    form_type TEXT NOT NULL,
+                    source_page TEXT NOT NULL,
+                    referrer_url TEXT,
+                    intent_purpose TEXT,
+                    category TEXT DEFAULT 'General',
+                    location TEXT DEFAULT 'Trichy',
+                    message TEXT,
+                    status TEXT DEFAULT 'new',
+                    admin_notes TEXT,
+                    ip_address TEXT,
+                    user_agent TEXT,
+                    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+                );
+
+                CREATE TABLE IF NOT EXISTS projects (
+                    id TEXT PRIMARY KEY,
+                    title TEXT NOT NULL,
+                    slug TEXT UNIQUE NOT NULL,
+                    location TEXT NOT NULL,
+                    type TEXT DEFAULT 'Residential Plots',
+                    price_per_sqft REAL DEFAULT 0,
+                    starting_price TEXT DEFAULT '₹15 Lakhs',
+                    status TEXT DEFAULT 'Ready to Register',
+                    approval TEXT DEFAULT 'DTCP Approved',
+                    total_units INTEGER DEFAULT 50,
+                    available_units INTEGER DEFAULT 15,
+                    amenities TEXT,
+                    description TEXT,
+                    image_url TEXT,
+                    featured INTEGER DEFAULT 0,
+                    display_order INTEGER DEFAULT 0,
+                    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+                );
+
+                CREATE TABLE IF NOT EXISTS admins (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    username TEXT UNIQUE NOT NULL,
+                    password_hash TEXT NOT NULL,
+                    role TEXT DEFAULT 'admin',
+                    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+                );
+            ");
+
+            return $pdo;
+        } catch (Throwable $sqliteEx) {
+            return null;
+        }
+    }
+
+    return null;
+}
+
+function getDbConnection() {
+    return getDatabaseConnection();
 }

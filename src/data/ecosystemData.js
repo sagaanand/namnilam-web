@@ -745,24 +745,24 @@ export {
   AI_WORKFORCE_DATA, 
   AI_USE_CASES, 
   AI_WORKFLOW_STEPS 
-} from './aiData';
+} from './aiData.js';
 
 export { 
   EDUCATIONAL_RESOURCES 
-} from './resourcesData';
+} from './resourcesData.js';
 
 export { 
   ACADEMY_SUBPAGES, 
   ACADEMY_PROGRAMS,
   ACADEMY_FLAGSHIP_OFFERINGS 
-} from './academyData';
+} from './academyData.js';
 
 export { 
   INTELLIGENCE_SUBPAGES, 
   TN_REGIONAL_HIERARCHY, 
   DETAILED_INTELLIGENCE_RECORDS,
   INTELLIGENCE_PRODUCTS 
-} from './intelligenceData';
+} from './intelligenceData.js';
 
 
 

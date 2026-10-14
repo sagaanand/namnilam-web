@@ -17,10 +17,13 @@ import { BusinessSolutionsPage } from './pages/BusinessSolutionsPage';
 import { AiWorkforcePage } from './pages/AiWorkforcePage';
 import { AiUseCasesPage } from './pages/AiUseCasesPage';
 import { ProjectsPage } from './pages/ProjectsPage';
+import { PropertiesPage } from './pages/PropertiesPage';
+import { PropertyDetailPage } from './pages/PropertyDetailPage';
 import { ResourcesPage } from './pages/ResourcesPage';
 import { ContactPage } from './pages/ContactPage';
 import { CareersPage } from './pages/CareersPage';
 import { AdminPage } from './pages/AdminPage';
+import { NotFoundPage } from './pages/NotFoundPage';
 
 // Scroll to top on route change
 function ScrollToTop() {
@@ -86,6 +89,10 @@ export function AppContent() {
           <Route path="/projects" element={<ProjectsPage onOpenEnquiry={handleOpenEnquiry} />} />
           <Route path="/projects/:slug" element={<ProjectsPage onOpenEnquiry={handleOpenEnquiry} />} />
 
+          {/* Properties (Verified Plot Listings) */}
+          <Route path="/properties" element={<PropertiesPage onOpenEnquiry={handleOpenEnquiry} />} />
+          <Route path="/properties/:slug" element={<PropertyDetailPage onOpenEnquiry={handleOpenEnquiry} />} />
+
           {/* Resources */}
           <Route path="/resources" element={<ResourcesPage onOpenEnquiry={handleOpenEnquiry} />} />
           <Route path="/resources/:slug" element={<ResourcesPage onOpenEnquiry={handleOpenEnquiry} />} />
@@ -99,8 +106,8 @@ export function AppContent() {
           {/* Admin Control Center (Hostinger Native) */}
           <Route path="/admin" element={<AdminPage />} />
 
-          {/* Fallback to Home */}
-          <Route path="*" element={<HomePage onOpenEnquiry={handleOpenEnquiry} />} />
+          {/* 404 Not Found */}
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
 

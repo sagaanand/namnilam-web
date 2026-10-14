@@ -100,8 +100,10 @@ export const Footer = () => {
 
           {/* Trichy Projects & Quick Contact */}
           <div>
-            <h4>Projects in Trichy</h4>
+            <h4>Properties & Projects</h4>
             <ul className="footer-links" style={{ marginBottom: '20px' }}>
+              <li><Link to="/properties" style={{ color: '#DFBA73', fontWeight: 600 }}>Verified Plots for Sale</Link></li>
+              <li><Link to="/projects">All Layout Projects</Link></li>
               {TRICHY_PROJECTS.map((proj) => (
                 <li key={proj.slug}>
                   <Link to={`/projects/${proj.slug}`}>{proj.title} ({proj.location.split(',')[0]})</Link>
